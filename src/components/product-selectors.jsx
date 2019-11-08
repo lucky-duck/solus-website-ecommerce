@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'astroturf';
 import InputSelect from './controls/input-select';
+import mixins from '../styles/mixins';
+
+console.log('mixins', mixins);
 
 const StyledProductSelectors = styled.div``;
 
@@ -8,7 +11,7 @@ const StyledItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
+  padding: 10px 15px;
   border: 1px solid #949494;
   border-radius: 4px;
   height: 86px;
@@ -19,10 +22,13 @@ const ItemTitle = styled.div`
   font-weight: 500;
   max-width: 200px;
   line-height: 1;
+  margin-bottom: 3px;
 `;
 
 const ItemDescription = styled.div`
+  composes: ${mixins.fontFamilySansAlt};
   color: #949494;
+  font-size: 14px;
 `;
 
 const ItemRight = styled.div`
@@ -31,9 +37,11 @@ const ItemRight = styled.div`
 `;
 
 const ItemPrice = styled.div`
+  text-align: right;
   font-size: 22px;
   color: #949494;
-  margin-left: 25px;
+  padding-left: 25px;
+  min-width: 100px;
 `;
 
 function Item({ title, price }) {
@@ -74,10 +82,10 @@ function Item({ title, price }) {
 function ProductSelectors() {
   return (
     <StyledProductSelectors>
-      <Item title={'SOLUS+ M1<br/> 200W Heater'} price={210} />
-      <Item title={'SOLUS+ M1<br/> 200W Heater'} price={210} />
-      <Item title={'SOLUS+ M1<br/> 200W Heater'} price={210} />
-      <Item title={'SOLUS+ M1<br/> 200W Heater'} price={210} />
+      <Item title={'SOLUS+ M1<br/> 200W Heater'} price={250} />
+      <Item title={'SOLUS+ M2<br/> 400W Heater'} price={350} />
+      <Item title={'Starter Kit M1<br/> 2xM1 200W Heater'} price={450} />
+      <Item title={'Starter Kit M2<br/> 2xM2 400W Heater'} price={650} />
     </StyledProductSelectors>
   );
 }
