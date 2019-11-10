@@ -4,21 +4,32 @@ import InputSelect from '../../../components/controls/input-select';
 import mixins from '../../../styles/mixins';
 import Section from './section';
 import Link from '../../../components/ui-kit/link';
+import Text from '../../../components/ui-kit/text';
 
 const StyledProductSelectors = styled.div``;
 
+const Header = styled.header`
+  margin-bottom: 17px;
+`;
+
 const StyledItem = styled.div`
+  @import '../../../styles/colors.scss';
+
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 15px;
-  border: 1px solid #949494;
+  border: 1px solid $colorPaleGrey;
   border-radius: 4px;
   height: 86px;
-  margin-bottom: 22px;
+  margin-bottom: 15px;
 
   &:last-of-type {
     margin-bottom: 0;
+  }
+
+  &.active {
+    border-color: $colorPrimary;
   }
 `;
 
@@ -30,8 +41,10 @@ const ItemTitle = styled.div`
 `;
 
 const ItemDescription = styled.div`
+  @import '../../../styles/colors.scss';
+
   composes: ${mixins.fontFamilySansAlt};
-  color: #949494;
+  color: $colorPaleGrey;
   font-size: 14px;
 `;
 
@@ -40,17 +53,21 @@ const ItemRight = styled.div`
   align-items: center;
 `;
 
-const ItemPrice = styled.div`
+const ItemPrice = styled(Text)`
+  @import '../../../styles/colors.scss';
+
   text-align: right;
-  font-size: 22px;
-  color: #949494;
   padding-left: 25px;
   min-width: 100px;
+
+  &.active {
+    color: $colorBlack;
+  }
 `;
 
-function Item({ title, price }) {
+function Item({ title, price, ...rest }) {
   return (
-    <StyledItem>
+    <StyledItem {...rest}>
       <div style={{ width: '40%' }}>
         <ItemTitle dangerouslySetInnerHTML={{ __html: title }} />
         <ItemDescription>40x45x80 cm</ItemDescription>
@@ -76,8 +93,11 @@ function Item({ title, price }) {
               label: '3',
             },
           ]}
+          active={rest.active}
         />
-        <ItemPrice>£{price}</ItemPrice>
+        <ItemPrice pale big active={rest.active}>
+          £{price.toFixed(2)}
+        </ItemPrice>
       </ItemRight>
     </StyledItem>
   );
@@ -86,12 +106,14 @@ function Item({ title, price }) {
 function ProductSelectors() {
   return (
     <Section>
-      <div style={{ marginBottom: 20 }}>
+      <Header>
         <Section.Title>Select your SOLUS+</Section.Title>
-        <Link href={'/'} extraSmall>How many heaters do I need?</Link>
-      </div>
+        <Link href={'/'} extraSmall>
+          How many heaters do I need?
+        </Link>
+      </Header>
       <StyledProductSelectors>
-        <Item title={'SOLUS+ M1<br/> 200W Heater'} price={250} />
+        <Item active title={'SOLUS+ M1<br/> 200W Heater'} price={250} />
         <Item title={'SOLUS+ M2<br/> 400W Heater'} price={350} />
         <Item title={'Starter Kit M1<br/> 2xM1 200W Heater'} price={450} />
         <Item title={'Starter Kit M2<br/> 2xM2 400W Heater'} price={650} />

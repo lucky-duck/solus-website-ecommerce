@@ -32,6 +32,7 @@ const ItemTitle = styled.div`
   text-transform: uppercase;
   font-weight: 500;
   margin-bottom: 5px;
+  letter-spacing: 0.12em;
 `;
 
 function Item({ title, text, icon: IconComponent }) {

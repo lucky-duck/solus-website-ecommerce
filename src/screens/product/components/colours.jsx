@@ -14,6 +14,10 @@ const StyledColour = styled(Colour)`
   }
 `;
 
+const Header = styled(Flex)`
+	margin-bottom: 15px;
+`;
+
 const StyledItem = styled(Flex)`
   padding: 20px 0;
   border-bottom: 1px solid #dadada;
@@ -30,8 +34,10 @@ const ItemTitle = styled.div`
 `;
 
 const Quantity = styled.span`
+  @import '../../../styles/colors.scss';
+
   display: inline-block;
-  color: #949494;
+  color: $colorPaleGrey;
   min-width: 23px;
 `;
 
@@ -50,8 +56,10 @@ function Item({ title, quantity }) {
 }
 
 const HeaderText = styled.div`
+  @import '../../../styles/colors.scss';
+
   composes: ${mixins.fontFamilySansAlt};
-  color: #949494;
+  color: $colorPaleGrey;
   font-size: 13px;
 `;
 
@@ -63,14 +71,16 @@ const HeaderTextNumber = styled.span`
 function Colours() {
   return (
     <Section>
-      <Flex aic jcsb>
+      <Header aic jcsb>
         <Section.Title>Select Colour</Section.Title>
         <HeaderText>
           For the <HeaderTextNumber>2</HeaderTextNumber> selected radiators
         </HeaderText>
-      </Flex>
-      <Item quantity={1} title={'SOLUS+ M1 200W Heater'} />
-      <Item quantity={1} title={'SOLUS+ M1 200W Heater'} />
+      </Header>
+      <div>
+        <Item quantity={1} title={'SOLUS+ M1 200W Heater'} />
+        <Item quantity={1} title={'SOLUS+ M1 200W Heater'} />
+      </div>
     </Section>
   );
 }

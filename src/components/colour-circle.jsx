@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'astroturf';
 
+import mixins from '../styles/mixins';
+
 const StyledColour = styled.div`
+  composes: ${mixins.hoverDefault};
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,8 +23,13 @@ const StyledColour = styled.div`
   }
 
   &.small {
+    &:hover {
+      opacity: 1;
+    }
+
     width: 20px;
     height: 20px;
+    pointer-events: none;
   }
 `;
 

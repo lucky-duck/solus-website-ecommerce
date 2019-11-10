@@ -6,11 +6,16 @@ import Text from '../ui-kit/text';
 import Link from '../ui-kit/link';
 import Flex from '../ui-kit/flex';
 import Button from '../button';
+import mixins from '../../styles/mixins';
 
 const StyledCart = styled.div``;
 
 const Items = styled.div`
-  margin-bottom: 70px;
+  margin-bottom: 50px;
+`;
+
+const SubtotalTitle = styled.span`
+  composes: ${mixins.fontFamilySans};
 `;
 
 const SubtotalLine = styled.div`
@@ -40,12 +45,12 @@ function Cart() {
       </Items>
       <div>
         <Text as={'h2'} bold big>
-          Subtotal
+          <SubtotalTitle>Subtotal</SubtotalTitle>
         </Text>
         <Link extraSmall>Terms and conditions</Link>
         <SubtotalLine />
         <Flex aic jcsb>
-          <Price big>£500</Price>
+          <Price big>£500.00</Price>
           <Text extraSmall pale>
             Includes VAT of approx. £40.00.*
           </Text>
@@ -53,7 +58,7 @@ function Cart() {
         <StyledButton>Continue to payment</StyledButton>
         <BottomText pale extraSmall>
           Powered by{' '}
-          <Link href={'https://stripe.com'} target={'_blank'} extraSmall>
+          <Link href={'https://stripe.com'} target={'blank'} extraSmall>
             Stripe
           </Link>
         </BottomText>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'astroturf';
+import { up, down, between, only } from 'styled-breakpoints';
 
 import productImage from '../../images/product.jpg';
 import Container from '../../components/container';
@@ -11,7 +12,13 @@ import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
 
 const Screen = styled.div`
-  padding-top: 52px;
+  padding-top: 152px;
+`;
+
+const StyledFlex = styled(Flex)`
+  ${down('desktop')} {
+    color: lightcoral;
+  }
 `;
 
 const ImageArea = styled.div`
@@ -20,7 +27,7 @@ const ImageArea = styled.div`
 
 const StickyItem = styled.div`
   position: sticky;
-  top: 30px;
+  top: 130px;
 `;
 
 const Image = styled.img`
@@ -38,7 +45,7 @@ function ProductScreen() {
   return (
     <Screen>
       <Container>
-        <Flex posr jcsb>
+        <StyledFlex posr jcsb>
           <ImageArea>
             <StickyItem>
               <Image src={productImage} alt={'Product'} />
@@ -51,7 +58,7 @@ function ProductScreen() {
             <Colours />
             <Cart />
           </Content>
-        </Flex>
+        </StyledFlex>
       </Container>
     </Screen>
   );
