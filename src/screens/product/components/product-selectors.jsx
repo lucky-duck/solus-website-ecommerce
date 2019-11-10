@@ -3,6 +3,7 @@ import styled from 'astroturf';
 import InputSelect from '../../../components/controls/input-select';
 import mixins from '../../../styles/mixins';
 import Section from './section';
+import Link from '../../../components/ui-kit/link';
 
 const StyledProductSelectors = styled.div``;
 
@@ -47,12 +48,6 @@ const ItemPrice = styled.div`
   min-width: 100px;
 `;
 
-const Link = styled.a`
-  color: #2199f0;
-  font-size: 13px;
-  text-decoration: none;
-`;
-
 function Item({ title, price }) {
   return (
     <StyledItem>
@@ -93,7 +88,7 @@ function ProductSelectors() {
     <Section>
       <div style={{ marginBottom: 20 }}>
         <Section.Title>Select your SOLUS+</Section.Title>
-        <Link href={'/'}>How many heaters do I need?</Link>
+        <Link href={'/'} extraSmall>How many heaters do I need?</Link>
       </div>
       <StyledProductSelectors>
         <Item title={'SOLUS+ M1<br/> 200W Heater'} price={250} />

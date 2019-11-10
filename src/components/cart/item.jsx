@@ -5,13 +5,23 @@ import image from '../../images/heater-black-small.jpg';
 import Text from '../ui-kit/text';
 import Flex from '../ui-kit/flex';
 import Colour from '../colour-circle';
+import Link from '../ui-kit/link';
 
 const StyledItem = styled.div`
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c5c5c5;
+  margin-bottom: 27px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+`;
+
+const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #c5c5c5;
+  margin-bottom: 18px;
 `;
 
 const ImageContainer = styled.div`
@@ -61,29 +71,45 @@ const StyledColour = styled(Colour)`
   }
 `;
 
+const Separator = styled.div`
+  width: 1px;
+  height: 11px;
+  background-color: #949494;
+  margin: 0 10px;
+`;
+
 function Item({ title, description }) {
   return (
     <StyledItem>
+      <Row>
+        <Flex aic>
+          <ImageContainer>
+            <Image src={image} />
+          </ImageContainer>
+          <Content>
+            <Title bold>{title}</Title>
+            <Text small pale>
+              {description}
+            </Text>
+          </Content>
+        </Flex>
+        <div>
+          <Price big>£250.00</Price>
+          <ColourContainer>
+            <StyledColour small />
+            <Text extraSmall pale>
+              White
+            </Text>
+          </ColourContainer>
+        </div>
+      </Row>
       <Flex aic>
-        <ImageContainer>
-          <Image src={image} />
-        </ImageContainer>
-        <Content>
-          <Title bold>{title}</Title>
-          <Text small pale>
-            {description}
-          </Text>
-        </Content>
+        <Link extraSmall>Edit</Link>
+        <Separator />
+        <Link extraSmall pale>
+          Remove
+        </Link>
       </Flex>
-      <div>
-        <Price big>£250.00</Price>
-        <ColourContainer>
-          <StyledColour small />
-          <Text extraSmall pale>
-            White
-          </Text>
-        </ColourContainer>
-      </div>
     </StyledItem>
   );
 }

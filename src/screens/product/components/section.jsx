@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'astroturf';
 
-import mixins from '../../../styles/mixins';
+import Text from '../../../components/ui-kit/text';
 
 const StyledSection = styled.section`
   margin-bottom: 38px;
@@ -11,11 +11,9 @@ function Section({ children }) {
   return <StyledSection>{children}</StyledSection>;
 }
 
-const SectionTitle = styled.h2`
-  composes: ${mixins.fontFamilySansAlt};
-  font-size: 22px;
-  font-weight: 500;
-`;
+function SectionTitle(props) {
+  return <Text as={'h2'} bold big {...props} />;
+}
 
 Section.Title = SectionTitle;
 
