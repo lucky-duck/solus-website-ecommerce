@@ -5,6 +5,7 @@ import { ReactComponent as IconPlug } from '../images/svg/icon-plug.svg';
 import { ReactComponent as IconSmartHome } from '../images/svg/icon-smart-home.svg';
 import { ReactComponent as IconTools } from '../images/svg/icon-tools.svg';
 import { ReactComponent as IconSeed } from '../images/svg/icon-seed.svg';
+import Text from './ui-kit/text';
 
 const StyledFeatures = styled.div`
   display: flex;
@@ -33,11 +34,6 @@ const ItemTitle = styled.div`
   margin-bottom: 5px;
 `;
 
-const ItemText = styled.div`
-  font-size: 14px;
-  color: #949494;
-`;
-
 function Item({ title, text, icon: IconComponent }) {
   return (
     <StyledItem>
@@ -46,7 +42,9 @@ function Item({ title, text, icon: IconComponent }) {
       </ItemIconContainer>
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>
-        <ItemText>{text}</ItemText>
+        <Text small pale>
+          {text}
+        </Text>
       </ItemContent>
     </StyledItem>
   );

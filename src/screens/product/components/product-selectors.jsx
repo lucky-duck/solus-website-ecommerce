@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'astroturf';
-import InputSelect from './controls/input-select';
-import mixins from '../styles/mixins';
-
-console.log('mixins', mixins);
+import InputSelect from '../../../components/controls/input-select';
+import mixins from '../../../styles/mixins';
+import Section from './section';
 
 const StyledProductSelectors = styled.div``;
 
@@ -16,6 +15,10 @@ const StyledItem = styled.div`
   border-radius: 4px;
   height: 86px;
   margin-bottom: 22px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 `;
 
 const ItemTitle = styled.div`
@@ -42,6 +45,12 @@ const ItemPrice = styled.div`
   color: #949494;
   padding-left: 25px;
   min-width: 100px;
+`;
+
+const Link = styled.a`
+  color: #2199f0;
+  font-size: 13px;
+  text-decoration: none;
 `;
 
 function Item({ title, price }) {
@@ -73,7 +82,7 @@ function Item({ title, price }) {
             },
           ]}
         />
-        <ItemPrice>{price}£</ItemPrice>
+        <ItemPrice>£{price}</ItemPrice>
       </ItemRight>
     </StyledItem>
   );
@@ -81,12 +90,18 @@ function Item({ title, price }) {
 
 function ProductSelectors() {
   return (
-    <StyledProductSelectors>
-      <Item title={'SOLUS+ M1<br/> 200W Heater'} price={250} />
-      <Item title={'SOLUS+ M2<br/> 400W Heater'} price={350} />
-      <Item title={'Starter Kit M1<br/> 2xM1 200W Heater'} price={450} />
-      <Item title={'Starter Kit M2<br/> 2xM2 400W Heater'} price={650} />
-    </StyledProductSelectors>
+    <Section>
+      <div style={{ marginBottom: 20 }}>
+        <Section.Title>Select your SOLUS+</Section.Title>
+        <Link href={'/'}>How many heaters do I need?</Link>
+      </div>
+      <StyledProductSelectors>
+        <Item title={'SOLUS+ M1<br/> 200W Heater'} price={250} />
+        <Item title={'SOLUS+ M2<br/> 400W Heater'} price={350} />
+        <Item title={'Starter Kit M1<br/> 2xM1 200W Heater'} price={450} />
+        <Item title={'Starter Kit M2<br/> 2xM2 400W Heater'} price={650} />
+      </StyledProductSelectors>
+    </Section>
   );
 }
 
