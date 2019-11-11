@@ -7,6 +7,7 @@ import Link from '../ui-kit/link';
 import Flex from '../ui-kit/flex';
 import Button from '../button';
 import mixins from '../../styles/mixins';
+import { useProducts } from '../../hooks/products';
 
 const StyledCart = styled.div``;
 
@@ -37,11 +38,21 @@ const BottomText = styled(Text)`
 `;
 
 function Cart() {
+  const { selectedProducts } = useProducts();
+
   return (
     <StyledCart>
       <Items>
-        <Item title={'SOLUS+ M1 200W Heater'} description={'40x45x80 cm'} />
-        <Item title={'SOLUS+ M1 200W Heater'} description={'40x45x80 cm'} />
+        {selectedProducts.map((item) => {
+          return (
+            <Item
+              key={item.id}
+              quantity={item.quantity}
+              title={item.title}
+              color={item.color}
+            />
+          );
+        })}
       </Items>
       <div>
         <Text as={'h2'} bold big>

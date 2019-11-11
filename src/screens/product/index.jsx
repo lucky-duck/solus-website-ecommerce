@@ -94,6 +94,44 @@ const Content = styled.div`
   }
 `;
 
+const FurtherSteps = styled.div`
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0) 0%,
+        #ffffff 74.91%
+      ),
+      rgba(255, 255, 255, 0.5);
+  }
+
+  @keyframes product-further-steps {
+    from {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &.hide {
+    &:before {
+      animation: product-further-steps 0.55s ease-out forwards;
+    }
+  }
+`;
+
 const MobileHeader = styled.div`
   display: none;
   text-align: center;
@@ -141,12 +179,10 @@ function ProductScreen() {
           <Content>
             <ProductSelectors />
             <Description />
-            {selectedProducts.length > 0 && (
-              <>
-                <Colours />
-                <Cart />
-              </>
-            )}
+            <FurtherSteps hide={selectedProducts.length > 0}>
+              <Colours />
+              <Cart />
+            </FurtherSteps>
           </Content>
         </StyledFlex>
         {IS_MOBILE && <Features />}
