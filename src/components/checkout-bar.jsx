@@ -36,7 +36,7 @@ const StyledItem = styled.div`
 `;
 
 const ItemContent = styled.div`
-margin-right: 10px;
+  margin-right: 10px;
 `;
 
 const ItemTitle = styled.div`
@@ -74,6 +74,7 @@ function CheckoutBar() {
     <StyledCheckoutBar>
       <Flex aic>
         <Items>
+          <Item />
           <Item />
         </Items>
         <StyledButton>Checkout</StyledButton>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'astroturf';
 
-import productImage from '../../images/product.jpg';
+import productImage from '../../images/heater-black.jpg';
 import Container from '../../components/container';
 import Features from '../../components/features';
 import ProductSelectors from './components/product-selectors';
@@ -15,13 +15,17 @@ const Screen = styled.div`
 `;
 
 const StyledFlex = styled(Flex)`
-  @media (max-width: 992px) {
+  @media (max-width: 767px) {
     flex-direction: column;
   }
 `;
 
 const ImageArea = styled.div`
   max-width: 511px;
+
+  @media (max-width: 991px) {
+    max-width: 310px;
+  }
 `;
 
 const StickyItem = styled.div`
@@ -29,15 +33,39 @@ const StickyItem = styled.div`
   top: 130px;
 `;
 
+const ImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 410px;
+  height: 50vh;
+  background: linear-gradient(
+    219.9deg,
+    rgba(255, 255, 255, 0.25) -23.1%,
+    rgba(214, 223, 239, 0.25) 35.55%,
+    rgba(123, 146, 179, 0.25) 111.64%
+  );
+  margin-bottom: 30px;
+
+  @media (max-height: 800px) {
+    height: 40vh;
+  }
+`;
+
 const Image = styled.img`
   display: block;
   max-width: 100%;
-  margin-bottom: 30px;
+  height: auto;
+  max-height: 80%;
 `;
 
 const Content = styled.div`
   flex: 1 0 auto;
   padding-left: 60px;
+
+  @media (max-width: 991px) {
+    padding-left: 30px;
+  }
 `;
 
 function ProductScreen() {
@@ -47,7 +75,9 @@ function ProductScreen() {
         <StyledFlex posr jcsb>
           <ImageArea>
             <StickyItem>
-              <Image src={productImage} alt={'Product'} />
+              <ImageContainer>
+                <Image src={productImage} alt={'Product'} />
+              </ImageContainer>
               <Features />
             </StickyItem>
           </ImageArea>

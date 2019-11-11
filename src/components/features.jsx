@@ -10,12 +10,21 @@ import Text from './ui-kit/text';
 const StyledFeatures = styled.div`
   display: flex;
   flex-wrap: wrap;
+
+  @media (max-width: 991px) {
+    display: block;
+  }
 `;
 
 const StyledItem = styled.div`
   display: flex;
   width: 50%;
   margin-bottom: 20px;
+
+  @media (max-width: 991px) {
+    width: auto;
+    margin-bottom: 32px;
+  }
 `;
 
 const ItemIconContainer = styled.div`
