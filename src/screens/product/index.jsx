@@ -15,7 +15,7 @@ const Screen = styled.div`
   padding-top: 152px;
 
   @media (max-width: 767px) {
-    padding-top: 60px;
+    padding-top: 46px;
   }
 `;
 
@@ -34,7 +34,7 @@ const ImageArea = styled.div`
 
   @media (max-width: 767px) {
     max-width: none;
-    margin-bottom: 50px;
+    margin-bottom: 36px;
   }
 `;
 
@@ -65,6 +65,11 @@ const ImageContainer = styled.div`
 
   @media (max-height: 800px) {
     height: 40vh;
+  }
+
+  @media (max-width: 767px) {
+    height: 100vw;
+    margin-bottom: 0;
   }
 `;
 
@@ -103,6 +108,7 @@ const MobileTitle = styled.h2`
   letter-spacing: 0.08em;
   font-size: 12px;
   font-weight: 500;
+  margin-bottom: 8px;
 `;
 
 const MobileSubtitle = styled.h1`

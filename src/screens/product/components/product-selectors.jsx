@@ -9,7 +9,7 @@ import Text from '../../../components/ui-kit/text';
 const StyledProductSelectors = styled.div``;
 
 const Header = styled.header`
-  margin-bottom: 17px;
+  margin-bottom: 30px;
 `;
 
 const StyledItem = styled.div`
@@ -30,6 +30,10 @@ const StyledItem = styled.div`
 
   &.active {
     border-color: $colorPrimary;
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 11px;
   }
 `;
 
