@@ -25,6 +25,10 @@ const StyledItem = styled.div`
     width: auto;
     margin-bottom: 32px;
   }
+
+  @media (max-width: 767px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const ItemIconContainer = styled.div`
@@ -32,6 +36,11 @@ const ItemIconContainer = styled.div`
   justify-content: center;
   width: 50px;
   flex-shrink: 0;
+
+  @media (max-width: 767px) {
+    width: 45px;
+    justify-content: flex-start;
+  }
 `;
 
 const ItemContent = styled.div``;

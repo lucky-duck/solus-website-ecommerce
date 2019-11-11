@@ -12,11 +12,15 @@ import Cart from './components/cart';
 
 const Screen = styled.div`
   padding-top: 152px;
+
+  @media (max-width: 767px) {
+    padding-top: 60px;
+  }
 `;
 
 const StyledFlex = styled(Flex)`
   @media (max-width: 767px) {
-    flex-direction: column !important;
+    flex-direction: column;
   }
 `;
 
@@ -25,6 +29,10 @@ const ImageArea = styled.div`
 
   @media (max-width: 991px) {
     max-width: 310px;
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 50px;
   }
 `;
 
@@ -68,12 +76,43 @@ const Content = styled.div`
   @media (max-width: 991px) {
     padding-left: 30px;
   }
+
+  @media (max-width: 767px) {
+    padding-left: 0;
+  }
+`;
+
+const MobileHeader = styled.div`
+  display: none;
+  text-align: center;
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+`;
+
+const MobileTitle = styled.h2`
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 500;
+`;
+
+const MobileSubtitle = styled.h1`
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 28px;
+  font-weight: 500;
 `;
 
 function ProductScreen() {
   return (
     <Screen>
       <Container>
+        <MobileHeader>
+          <MobileTitle>Buy today</MobileTitle>
+          <MobileSubtitle>Get your SOLUS+</MobileSubtitle>
+        </MobileHeader>
         <StyledFlex posr jcsb>
           <ImageArea>
             <StickyItem>
