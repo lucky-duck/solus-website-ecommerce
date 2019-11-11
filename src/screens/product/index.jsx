@@ -16,7 +16,7 @@ const Screen = styled.div`
 
 const StyledFlex = styled(Flex)`
   @media (max-width: 767px) {
-    flex-direction: column;
+    flex-direction: column !important;
   }
 `;
 
@@ -46,6 +46,8 @@ const ImageContainer = styled.div`
     rgba(123, 146, 179, 0.25) 111.64%
   );
   margin-bottom: 30px;
+  border-radius: 5px;
+  overflow: hidden;
 
   @media (max-height: 800px) {
     height: 40vh;

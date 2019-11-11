@@ -18,6 +18,10 @@ const StyledCheckoutBar = styled.div`
   height: 101px;
   background-color: $colorBlack;
   z-index: 10;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 
 const Items = styled.div`
