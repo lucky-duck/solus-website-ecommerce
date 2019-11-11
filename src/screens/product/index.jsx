@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'astroturf';
-import { up, down, between, only } from 'styled-breakpoints';
 
 import productImage from '../../images/product.jpg';
 import Container from '../../components/container';
@@ -16,8 +15,8 @@ const Screen = styled.div`
 `;
 
 const StyledFlex = styled(Flex)`
-  ${down('desktop')} {
-    color: lightcoral;
+  @media (max-width: 992px) {
+    flex-direction: column;
   }
 `;
 

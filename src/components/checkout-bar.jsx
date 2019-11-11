@@ -4,7 +4,6 @@ import styled from 'astroturf';
 import ProductPreview from './product-preview';
 import Flex from './ui-kit/flex';
 import Button from './button';
-import Text from './ui-kit/text';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
