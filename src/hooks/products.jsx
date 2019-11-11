@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
+import { COLORS } from '../constants';
 
 const ProductsContext = React.createContext({});
 
@@ -62,6 +63,7 @@ function changeItemQuantity(operation, id, quantity = 1) {
         {
           id,
           ...productData,
+          color: COLORS.BLACK,
           quantity,
         },
       ];
@@ -71,8 +73,28 @@ function changeItemQuantity(operation, id, quantity = 1) {
   };
 }
 
+function changeItemColor(id, color) {
+  return function(products) {
+    return products.map((v) => {
+      if (v.id !== id) {
+        return v;
+      }
+      return {
+        ...v,
+        color,
+      };
+    });
+  };
+}
+
 export function ProductsProvider({ children }) {
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const totalPrice = useMemo(() => {
+    return selectedProducts.reduce(
+      (acc, curr) => acc + curr.price * curr.quantity,
+      0
+    );
+  }, [selectedProducts]);
 
   function addProduct(id) {
     setSelectedProducts(changeItemQuantity('+', id));
@@ -86,7 +108,9 @@ export function ProductsProvider({ children }) {
     setSelectedProducts(changeItemQuantity('', id, quantity));
   }
 
-  console.log('selectedProducts', selectedProducts);
+  function changeProductColor(id, color) {
+    setSelectedProducts(changeItemColor(id, color));
+  }
 
   return (
     <ProductsContext.Provider
@@ -96,6 +120,8 @@ export function ProductsProvider({ children }) {
         addProduct,
         removeProduct,
         setProductQuantity,
+        changeProductColor,
+        totalPrice,
       }}
     >
       {children}

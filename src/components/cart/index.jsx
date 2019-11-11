@@ -38,7 +38,7 @@ const BottomText = styled(Text)`
 `;
 
 function Cart() {
-  const { selectedProducts } = useProducts();
+  const { selectedProducts, totalPrice } = useProducts();
 
   return (
     <StyledCart>
@@ -61,7 +61,7 @@ function Cart() {
         <Link extraSmall>Terms and conditions</Link>
         <SubtotalLine />
         <Flex aic jcsb>
-          <Price big>£500.00</Price>
+          <Price big>£{totalPrice}</Price>
           <Text extraSmall pale>
             Includes VAT of approx. £40.00.*
           </Text>

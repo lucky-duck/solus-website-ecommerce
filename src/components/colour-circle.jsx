@@ -55,9 +55,14 @@ const ColourInner = styled.div`
   }
 `;
 
-function Colour({ className, white, active, small }) {
+function Colour({ className, white, active, small, onClick }) {
   return (
-    <StyledColour className={className} active={active} small={small}>
+    <StyledColour
+      className={className}
+      active={active}
+      small={small}
+      onClick={onClick}
+    >
       <ColourInner white={white} small={small} />
     </StyledColour>
   );

@@ -6,6 +6,7 @@ import Flex from '../ui-kit/flex';
 import Colour from '../colour-circle';
 import Link from '../ui-kit/link';
 import ProductPreview from '../product-preview';
+import { COLORS } from '../../constants';
 
 const StyledItem = styled.div`
   padding-bottom: 20px;
@@ -60,7 +61,7 @@ const Separator = styled.div`
   margin: 0 10px;
 `;
 
-function Item({ title, description }) {
+function Item({ title, description, color }) {
   return (
     <StyledItem>
       <Row>
@@ -76,7 +77,7 @@ function Item({ title, description }) {
         <div>
           <Price big>£250.00</Price>
           <ColourContainer>
-            <StyledColour small />
+            <StyledColour small white={color === COLORS.WHITE} />
             <Text extraSmall pale>
               White
             </Text>

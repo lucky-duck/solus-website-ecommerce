@@ -6,6 +6,7 @@ import Flex from '../../../components/ui-kit/flex';
 import mixins from '../../../styles/mixins';
 import Colour from '../../../components/colour-circle';
 import { useProducts } from '../../../hooks/products';
+import { COLORS } from '../../../constants';
 
 const StyledColour = styled(Colour)`
   margin-right: 13px;
@@ -59,15 +60,22 @@ const Quantity = styled.span`
   min-width: 23px;
 `;
 
-function Item({ title, quantity }) {
+function Item({ id, title, quantity, color, onChange }) {
   return (
     <StyledItem jcsb aic>
       <ItemTitle>
         <Quantity>{quantity}x</Quantity> {title}
       </ItemTitle>
       <Flex aic>
-        <StyledColour active />
-        <StyledColour white />
+        <StyledColour
+          active={color === COLORS.BLACK}
+          onClick={() => onChange(id, COLORS.BLACK)}
+        />
+        <StyledColour
+          white
+          active={color === COLORS.WHITE}
+          onClick={() => onChange(id, COLORS.WHITE)}
+        />
       </Flex>
     </StyledItem>
   );
@@ -102,7 +110,7 @@ function FakeColours() {
 }
 
 function Colours() {
-  const { selectedProducts } = useProducts();
+  const { selectedProducts, changeProductColor } = useProducts();
 
   return (
     <Section>
@@ -119,9 +127,11 @@ function Colours() {
             return (
               <Item
                 key={item.id}
+                id={item.id}
                 quantity={item.quantity}
                 title={item.title}
                 color={item.color}
+                onChange={changeProductColor}
               />
             );
           })
