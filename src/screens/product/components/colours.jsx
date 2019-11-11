@@ -5,6 +5,7 @@ import Section from './section';
 import Flex from '../../../components/ui-kit/flex';
 import mixins from '../../../styles/mixins';
 import Colour from '../../../components/colour-circle';
+import { useProducts } from '../../../hooks/products';
 
 const StyledColour = styled(Colour)`
   margin-right: 13px;
@@ -85,6 +86,10 @@ const HeaderTextNumber = styled.span`
 `;
 
 function Colours() {
+  const {
+    selectedProducts,
+  } = useProducts();
+
   return (
     <Section>
       <Header aic jcsb>
@@ -94,8 +99,16 @@ function Colours() {
         </HeaderText>
       </Header>
       <div>
-        <Item quantity={1} title={'SOLUS+ M1 200W Heater'} />
-        <Item quantity={1} title={'SOLUS+ M1 200W Heater'} />
+        {selectedProducts.map((item) => {
+          return (
+            <Item
+              key={item.id}
+              quantity={item.quantity}
+              title={item.title}
+              color={item.color}
+            />
+          );
+        })}
       </div>
     </Section>
   );

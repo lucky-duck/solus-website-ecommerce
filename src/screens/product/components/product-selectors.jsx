@@ -5,6 +5,7 @@ import mixins from '../../../styles/mixins';
 import Section from './section';
 import Link from '../../../components/ui-kit/link';
 import Text from '../../../components/ui-kit/text';
+import { useProducts } from '../../../hooks/products';
 
 const OPTIONS = [
   {
@@ -121,7 +122,7 @@ const ItemPrice = styled(Text)`
   }
 `;
 
-function Item({ title, price, ...rest }) {
+function Item({ id, title, price, onChange, ...rest }) {
   return (
     <StyledItem {...rest}>
       <div style={{ width: '40%' }}>
@@ -129,7 +130,13 @@ function Item({ title, price, ...rest }) {
         <ItemDescription>40x45x80 cm</ItemDescription>
       </div>
       <ItemRight>
-        <InputSelect type={'select'} options={OPTIONS} active={rest.active} />
+        <InputSelect
+          name={`product_${id}`}
+          type={'select'}
+          options={OPTIONS}
+          active={rest.active}
+          onChange={onChange}
+        />
         <ItemPrice pale big active={rest.active}>
           £{price.toFixed(2)}
         </ItemPrice>
@@ -139,6 +146,16 @@ function Item({ title, price, ...rest }) {
 }
 
 function ProductSelectors() {
+  const {
+    allProducts: items,
+    selectedProducts,
+    setProductQuantity,
+  } = useProducts();
+
+  function handleChange(e, id) {
+    setProductQuantity(id, Number(e.currentTarget.value));
+  }
+
   return (
     <Section>
       <Header>
@@ -148,10 +165,21 @@ function ProductSelectors() {
         </Link>
       </Header>
       <StyledProductSelectors>
-        <Item active title={'SOLUS+ M1<br/> 200W Heater'} price={250} />
-        <Item title={'SOLUS+ M2<br/> 400W Heater'} price={350} />
-        <Item title={'Starter Kit M1<br/> 2xM1 200W Heater'} price={450} />
-        <Item title={'Starter Kit M2<br/> 2xM2 400W Heater'} price={650} />
+        {items.map((item, index) => {
+          const isSelected =
+            selectedProducts.filter((v) => v.id === item.id).length > 0;
+          return (
+            <Item
+              key={index}
+              id={item.id}
+              title={item.title}
+              quantity={item.quantity}
+              price={item.price}
+              active={isSelected}
+              onChange={(e) => handleChange(e, item.id)}
+            />
+          );
+        })}
       </StyledProductSelectors>
     </Section>
   );

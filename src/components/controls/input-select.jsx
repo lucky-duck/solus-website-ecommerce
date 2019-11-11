@@ -25,9 +25,9 @@ const StyledInputSelect = styled.select`
   }
 `;
 
-function InputSelect({ options, active }) {
+function InputSelect({ options, ...rest }) {
   return (
-    <StyledInputSelect type={'select'} active={active}>
+    <StyledInputSelect type={'select'} {...rest}>
       {options.map((option, index) => {
         return (
           <option key={index} value={option.value}>

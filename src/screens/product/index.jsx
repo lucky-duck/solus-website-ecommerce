@@ -10,6 +10,7 @@ import Colours from './components/colours';
 import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
 import { IS_MOBILE } from '../../constants';
+import { useProducts } from '../../hooks/products';
 
 const Screen = styled.div`
   padding-top: 152px;
@@ -119,6 +120,8 @@ const MobileSubtitle = styled.h1`
 `;
 
 function ProductScreen() {
+  const { selectedProducts } = useProducts();
+
   return (
     <Screen>
       <Container>
@@ -138,8 +141,12 @@ function ProductScreen() {
           <Content>
             <ProductSelectors />
             <Description />
-            <Colours />
-            <Cart />
+            {selectedProducts.length > 0 && (
+              <>
+                <Colours />
+                <Cart />
+              </>
+            )}
           </Content>
         </StyledFlex>
         {IS_MOBILE && <Features />}

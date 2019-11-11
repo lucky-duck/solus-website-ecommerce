@@ -4,6 +4,7 @@ import styled from 'astroturf';
 import ProductScreen from './screens/product';
 import mixins from './styles/mixins';
 import CheckoutBar from './components/checkout-bar';
+import { ProductsProvider } from './hooks/products';
 
 const Wrapper = styled.div`
   composes: ${mixins.fontFamilySans};
@@ -12,10 +13,12 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <Wrapper>
-      <CheckoutBar />
-      <ProductScreen />
-    </Wrapper>
+    <ProductsProvider>
+      <Wrapper>
+        <CheckoutBar />
+        <ProductScreen />
+      </Wrapper>
+    </ProductsProvider>
   );
 }
 
