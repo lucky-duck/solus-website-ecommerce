@@ -28,6 +28,18 @@ const Text = styled.div`
   &.bold {
     font-weight: 500;
   }
+
+  @media (max-width: 767px) {
+    &.big {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 374px) {
+    &.big {
+      font-size: 18px;
+    }
+  }
 `;
 
 export default Text;

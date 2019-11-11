@@ -6,6 +6,53 @@ import Section from './section';
 import Link from '../../../components/ui-kit/link';
 import Text from '../../../components/ui-kit/text';
 
+const OPTIONS = [
+  {
+    value: 0,
+    label: 0,
+  },
+  {
+    value: 1,
+    label: 1,
+  },
+  {
+    value: 2,
+    label: 2,
+  },
+  {
+    value: 3,
+    label: 3,
+  },
+  {
+    value: 4,
+    label: 4,
+  },
+  {
+    value: 5,
+    label: 5,
+  },
+  {
+    value: 6,
+    label: 6,
+  },
+  {
+    value: 7,
+    label: 7,
+  },
+  {
+    value: 8,
+    label: 8,
+  },
+  {
+    value: 9,
+    label: 9,
+  },
+  {
+    value: 10,
+    label: 10,
+  },
+];
+
 const StyledProductSelectors = styled.div``;
 
 const Header = styled.header`
@@ -67,6 +114,11 @@ const ItemPrice = styled(Text)`
   &.active {
     color: $colorBlack;
   }
+
+  @media (max-width: 374px) {
+    padding-left: 12px;
+    min-width: 80px;
+  }
 `;
 
 function Item({ title, price, ...rest }) {
@@ -77,28 +129,7 @@ function Item({ title, price, ...rest }) {
         <ItemDescription>40x45x80 cm</ItemDescription>
       </div>
       <ItemRight>
-        <InputSelect
-          type={'select'}
-          options={[
-            {
-              value: '0',
-              label: '0',
-            },
-            {
-              value: '1',
-              label: '1',
-            },
-            {
-              value: '2',
-              label: '2',
-            },
-            {
-              value: '3',
-              label: '3',
-            },
-          ]}
-          active={rest.active}
-        />
+        <InputSelect type={'select'} options={OPTIONS} active={rest.active} />
         <ItemPrice pale big active={rest.active}>
           £{price.toFixed(2)}
         </ItemPrice>

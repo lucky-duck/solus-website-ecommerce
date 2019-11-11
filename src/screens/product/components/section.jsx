@@ -3,6 +3,10 @@ import styled from 'astroturf';
 
 const StyledSection = styled.section`
   margin-bottom: 38px;
+
+  @media (max-width: 767px) {
+    margin-bottom: 60px;
+  }
 `;
 
 function Section(props) {

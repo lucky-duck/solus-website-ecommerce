@@ -25,6 +25,14 @@ const StyledItem = styled(Flex)`
   &:last-of-type {
     border-bottom: none;
   }
+
+  @media (max-width: 767px) {
+    border-bottom: none;
+
+    &:last-of-type {
+      border-bottom: 1px solid #dadada;
+    }
+  }
 `;
 
 const ItemTitle = styled.div`
@@ -34,6 +42,10 @@ const ItemTitle = styled.div`
 
   @media (max-width: 767px) {
     max-width: 200px;
+  }
+
+  @media (max-width: 374px) {
+    max-width: 150px;
   }
 `;
 

@@ -15,6 +15,7 @@ const StyledColour = styled.div`
   border: 1px solid #d0d0d0;
   cursor: pointer;
   user-select: none;
+  flex-shrink: 0;
 
   &.active {
     border-color: #ff7020;
