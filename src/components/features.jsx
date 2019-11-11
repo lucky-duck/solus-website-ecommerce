@@ -27,7 +27,10 @@ const StyledItem = styled.div`
   }
 
   @media (max-width: 767px) {
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
   }
 `;
 
@@ -39,11 +42,15 @@ const ItemIconContainer = styled.div`
 
   @media (max-width: 767px) {
     width: 45px;
-    justify-content: flex-start;
+    margin-bottom: 12px;
   }
 `;
 
-const ItemContent = styled.div``;
+const ItemContent = styled.div`
+  @media (max-width: 767px) {
+    max-width: 200px;
+  }
+`;
 
 const ItemTitle = styled.div`
   font-size: 13px;
@@ -51,6 +58,10 @@ const ItemTitle = styled.div`
   font-weight: 500;
   margin-bottom: 5px;
   letter-spacing: 0.12em;
+
+  @media (max-width: 767px) {
+    margin-bottom: 4px;
+  }
 `;
 
 function Item({ title, text, icon: IconComponent }) {

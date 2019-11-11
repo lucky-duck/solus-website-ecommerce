@@ -15,7 +15,7 @@ const StyledColour = styled(Colour)`
 `;
 
 const Header = styled(Flex)`
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 `;
 
 const StyledItem = styled(Flex)`
@@ -28,9 +28,13 @@ const StyledItem = styled(Flex)`
 `;
 
 const ItemTitle = styled.div`
-  composes: ${mixins.fontFamilySansAlt};
   font-weight: 500;
   font-size: 18px;
+  line-height: 1;
+
+  @media (max-width: 767px) {
+    max-width: 200px;
+  }
 `;
 
 const Quantity = styled.span`

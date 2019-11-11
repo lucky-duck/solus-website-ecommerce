@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'astroturf';
 
-import productImage from '../../images/heater-black.jpg';
+import productImage from '../../images/heater-black.png';
 import Container from '../../components/container';
 import Features from '../../components/features';
 import ProductSelectors from './components/product-selectors';
@@ -9,6 +9,7 @@ import Description from './components/description';
 import Colours from './components/colours';
 import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
+import { IS_MOBILE } from '../../constants';
 
 const Screen = styled.div`
   padding-top: 152px;
@@ -32,6 +33,7 @@ const ImageArea = styled.div`
   }
 
   @media (max-width: 767px) {
+    max-width: none;
     margin-bottom: 50px;
   }
 `;
@@ -39,6 +41,10 @@ const ImageArea = styled.div`
 const StickyItem = styled.div`
   position: sticky;
   top: 130px;
+
+  @media (max-width: 767px) {
+    position: static;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -85,6 +91,7 @@ const Content = styled.div`
 const MobileHeader = styled.div`
   display: none;
   text-align: center;
+  margin-bottom: 36px;
 
   @media (max-width: 767px) {
     display: block;
@@ -119,7 +126,7 @@ function ProductScreen() {
               <ImageContainer>
                 <Image src={productImage} alt={'Product'} />
               </ImageContainer>
-              <Features />
+              {!IS_MOBILE && <Features />}
             </StickyItem>
           </ImageArea>
           <Content>
@@ -129,6 +136,7 @@ function ProductScreen() {
             <Cart />
           </Content>
         </StyledFlex>
+        {IS_MOBILE && <Features />}
       </Container>
     </Screen>
   );
