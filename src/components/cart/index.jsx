@@ -28,16 +28,6 @@ const SubtotalLine = styled.div`
 
 const Price = styled(Text)``;
 
-const StyledButton = styled(Button)`
-  width: 100%;
-  margin-top: 30px;
-`;
-
-const BottomText = styled(Text)`
-  text-align: center;
-  margin-top: 13px;
-`;
-
 function Cart() {
   const { selectedProducts, totalPrice } = useProducts();
 
@@ -67,13 +57,6 @@ function Cart() {
             Includes VAT of approx. £40.00.*
           </Text>
         </Flex>
-        <StyledButton>Continue to payment</StyledButton>
-        <BottomText pale extraSmall>
-          Powered by{' '}
-          <Link href={'https://stripe.com'} target={'blank'} extraSmall>
-            Paypal
-          </Link>
-        </BottomText>
       </div>
     </StyledCart>
   );

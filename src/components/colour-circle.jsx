@@ -78,7 +78,7 @@ function Colour({ className, white, active, small, onClick }) {
       onClick={handleClick}
       type="button"
     >
-      <ColourInner white={white} small={small} tabindex="-1" />
+      <ColourInner white={white} small={small} tabIndex="-1" />
     </StyledColour>
   );
 }

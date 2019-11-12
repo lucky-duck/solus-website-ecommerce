@@ -11,6 +11,7 @@ import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
 import { IS_MOBILE } from '../../constants';
 import { useProducts } from '../../hooks/products';
+import CheckoutBar from '../../components/checkout-bar';
 
 const Screen = styled.div`
   padding-top: 152px;
@@ -162,6 +163,7 @@ function ProductScreen() {
 
   return (
     <Screen>
+      <CheckoutBar />
       <Container>
         <MobileHeader>
           <MobileTitle>Buy today</MobileTitle>

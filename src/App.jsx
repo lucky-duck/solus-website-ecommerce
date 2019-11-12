@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'astroturf';
+import { Router } from '@reach/router';
 
 import ProductScreen from './screens/product';
 import mixins from './styles/mixins';
-import CheckoutBar from './components/checkout-bar';
 import { ProductsProvider } from './hooks/products';
+import CartScreen from './screens/cart';
 
 const Wrapper = styled.div`
   composes: ${mixins.fontFamilySans};
@@ -15,8 +16,10 @@ function App() {
   return (
     <ProductsProvider>
       <Wrapper>
-        <CheckoutBar />
-        <ProductScreen />
+        <Router>
+          <ProductScreen path={'/buy'} />
+          <CartScreen path={'/cart'} />
+        </Router>
       </Wrapper>
     </ProductsProvider>
   );

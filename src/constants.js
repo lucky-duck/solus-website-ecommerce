@@ -7,3 +7,5 @@ export const COLORS = {
   BLACK: 'BLACK',
   WHITE: 'WHITE',
 };
+
+export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products';

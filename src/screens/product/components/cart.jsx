@@ -5,6 +5,8 @@ import Section from './section';
 import Text from '../../../components/ui-kit/text';
 import Cart from '../../../components/cart';
 import { useProducts } from '../../../hooks/products';
+import Link from '../../../components/ui-kit/link';
+import Button from '../../../components/button';
 
 const Header = styled.div`
   margin-bottom: 41px;
@@ -16,6 +18,16 @@ const StyledTitle = styled(Section.Title)`
 
 const StyledText = styled(Text)`
   max-width: 345px;
+`;
+
+const StyledButton = styled(Button)`
+  width: 100%;
+  margin-top: 30px;
+`;
+
+const BottomText = styled(Text)`
+  text-align: center;
+  margin-top: 13px;
 `;
 
 function ProductCart() {
@@ -33,6 +45,13 @@ function ProductCart() {
         </Header>
       )}
       <Cart />
+      <StyledButton>Continue to payment</StyledButton>
+      <BottomText pale extraSmall>
+        Powered by{' '}
+        <Link href={'https://stripe.com'} target={'blank'} extraSmall>
+          Paypal
+        </Link>
+      </BottomText>
     </Section>
   );
 }

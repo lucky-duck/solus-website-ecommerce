@@ -1,5 +1,5 @@
-import React, { useContext, useState, useMemo } from 'react';
-import { COLORS } from '../constants';
+import React, { useContext, useState, useMemo, useEffect } from 'react';
+import { CART_LOCAL_STORAGE_KEY, COLORS } from '../constants';
 
 const ProductsContext = React.createContext({});
 
@@ -88,12 +88,17 @@ function changeItemColor(id, color) {
 }
 
 export function ProductsProvider({ children }) {
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState(
+    getSelectedFromLocalStorage()
+  );
   const totalPrice = useMemo(() => {
     return selectedProducts.reduce(
       (acc, curr) => acc + curr.price * curr.quantity,
       0
     );
+  }, [selectedProducts]);
+  useEffect(() => {
+    saveSelectedToLocalStorage(selectedProducts);
   }, [selectedProducts]);
 
   function addProduct(id) {
@@ -110,6 +115,27 @@ export function ProductsProvider({ children }) {
 
   function changeProductColor(id, color) {
     setSelectedProducts(changeItemColor(id, color));
+  }
+
+  function getSelectedFromLocalStorage() {
+    const selectedProducts = window.localStorage.getItem(
+      CART_LOCAL_STORAGE_KEY
+    );
+    if (!selectedProducts) {
+      return [];
+    }
+    const parsed = JSON.parse(selectedProducts);
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+    return parsed;
+  }
+
+  function saveSelectedToLocalStorage(selectedProducts) {
+    window.localStorage.setItem(
+      CART_LOCAL_STORAGE_KEY,
+      JSON.stringify(selectedProducts)
+    );
   }
 
   return (

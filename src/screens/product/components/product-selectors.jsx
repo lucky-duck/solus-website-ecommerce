@@ -122,7 +122,15 @@ const ItemPrice = styled(Text)`
   }
 `;
 
-function Item({ id, title, price, onChange, ...rest }) {
+function Item({ id, title, price, quantity, onChange, ...rest }) {
+  function getSelected() {
+    if (quantity) {
+      const filtered = OPTIONS.filter((v) => v.value === quantity)[0];
+      return filtered && filtered.value;
+    }
+    return OPTIONS[0].value;
+  }
+
   return (
     <StyledItem {...rest}>
       <div style={{ width: '40%' }}>
@@ -133,6 +141,7 @@ function Item({ id, title, price, onChange, ...rest }) {
         <InputSelect
           name={`product_${id}`}
           type={'select'}
+          defaultValue={getSelected()}
           options={OPTIONS}
           active={rest.active}
           onChange={onChange}
@@ -166,16 +175,17 @@ function ProductSelectors() {
       </Header>
       <StyledProductSelectors>
         {items.map((item, index) => {
-          const isSelected =
-            selectedProducts.filter((v) => v.id === item.id).length > 0;
+          const selectedItem = selectedProducts.filter(
+            (v) => v.id === item.id
+          )[0];
           return (
             <Item
               key={index}
               id={item.id}
               title={item.title}
-              quantity={item.quantity}
+              quantity={selectedItem && selectedItem.quantity}
               price={item.price}
-              active={isSelected}
+              active={!!selectedItem}
               onChange={(e) => handleChange(e, item.id)}
             />
           );
