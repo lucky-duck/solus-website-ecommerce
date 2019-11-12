@@ -12,6 +12,10 @@ const StyledCart = styled.div``;
 
 const Items = styled.div`
   margin-bottom: 50px;
+
+  &.altStyling {
+    margin-bottom: 10px;
+  }
 `;
 
 const SubtotalTitle = styled.span`
@@ -32,7 +36,7 @@ function Cart({ altStyling }) {
 
   return (
     <StyledCart>
-      <Items>
+      <Items altStyling={altStyling}>
         {selectedProducts.map((item) => {
           return (
             <Item
