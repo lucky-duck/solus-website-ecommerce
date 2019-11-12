@@ -29,6 +29,8 @@ const mixins = css`
 `;
 
 export const inputMixins = css`
+  @import './colors.scss';
+
   .inputReset {
     width: 100%;
     border: none;
@@ -38,6 +40,7 @@ export const inputMixins = css`
 
     &:focus {
       outline: none;
+      border-color: $colorLink;
     }
 
     &::-ms-clear {
@@ -55,7 +58,7 @@ export const inputMixins = css`
     min-height: 40px;
 
     &::placeholder {
-      color: #7a7a7a;
+      color: #949494;
     }
   }
 `;
