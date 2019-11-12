@@ -43,12 +43,16 @@ function changeItemQuantity(operation, id, quantity = 1) {
         if (v.id !== id) {
           return v;
         }
-        const newQuantity =
-          quantity !== undefined
-            ? quantity
-            : isAdding
-            ? v.quantity + 1
-            : v.quantity - 1;
+        let newQuantity;
+
+        if (isAdding) {
+          newQuantity = v.quantity + 1;
+        } else if (isSubtracting) {
+          newQuantity = v.quantity - 1;
+        } else {
+          newQuantity = quantity;
+        }
+
         return {
           ...v,
           quantity: newQuantity,

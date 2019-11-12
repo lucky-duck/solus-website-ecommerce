@@ -34,6 +34,8 @@ const Title = styled(Text)`
   margin-bottom: 4px;
 `;
 
+const Quantity = styled.div``;
+
 const Price = styled(Text)`
   margin-bottom: 20px;
 `;
@@ -57,14 +59,19 @@ const StyledColour = styled(Colour)`
 //   margin: 0 10px;
 // `;
 
-function Item({ title, description, color, onRemove }) {
+function Item({ title, description, quantity, color, onRemove }) {
   return (
     <StyledItem>
       <Row>
         <Flex aic>
           <ProductPreview />
           <Content>
-            <Title bold>{title}</Title>
+            <Title bold>
+              <Text as={'span'} pale>
+                {quantity}x
+              </Text>{' '}
+              {title}
+            </Title>
             <Text small pale>
               {description}
             </Text>
