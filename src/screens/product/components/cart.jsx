@@ -48,7 +48,7 @@ function ProductCart() {
       <StyledButton href={'/cart'}>Continue to payment</StyledButton>
       <BottomText pale extraSmall>
         Powered by{' '}
-        <Link href={'https://stripe.com'} target={'blank'} extraSmall>
+        <Link href={'https://paypal.com'} target={'blank'} extraSmall>
           PayPal
         </Link>
       </BottomText>
