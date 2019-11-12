@@ -10,7 +10,7 @@ const StyledCheckoutBar = styled.div`
 
   position: fixed;
   left: 0;
-  top: 0;
+  top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
