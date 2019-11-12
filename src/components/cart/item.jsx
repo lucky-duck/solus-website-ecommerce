@@ -48,16 +48,16 @@ const StyledColour = styled(Colour)`
   margin-right: 5px;
 `;
 
-const Separator = styled.div`
-  @import '../../styles/colors.scss';
+// const Separator = styled.div`
+//   @import '../../styles/colors.scss';
+//
+//   width: 1px;
+//   height: 11px;
+//   background-color: $colorPaleGrey;
+//   margin: 0 10px;
+// `;
 
-  width: 1px;
-  height: 11px;
-  background-color: $colorPaleGrey;
-  margin: 0 10px;
-`;
-
-function Item({ title, description, color }) {
+function Item({ title, description, color, onRemove }) {
   return (
     <StyledItem>
       <Row>
@@ -81,9 +81,9 @@ function Item({ title, description, color }) {
         </div>
       </Row>
       <Flex aic>
-        <Link extraSmall>Edit</Link>
-        <Separator />
-        <Link extraSmall pale>
+        {/*<Link extraSmall>Edit</Link>*/}
+        {/*<Separator />*/}
+        <Link extraSmall pale onClick={onRemove}>
           Remove
         </Link>
       </Flex>

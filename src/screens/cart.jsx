@@ -80,12 +80,14 @@ function CartScreen() {
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
-      <Container>
-        <Title>Your cart currently is empty.</Title>
-        <EmptyText>
-          You can select products on <Link href={'/buy'}>this page</Link>
-        </EmptyText>
-      </Container>
+      <Screen>
+        <Container>
+          <Title>Your cart currently is empty.</Title>
+          <EmptyText>
+            You can select products on <Link href={'/buy'}>this page</Link>
+          </EmptyText>
+        </Container>
+      </Screen>
     );
   }
 
