@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'astroturf';
+import { Sticky } from 'react-sticky';
 
 import ProductPreview from './product-preview';
 import Flex from './ui-kit/flex';
@@ -7,10 +8,6 @@ import Button from './button';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
-
-  position: fixed;
-  left: 0;
-  top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,15 +72,21 @@ function Item() {
 
 function CheckoutBar() {
   return (
-    <StyledCheckoutBar>
-      <Flex aic>
-        <Items>
-          <Item />
-          <Item />
-        </Items>
-        <StyledButton>Checkout</StyledButton>
-      </Flex>
-    </StyledCheckoutBar>
+    <Sticky>
+      {({ style }) => {
+        return (
+          <StyledCheckoutBar style={{ ...style, top: 0 }}>
+            <Flex aic>
+              <Items>
+                <Item />
+                <Item />
+              </Items>
+              <StyledButton>Checkout</StyledButton>
+            </Flex>
+          </StyledCheckoutBar>
+        );
+      }}
+    </Sticky>
   );
 }
 

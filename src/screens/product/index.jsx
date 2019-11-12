@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'astroturf';
+import { StickyContainer } from 'react-sticky';
 
 import productImage from '../../images/heater-black.png';
 import Container from '../../components/container';
@@ -13,8 +14,9 @@ import { IS_MOBILE } from '../../constants';
 import { useProducts } from '../../hooks/products';
 import CheckoutBar from '../../components/checkout-bar';
 
+
 const Screen = styled.div`
-  padding-top: 152px;
+  padding-top: 50px;
 
   @media (max-width: 767px) {
     padding-top: 46px;
@@ -163,34 +165,38 @@ function ProductScreen() {
   const { selectedProducts } = useProducts();
 
   return (
-    <Screen>
+    <StickyContainer>
+    <div>
       <CheckoutBar />
-      <Container>
-        <MobileHeader>
-          <MobileTitle>Buy today</MobileTitle>
-          <MobileSubtitle>Get your SOLUS+</MobileSubtitle>
-        </MobileHeader>
-        <StyledFlex posr jcsb>
-          <ImageArea>
-            <StickyItem>
-              <ImageContainer>
-                <Image src={productImage} alt={'Product'} />
-              </ImageContainer>
-              {!IS_MOBILE && <Features />}
-            </StickyItem>
-          </ImageArea>
-          <Content>
-            <ProductSelectors />
-            <Description />
-            <FurtherSteps hide={selectedProducts.length > 0}>
-              <Colours />
-              <Cart />
-            </FurtherSteps>
-          </Content>
-        </StyledFlex>
-        {IS_MOBILE && <Features />}
-      </Container>
-    </Screen>
+      <Screen>
+        <Container>
+          <MobileHeader>
+            <MobileTitle>Buy today</MobileTitle>
+            <MobileSubtitle>Get your SOLUS+</MobileSubtitle>
+          </MobileHeader>
+          <StyledFlex posr jcsb>
+            <ImageArea>
+              <StickyItem>
+                <ImageContainer>
+                  <Image src={productImage} alt={'Product'} />
+                </ImageContainer>
+                {!IS_MOBILE && <Features />}
+              </StickyItem>
+            </ImageArea>
+            <Content>
+              <ProductSelectors />
+              <Description />
+              <FurtherSteps hide={selectedProducts.length > 0}>
+                <Colours />
+                <Cart />
+              </FurtherSteps>
+            </Content>
+          </StyledFlex>
+          {IS_MOBILE && <Features />}
+        </Container>
+      </Screen>
+    </div>
+    </StickyContainer>
   );
 }
 
