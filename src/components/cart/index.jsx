@@ -5,7 +5,6 @@ import Item from './item';
 import Text from '../ui-kit/text';
 import Link from '../ui-kit/link';
 import Flex from '../ui-kit/flex';
-import Button from '../button';
 import mixins from '../../styles/mixins';
 import { useProducts } from '../../hooks/products';
 
@@ -28,7 +27,7 @@ const SubtotalLine = styled.div`
 
 const Price = styled(Text)``;
 
-function Cart() {
+function Cart({ altStyling }) {
   const { selectedProducts, totalPrice } = useProducts();
 
   return (
@@ -46,10 +45,12 @@ function Cart() {
         })}
       </Items>
       <div>
-        <Text as={'h2'} bold big>
-          <SubtotalTitle>Subtotal</SubtotalTitle>
-        </Text>
-        <Link extraSmall>Terms and conditions</Link>
+        <Flex fdc={!altStyling} jcsb={altStyling} aic={altStyling}>
+          <Text as={'h2'} bold big>
+            <SubtotalTitle>Subtotal</SubtotalTitle>
+          </Text>
+          <Link extraSmall>Terms and conditions</Link>
+        </Flex>
         <SubtotalLine />
         <Flex aic jcsb>
           <Price big>£{totalPrice}</Price>

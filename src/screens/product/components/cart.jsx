@@ -49,7 +49,7 @@ function ProductCart() {
       <BottomText pale extraSmall>
         Powered by{' '}
         <Link href={'https://stripe.com'} target={'blank'} extraSmall>
-          Paypal
+          PayPal
         </Link>
       </BottomText>
     </Section>

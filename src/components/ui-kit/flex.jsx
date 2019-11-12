@@ -4,6 +4,10 @@ import styled from 'astroturf';
 const StyledFlex = styled.div`
   display: flex;
 
+  &.fdc {
+    flex-direction: column;
+  }
+
   &.aic {
     align-items: center;
   }

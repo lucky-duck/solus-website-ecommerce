@@ -7,6 +7,10 @@ const StyledContainer = styled.div`
   margin-right: auto;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
+
+  &.narrow {
+    max-width: 660px;
+  }
 `;
 
 function Container(props) {

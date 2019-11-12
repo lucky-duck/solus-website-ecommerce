@@ -28,4 +28,36 @@ const mixins = css`
   }
 `;
 
+export const inputMixins = css`
+  .inputReset {
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-ms-clear {
+      display: none;
+    }
+  }
+
+  .inputCommon {
+    display: block;
+    border: 1px solid #949494;
+    background-color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 0 14px;
+    min-height: 40px;
+
+    &::placeholder {
+      color: #7a7a7a;
+    }
+  }
+`;
+
 export default mixins;

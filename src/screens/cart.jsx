@@ -6,22 +6,47 @@ import Container from '../components/container';
 import Text from '../components/ui-kit/text';
 import { useProducts } from '../hooks/products';
 import Link from '../components/ui-kit/link';
+import InputText from '../components/controls/input-text';
 
 const Screen = styled.div`
   padding-top: 60px;
+  padding-bottom: 60px;
 `;
 
 const OrderDetails = styled.section`
   margin-bottom: 80px;
 `;
 
+const Header = styled.header`
+  margin-bottom: 30px;
+`;
+
 const Title = styled.h2`
   font-size: 30px;
   font-weight: 500;
+  margin-bottom: 3px;
 `;
 
 const EmptyText = styled(Text)`
   margin-top: 20px;
+`;
+
+const SmallContainer = styled.div`
+  max-width: 430px;
+`;
+
+const DeliveryInputs = styled.div`
+  margin-bottom: 60px;
+`;
+
+const DeliveryInputSection = styled.fieldset`
+  margin-bottom: 35px;
+  border: none;
+  outline: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 function CartScreen() {
@@ -66,16 +91,53 @@ function CartScreen() {
 
   return (
     <Screen>
-      <Container>
+      <Container narrow>
         <OrderDetails>
-          <Title>Your Order</Title>
-          <Cart />
+          <Header>
+            <Title>Your Order</Title>
+            <Text pale>
+              This is what is in your cart. You can still edit your purchace.
+            </Text>
+          </Header>
+          <Cart altStyling />
         </OrderDetails>
-        <Title>Delivery Setup</Title>
-        <Text small pale>
-          To get started, enter your details
-        </Text>
-        <div id={'paypal-button-container'} />
+        <SmallContainer>
+          <Header>
+            <Title>Delivery Setup</Title>
+            <Text pale>To get started, enter your details</Text>
+          </Header>
+          <DeliveryInputs>
+            <DeliveryInputSection>
+              <InputText
+                label={'Email'}
+                placeholder={'Your email address here'}
+              />
+            </DeliveryInputSection>
+            <DeliveryInputSection>
+              <InputText
+                label={'Phone Number'}
+                placeholder={'Your phone number here'}
+              />
+            </DeliveryInputSection>
+            <DeliveryInputSection>
+              <InputText
+                mb
+                label={'Full Address'}
+                placeholder={'Address Line 1'}
+              />
+              <InputText mb placeholder={'Address Line 2'} />
+              <InputText mb placeholder={'Country'} />
+              <InputText placeholder={'Post Code'} />
+            </DeliveryInputSection>
+          </DeliveryInputs>
+        </SmallContainer>
+        <SmallContainer>
+          <Header>
+            <Title>Payment Confirmation</Title>
+            <Text pale>Please, proceed to make a payment via PayPal</Text>
+          </Header>
+          <div id={'paypal-button-container'} />
+        </SmallContainer>
       </Container>
     </Screen>
   );
