@@ -14,8 +14,8 @@
     "react-textarea-autosize": "^7.1.2"
   },
   "scripts": {
-    "start": "rescripts start",
-    "build": "rescripts build",
+    "start": "IMAGE_INLINE_SIZE_LIMIT=99999999 rescripts start",
+    "build": "IMAGE_INLINE_SIZE_LIMIT=99999999 rescripts build",
     "test": "rescripts test",
     "eject": "rescripts eject"
   },
