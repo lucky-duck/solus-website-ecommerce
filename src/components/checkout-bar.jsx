@@ -81,7 +81,7 @@ function CheckoutBar() {
                 <Item />
                 <Item />
               </Items>
-              <StyledButton>Checkout</StyledButton>
+              <StyledButton href={'/cart'}>Checkout</StyledButton>
             </Flex>
           </StyledCheckoutBar>
         );

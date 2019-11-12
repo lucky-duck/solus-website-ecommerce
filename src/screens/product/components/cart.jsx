@@ -45,7 +45,7 @@ function ProductCart() {
         </Header>
       )}
       <Cart />
-      <StyledButton>Continue to payment</StyledButton>
+      <StyledButton href={'/cart'}>Continue to payment</StyledButton>
       <BottomText pale extraSmall>
         Powered by{' '}
         <Link href={'https://stripe.com'} target={'blank'} extraSmall>
