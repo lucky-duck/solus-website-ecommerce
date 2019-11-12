@@ -4,6 +4,8 @@ import styled from 'astroturf';
 import Cart from '../components/cart';
 import Container from '../components/container';
 import Text from '../components/ui-kit/text';
+import { useProducts } from '../hooks/products';
+import Link from '../components/ui-kit/link';
 
 const Screen = styled.div`
   padding-top: 60px;
@@ -18,7 +20,13 @@ const Title = styled.h2`
   font-weight: 500;
 `;
 
+const EmptyText = styled(Text)`
+  margin-top: 20px;
+`;
+
 function CartScreen() {
+  const { selectedProducts } = useProducts();
+
   useEffect(() => {
     window.paypal
       .Buttons({
@@ -43,49 +51,18 @@ function CartScreen() {
         },
       })
       .render('#paypal-button-container');
-    // window.paypal.Button.render(
-    //   {
-    //     // Configure environment
-    //     env: 'sandbox',
-    //     client: {
-    //       sandbox: 'Ab115IoTrFjgeoyb2z9JEL2Njm7ovP8uBUY-FBWYvQvZMUuIkMb6G-JyIR0DTDw4Xh8bQ8tsaQxVpa8A',
-    //       production: 'demo_production_client_id',
-    //     },
-    //     // Customize button (optional)
-    //     locale: 'en_US',
-    //     style: {
-    //       size: 'small',
-    //       color: 'gold',
-    //       shape: 'pill',
-    //     },
-    //
-    //     // Enable Pay Now checkout flow (optional)
-    //     commit: true,
-    //
-    //     // Set up a payment
-    //     payment: function(data, actions) {
-    //       return actions.payment.create({
-    //         transactions: [
-    //           {
-    //             amount: {
-    //               total: '0.01',
-    //               currency: 'USD',
-    //             },
-    //           },
-    //         ],
-    //       });
-    //     },
-    //     // Execute the payment
-    //     onAuthorize: function(data, actions) {
-    //       return actions.payment.execute().then(function() {
-    //         // Show a confirmation message to the buyer
-    //         window.alert('Thank you for your purchase!');
-    //       });
-    //     },
-    //   },
-    //   '#paypal-button-container'
-    // );
   }, []);
+
+  if (!selectedProducts || !selectedProducts.length) {
+    return (
+      <Container>
+        <Title>Your cart currently is empty.</Title>
+        <EmptyText>
+          You can select products on <Link href={'/buy'}>this page</Link>
+        </EmptyText>
+      </Container>
+    );
+  }
 
   return (
     <Screen>
