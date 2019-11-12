@@ -123,7 +123,7 @@ const ItemPrice = styled(Text)`
 `;
 
 function Item({ id, title, price, quantity, onChange, ...rest }) {
-  function getSelected() {
+  function getValue() {
     if (quantity) {
       const filtered = OPTIONS.filter((v) => v.value === quantity)[0];
       return filtered && filtered.value;
@@ -141,7 +141,7 @@ function Item({ id, title, price, quantity, onChange, ...rest }) {
         <InputSelect
           name={`product_${id}`}
           type={'select'}
-          defaultValue={getSelected()}
+          value={getValue()}
           options={OPTIONS}
           active={rest.active}
           onChange={onChange}
