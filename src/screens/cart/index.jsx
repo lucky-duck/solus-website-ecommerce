@@ -7,6 +7,8 @@ import Text from '../../components/ui-kit/text';
 import { useProducts } from '../../hooks/products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 const Screen = styled.div`
   padding-top: 60px;
@@ -35,6 +37,53 @@ export const SmallContainer = styled.div`
   max-width: 430px;
 `;
 
+const PaypalButtonContainer = styled.div`
+  position: relative;
+  transition: filter 0.55s ease-out;
+
+  &.disabled {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    pointer-events: none;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+    }
+  }
+`;
+
+const initialValues = {
+  email: '',
+  phone_number: '',
+  address1: '',
+  address2: '',
+  country: '',
+  post_code: '',
+};
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .email()
+    .required(),
+  phone_number: Yup.string()
+    .min(10)
+    .required(),
+  address1: Yup.string()
+    .min(2)
+    .required(),
+  address2: Yup.string(),
+  country: Yup.string()
+    .min(2)
+    .required(),
+});
+
 function CartScreen() {
   const { selectedProducts } = useProducts();
 
@@ -47,7 +96,9 @@ function CartScreen() {
             purchase_units: [
               {
                 amount: {
-                  value: '0.01',
+                  value: selectedProducts.reduce((acc, curr) => {
+                    return acc + curr.quantity * curr.price;
+                  }, 0),
                 },
               },
             ],
@@ -57,12 +108,14 @@ function CartScreen() {
           // This function captures the funds from the transaction.
           return actions.order.capture().then(function(details) {
             // This function shows a transaction success message to your buyer.
-            alert('Transaction completed by ' + details.payer.name.given_name);
+            alert(
+              `Thank you, ${details.payer.name.given_name}. We will come back to you shortly!`
+            );
           });
         },
       })
       .render('#paypal-button-container');
-  }, []);
+  }, [selectedProducts]);
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
@@ -78,27 +131,57 @@ function CartScreen() {
   }
 
   return (
-    <Screen>
-      <Container narrow>
-        <OrderDetails>
-          <Header>
-            <Title>Your Order</Title>
-            <Text pale>
-              This is what is in your cart. You can still edit your purchace.
-            </Text>
-          </Header>
-          <Cart altStyling />
-        </OrderDetails>
-        <Delivery />
-        <SmallContainer>
-          <Header>
-            <Title>Payment Confirmation</Title>
-            <Text pale>Please, proceed to make a payment via PayPal</Text>
-          </Header>
-          <div id={'paypal-button-container'} />
-        </SmallContainer>
-      </Container>
-    </Screen>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={() => undefined}
+      isInitialValid={false}
+    >
+      {({ isValid }) => {
+        function handlePaypalAreaClick(e) {
+          e.stopPropagation();
+          e.nativeEvent.stopImmediatePropagation();
+        }
+
+        return (
+          <Screen>
+            <Container narrow>
+              <OrderDetails>
+                <Header>
+                  <Title>Your Order</Title>
+                  <Text pale>
+                    This is what is in your cart. You can still edit your
+                    purchace.
+                  </Text>
+                </Header>
+                <Cart altStyling />
+              </OrderDetails>
+              <Delivery />
+              <SmallContainer>
+                <Header>
+                  <Title>Payment Confirmation</Title>
+                  {isValid ? (
+                    <Text pale>
+                      Please, proceed to make a payment via PayPal
+                    </Text>
+                  ) : (
+                    <Text danger>
+                      Please, fill out the delivery section to proceed
+                    </Text>
+                  )}
+                </Header>
+                <PaypalButtonContainer
+                  disabled={!isValid}
+                  onClick={handlePaypalAreaClick}
+                >
+                  <div id={'paypal-button-container'} />
+                </PaypalButtonContainer>
+              </SmallContainer>
+            </Container>
+          </Screen>
+        );
+      }}
+    </Formik>
   );
 }
 

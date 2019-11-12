@@ -17,11 +17,12 @@ const StyledInputText = styled.div`
 `;
 
 const Input = styled.input`
+  @import '../../styles/colors.scss';
   composes: ${inputMixins.inputReset};
   composes: ${inputMixins.inputCommon};
 
   &.invalid {
-    border-color: darkred;
+    border-color: $colorDanger;
   }
 `;
 
@@ -45,49 +46,36 @@ const Label = styled.label`
 
 function InputText({
   className,
-  name,
   id,
-  invalid,
   type,
-  onBlur,
   defaultValue,
   value,
-  px,
   placeholder,
-  minHeight,
-  height,
-  smallPadding,
-  alignTextCenter,
-  onChange,
   inputRef,
   autocomplete,
   onKeyDown,
   label,
+  field,
+  form,
   ...rest
 }) {
   const InputComponent = type === 'textarea' ? Textarea : Input;
 
+  const invalid = form.touched[field.name] && !!form.errors[field.name];
+
   return (
     <StyledInputText className={className} invalid={invalid} {...rest}>
-      {label && <Label for={id}>{label}</Label>}
+      {label && <Label htmlFor={id}>{label}</Label>}
       <InputComponent
-        height={height}
-        minHeight={minHeight}
-        px={px}
         id={id}
-        name={name}
         type={type}
-        onBlur={onBlur}
         defaultValue={defaultValue}
-        value={value}
         invalid={invalid}
         placeholder={placeholder}
-        smallPadding={smallPadding}
-        alignTextCenter={alignTextCenter}
-        onChange={onChange}
         ref={inputRef}
-        autocomplete={autocomplete}
+        autoComplete={autocomplete}
         onKeyDown={onKeyDown}
+        {...field}
       />
     </StyledInputText>
   );

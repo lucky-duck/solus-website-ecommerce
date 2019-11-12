@@ -29,6 +29,10 @@ const Text = styled.div`
     font-weight: 500;
   }
 
+  &.danger {
+    color: $colorDanger;
+  }
+
   @media (max-width: 767px) {
     &.big {
       font-size: 20px;
