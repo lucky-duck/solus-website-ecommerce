@@ -29,6 +29,7 @@ const SubtotalLine = styled.div`
 const Price = styled(Text)``;
 
 const StyledButton = styled(Button)`
+  width: 100%;
   margin-top: 30px;
 `;
 

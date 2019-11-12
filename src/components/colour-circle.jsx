@@ -3,7 +3,7 @@ import styled from 'astroturf';
 
 import mixins from '../styles/mixins';
 
-const StyledColour = styled.div`
+const StyledColour = styled.button`
   composes: ${mixins.hoverDefault};
 
   display: flex;
@@ -26,6 +26,10 @@ const StyledColour = styled.div`
   &.small {
     &:hover {
       opacity: 1;
+    }
+
+    &:focus {
+      outline: none;
     }
 
     width: 20px;
@@ -56,14 +60,25 @@ const ColourInner = styled.div`
 `;
 
 function Colour({ className, white, active, small, onClick }) {
+  function handleClick(e) {
+    if (small) {
+      e.preventDefault();
+      e.currentTarget.blur();
+      return;
+    }
+
+    onClick(e);
+  }
+
   return (
     <StyledColour
       className={className}
       active={active}
       small={small}
-      onClick={onClick}
+      onClick={handleClick}
+      type="button"
     >
-      <ColourInner white={white} small={small} />
+      <ColourInner white={white} small={small} tabindex="-1" />
     </StyledColour>
   );
 }

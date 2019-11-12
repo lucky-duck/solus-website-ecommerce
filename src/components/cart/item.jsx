@@ -46,10 +46,6 @@ const ColourContainer = styled.div`
 
 const StyledColour = styled(Colour)`
   margin-right: 5px;
-
-  &:last-of-type {
-    margin-right: 0;
-  }
 `;
 
 const Separator = styled.div`

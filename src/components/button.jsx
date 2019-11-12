@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'astroturf';
 import mixins from '../styles/mixins';
 
-const StyledButton = styled.div`
+const StyledButton = styled.button`
   @import '../styles/colors.scss';
   composes: ${mixins.hoverDefault};
+  composes: ${mixins.fontFamilySans};
 
   display: flex;
   align-items: center;
@@ -15,10 +16,11 @@ const StyledButton = styled.div`
   font-size: 17px;
   cursor: pointer;
   user-select: none;
+  border: none;
 `;
 
 function Button(props) {
-  return <StyledButton {...props} />;
+  return <StyledButton type="button" {...props}  />;
 }
 
 export default Button;
