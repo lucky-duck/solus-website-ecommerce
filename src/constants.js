@@ -32,3 +32,5 @@ export const PRODUCTS = [
     price: 793,
   },
 ];
+
+export const COUNTRY_FIELD_NAME = 'country__solus'

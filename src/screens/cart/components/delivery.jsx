@@ -7,6 +7,7 @@ import InputText from '../../../components/controls/input-text';
 import { Header, SmallContainer, Title } from '../index';
 import countries from '../../../countries.json';
 import InputSelect from '../../../components/controls/input-select';
+import { COUNTRY_FIELD_NAME } from '../../../constants';
 
 const DeliveryInputs = styled.div``;
 
@@ -14,14 +15,6 @@ const DeliveryInputSection = styled.fieldset`
   margin-bottom: 35px;
   border: none;
   outline: none;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const StyledInputSelect = styled(InputSelect)`
-  margin-bottom: 14px;
 
   &:last-child {
     margin-bottom: 0;
@@ -67,10 +60,10 @@ function Delivery() {
             component={InputText}
           />
           <Field
-            name={'country__solus'}
+            name={COUNTRY_FIELD_NAME}
             mb
             placeholder={'Country'}
-            component={StyledInputSelect}
+            component={InputSelect}
             options={countries}
             withInput
           />

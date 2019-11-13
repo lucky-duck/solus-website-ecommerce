@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'astroturf';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import omit from 'lodash/omit';
 
 import Cart from '../../components/cart';
 import Container from '../../components/container';
@@ -10,6 +12,11 @@ import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
+import { COUNTRY_FIELD_NAME } from '../../constants';
+import countries from '../../countries.json';
+
+const ZAPIER_WEBHOOK_URL =
+  'https://hooks.zapier.com/hooks/catch/3614782/o48nwdq/';
 
 const Screen = styled.div`
   padding-top: 60px;
@@ -82,7 +89,7 @@ const initialValues = {
   phone_number: '',
   address1: '',
   address2: '',
-  country__solus: '',
+  [COUNTRY_FIELD_NAME]: '',
   post_code: '',
 };
 
@@ -97,12 +104,73 @@ const validationSchema = Yup.object().shape({
     .min(2)
     .required(),
   address2: Yup.string(),
-  country__solus: Yup.string().required(),
+  [COUNTRY_FIELD_NAME]: Yup.string().required(),
 });
 
 function CartScreen() {
   const { selectedProducts } = useProducts();
+
+  if (!selectedProducts || !selectedProducts.length) {
+    return (
+      <Screen>
+        <Container>
+          <Title>Your cart currently is empty.</Title>
+          <EmptyText>
+            You can select products on{' '}
+            <Link href={getPath.buy()}>this page</Link>
+          </EmptyText>
+        </Container>
+      </Screen>
+    );
+  }
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={() => undefined}
+      isInitialValid={false}
+    >
+      {(formikProps) => {
+        return (
+          <Inner
+            formikProps={formikProps}
+            selectedProducts={selectedProducts}
+          />
+        );
+      }}
+    </Formik>
+  );
+}
+
+function Inner({ formikProps, selectedProducts }) {
+  const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
+
+  async function sendDeliveryDetails() {
+    try {
+      const countryData = countries.filter(
+        (v) => v.value === values[COUNTRY_FIELD_NAME]
+      )[0];
+      const valuesToSend = {
+        ...omit(values, [COUNTRY_FIELD_NAME]),
+        country: countryData.label,
+      };
+      console.log('valuesToSend', valuesToSend);
+      await axios({
+        url: ZAPIER_WEBHOOK_URL,
+        method: 'post',
+        data: valuesToSend,
+        withCredentials: false,
+        headers: { 'Content-Type': 'text/plain' },
+      });
+    } catch (error) {
+      alert(
+        'Sorry! Cannot save delivery details. Please, contact as for more information.'
+      );
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     if (!selectedProducts.length) {
@@ -133,8 +201,17 @@ function CartScreen() {
           // This function captures the funds from the transaction.
           return actions.order.capture().then(function(details) {
             // This function shows a transaction success message to your buyer.
+            function getPayerName() {
+              const name =
+                details && details.payer && details.payer.name.given_name;
+
+              return name ? `, ${name}` : '';
+            }
+
+            sendDeliveryDetails();
+
             alert(
-              `Thank you, ${details.payer.name.given_name}. We will come back to you shortly!`
+              `Thank you${getPayerName}. We will come back to you shortly!`
             );
           });
         },
@@ -142,76 +219,40 @@ function CartScreen() {
       .render(paypalButtonContainerNode.current);
   }, [selectedProducts]);
 
-  if (!selectedProducts || !selectedProducts.length) {
-    return (
-      <Screen>
-        <Container>
-          <Title>Your cart currently is empty.</Title>
-          <EmptyText>
-            You can select products on{' '}
-            <Link href={getPath.buy()}>this page</Link>
-          </EmptyText>
-        </Container>
-      </Screen>
-    );
-  }
-
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={() => undefined}
-      isInitialValid={false}
-    >
-      {({ isValid }) => {
-        function handlePaypalAreaClick(e) {
-          e.stopPropagation();
-          e.nativeEvent.stopImmediatePropagation();
-        }
-
-        return (
-          <Screen>
-            <Container narrow>
-              <Section>
-                <Header>
-                  <Title>Your Order</Title>
-                  <Text pale>
-                    This is what is in your cart. You can still edit your
-                    purchace.
-                  </Text>
-                </Header>
-                <Cart altStyling />
-              </Section>
-              <Section>
-                <Delivery />
-              </Section>
-              <Section>
-                <SmallContainer>
-                  <Header>
-                    <Title>Payment Confirmation</Title>
-                    {isValid ? (
-                      <Text pale>
-                        Please, proceed to make a payment via PayPal
-                      </Text>
-                    ) : (
-                      <Text danger>
-                        Please, fill out the delivery section to proceed
-                      </Text>
-                    )}
-                  </Header>
-                  <PaypalButtonContainer
-                    disabled={!isValid}
-                    onClick={handlePaypalAreaClick}
-                  >
-                    <div ref={paypalButtonContainerNode} />
-                  </PaypalButtonContainer>
-                </SmallContainer>
-              </Section>
-            </Container>
-          </Screen>
-        );
-      }}
-    </Formik>
+    <Screen>
+      <Container narrow>
+        <Section>
+          <Header>
+            <Title>Your Order</Title>
+            <Text pale>
+              This is what is in your cart. You can still edit your purchace.
+            </Text>
+          </Header>
+          <Cart altStyling />
+        </Section>
+        <Section>
+          <Delivery />
+        </Section>
+        <Section>
+          <SmallContainer>
+            <Header>
+              <Title>Payment Confirmation</Title>
+              {isValid ? (
+                <Text pale>Please, proceed to make a payment via PayPal</Text>
+              ) : (
+                <Text danger>
+                  Please, fill out the delivery section to proceed
+                </Text>
+              )}
+            </Header>
+            <PaypalButtonContainer disabled={!isValid}>
+              <div ref={paypalButtonContainerNode} />
+            </PaypalButtonContainer>
+          </SmallContainer>
+        </Section>
+      </Container>
+    </Screen>
   );
 }
 

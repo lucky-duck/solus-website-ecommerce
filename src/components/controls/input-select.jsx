@@ -16,6 +16,7 @@ const StyledSelect = styled.div`
   position: relative;
   user-select: none;
   height: 50px;
+  z-index: 1000;
 
   &.small {
     height: 32px;
@@ -23,6 +24,14 @@ const StyledSelect = styled.div`
 
   &.large {
     height: 48px;
+  }
+
+  &.mb {
+    margin-bottom: 14px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -215,7 +224,7 @@ const InnerComponent = (
           ref={inputNode}
           show={isOpen}
           name={name}
-          autocomplete="new-password"
+          autoComplete="new-password"
         />
       )}
       <DropdownWrapper
