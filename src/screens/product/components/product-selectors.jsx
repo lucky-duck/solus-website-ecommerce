@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'astroturf';
+
 import InputSelect from '../../../components/controls/input-select';
 import mixins from '../../../styles/mixins';
 import Section from './section';
@@ -67,7 +68,7 @@ const StyledItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 15px;
+  padding: 8px 15px;
   border: 1px solid $colorPaleGrey;
   border-radius: 4px;
   height: 86px;
@@ -84,6 +85,10 @@ const StyledItem = styled.div`
   @media (max-width: 767px) {
     margin-bottom: 11px;
   }
+`;
+
+const ItemLeft = styled.div`
+  width: 50%;
 `;
 
 const ItemTitle = styled.div`
@@ -123,7 +128,7 @@ const ItemPrice = styled(Text)`
   }
 `;
 
-function Item({ id, title, price, quantity, onChange, ...rest }) {
+function Item({ id, title, description, price, quantity, onChange, ...rest }) {
   function getValue() {
     if (quantity) {
       const filtered = OPTIONS.filter((v) => v.value === quantity)[0];
@@ -134,10 +139,10 @@ function Item({ id, title, price, quantity, onChange, ...rest }) {
 
   return (
     <StyledItem {...rest}>
-      <div style={{ width: '40%' }}>
+      <ItemLeft>
         <ItemTitle dangerouslySetInnerHTML={{ __html: title }} />
-        <ItemDescription>40x45x80 cm</ItemDescription>
-      </div>
+        <ItemDescription dangerouslySetInnerHTML={{ __html: description }} />
+      </ItemLeft>
       <ItemRight>
         <InputSelect
           name={`product_${id}`}
@@ -184,6 +189,7 @@ function ProductSelectors() {
               key={index}
               id={item.id}
               title={item.title}
+              description={item.description}
               quantity={selectedItem && selectedItem.quantity}
               price={item.price}
               active={!!selectedItem}

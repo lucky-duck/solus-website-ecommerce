@@ -27,9 +27,13 @@ const Row = styled.div`
   margin-bottom: 18px;
 `;
 
-const Content = styled.div`
-  width: 120px;
+const ItemLeft = styled.div`
+  display: flex;
+  align-items: center;
+  width: 70%;
 `;
+
+const Content = styled.div``;
 
 const Title = styled(Text)`
   margin-bottom: 4px;
@@ -62,20 +66,22 @@ function Item({ title, description, quantity, price, color, onRemove }) {
   return (
     <StyledItem>
       <Row>
-        <Flex aic>
+        <ItemLeft>
           <ProductPreview />
           <Content>
             <Title bold>
               <Text as={'span'} pale>
                 {quantity}x
               </Text>{' '}
-              {title}
+              <span dangerouslySetInnerHTML={{ __html: title }} />
             </Title>
-            <Text small pale>
-              {description}
-            </Text>
+            <Text
+              small
+              pale
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
           </Content>
-        </Flex>
+        </ItemLeft>
         <div>
           <Price big>{formatCurrency(price * quantity)}</Price>
           <ColourContainer>

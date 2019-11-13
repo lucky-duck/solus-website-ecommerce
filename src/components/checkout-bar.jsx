@@ -37,7 +37,7 @@ const StyledButton = styled(Button)`
 const StyledItem = styled.div`
   display: flex;
   align-items: center;
-  padding-right: 15px;
+  padding-right: 25px;
 `;
 
 const ItemContent = styled.div``;
@@ -47,7 +47,7 @@ const ItemTitle = styled.div`
   font-size: 18px;
   font-weight: 500;
   letter-spacing: -0.02em;
-  max-width: 120px;
+  max-width: 150px;
 `;
 
 const ItemQuantity = styled.span`
@@ -70,7 +70,8 @@ function Item({ quantity, price, title }) {
       <ProductPreview />
       <ItemContent>
         <ItemTitle>
-          <ItemQuantity>{quantity}x</ItemQuantity> {title}
+          <ItemQuantity>{quantity}x</ItemQuantity>{' '}
+          <span dangerouslySetInnerHTML={{ __html: title }} />
         </ItemTitle>
         <ItemPrice>{formatCurrency(price * quantity)}</ItemPrice>
       </ItemContent>
@@ -82,6 +83,10 @@ const MAX_ITEMS = 3;
 
 function CheckoutBar() {
   const { selectedProducts } = useProducts();
+
+  if (!selectedProducts.length) {
+    return null;
+  }
 
   return (
     <Sticky>

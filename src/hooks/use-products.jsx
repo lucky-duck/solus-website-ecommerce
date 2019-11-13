@@ -1,34 +1,9 @@
 import React, { useContext, useState, useMemo, useEffect } from 'react';
-import { CART_LOCAL_STORAGE_KEY, COLORS } from '../constants';
+import sortBy from 'lodash/sortBy';
+
+import { CART_LOCAL_STORAGE_KEY, COLORS, PRODUCTS } from '../constants';
 
 const ProductsContext = React.createContext({});
-
-const allProducts = [
-  {
-    id: 0,
-    title: 'SOLUS+ M1 200W Heater',
-    description: '40x45x80 cm',
-    price: 250,
-  },
-  {
-    id: 1,
-    title: 'SOLUS+ M2 400W Heater',
-    description: '60x79x110 cm',
-    price: 350,
-  },
-  {
-    id: 2,
-    title: 'Starter Kit M1 2xM1 200W Heater',
-    description: '40x45x80 cm',
-    price: 450,
-  },
-  {
-    id: 3,
-    title: 'Starter Kit M2 2xM2 400W Heater',
-    description: '60x79x110 cm',
-    price: 650,
-  },
-];
 
 function changeItemQuantity(operation, id, quantity = 1) {
   const isAdding = operation === '+';
@@ -108,10 +83,13 @@ export function ProductsProvider({ children }) {
 
   useEffect(() => {
     setSelectedProductsWithData(
-      selectedProducts.map((v) => {
-        const productData = allProducts.filter((data) => data.id === v.id)[0];
-        return { ...v, ...productData };
-      })
+      sortBy(
+        selectedProducts.map((v) => {
+          const productData = PRODUCTS.filter((data) => data.id === v.id)[0];
+          return { ...v, ...productData };
+        }),
+        'id'
+      )
     );
   }, [selectedProducts]);
 
@@ -155,7 +133,7 @@ export function ProductsProvider({ children }) {
   return (
     <ProductsContext.Provider
       value={{
-        allProducts,
+        allProducts: PRODUCTS,
         selectedProducts: selectedProductsWithData,
         addProduct,
         removeProduct,
