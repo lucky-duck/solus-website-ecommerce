@@ -29,6 +29,8 @@ const mixins = css`
 `;
 
 export const inputMixins = css`
+  @import './colors.scss';
+
   .inputReset {
     width: 100%;
     border: none;
@@ -38,7 +40,6 @@ export const inputMixins = css`
   }
 
   .inputReset:focus {
-    @import './colors.scss';
     outline: none;
     border-color: $colorLink;
   }
