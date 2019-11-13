@@ -9,3 +9,5 @@ export const COLORS = {
 };
 
 export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products';
+
+export const DEFAULT_CURRENCY_SYMBOL = '€';

@@ -5,6 +5,7 @@ import { Sticky } from 'react-sticky';
 import ProductPreview from './product-preview';
 import Flex from './ui-kit/flex';
 import Button from './button';
+import { formatCurrency } from '../utils/utils';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
@@ -64,7 +65,7 @@ function Item() {
         <ItemTitle>
           <ItemQuantity>2x</ItemQuantity> SOLUS+ M1 200W Heater
         </ItemTitle>
-        <ItemPrice>£500.00</ItemPrice>
+        <ItemPrice>{formatCurrency(500)}</ItemPrice>
       </ItemContent>
     </StyledItem>
   );

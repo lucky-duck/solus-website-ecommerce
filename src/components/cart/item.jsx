@@ -7,6 +7,7 @@ import Colour from '../colour-circle';
 import Link from '../ui-kit/link';
 import ProductPreview from '../product-preview';
 import { COLORS } from '../../constants';
+import { formatCurrency } from '../../utils/utils';
 
 const StyledItem = styled.div`
   padding-bottom: 20px;
@@ -34,8 +35,6 @@ const Title = styled(Text)`
   margin-bottom: 4px;
 `;
 
-const Quantity = styled.div``;
-
 const Price = styled(Text)`
   margin-bottom: 20px;
 `;
@@ -59,7 +58,7 @@ const StyledColour = styled(Colour)`
 //   margin: 0 10px;
 // `;
 
-function Item({ title, description, quantity, color, onRemove }) {
+function Item({ title, description, quantity, price, color, onRemove }) {
   return (
     <StyledItem>
       <Row>
@@ -78,7 +77,7 @@ function Item({ title, description, quantity, color, onRemove }) {
           </Content>
         </Flex>
         <div>
-          <Price big>£250.00</Price>
+          <Price big>{formatCurrency(price * quantity)}</Price>
           <ColourContainer>
             <StyledColour small white={color === COLORS.WHITE} />
             <Text extraSmall pale>

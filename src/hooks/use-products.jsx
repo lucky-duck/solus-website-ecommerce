@@ -61,12 +61,10 @@ function changeItemQuantity(operation, id, quantity = 1) {
     }
 
     if (!isSubtracting) {
-      const productData = allProducts.filter((v) => v.id === id)[0];
       return [
         ...products,
         {
           id,
-          ...productData,
           color: COLORS.BLACK,
           quantity,
         },
@@ -95,14 +93,26 @@ export function ProductsProvider({ children }) {
   const [selectedProducts, setSelectedProducts] = useState(
     getSelectedFromLocalStorage()
   );
+  const [selectedProductsWithData, setSelectedProductsWithData] = useState([]);
+
   const totalPrice = useMemo(() => {
-    return selectedProducts.reduce(
+    return selectedProductsWithData.reduce(
       (acc, curr) => acc + curr.price * curr.quantity,
       0
     );
-  }, [selectedProducts]);
+  }, [selectedProductsWithData]);
+
   useEffect(() => {
     saveSelectedToLocalStorage(selectedProducts);
+  }, [selectedProducts]);
+
+  useEffect(() => {
+    setSelectedProductsWithData(
+      selectedProducts.map((v) => {
+        const productData = allProducts.filter((data) => data.id === v.id)[0];
+        return { ...v, ...productData };
+      })
+    );
   }, [selectedProducts]);
 
   function addProduct(id) {
@@ -146,7 +156,7 @@ export function ProductsProvider({ children }) {
     <ProductsContext.Provider
       value={{
         allProducts,
-        selectedProducts,
+        selectedProducts: selectedProductsWithData,
         addProduct,
         removeProduct,
         setProductQuantity,

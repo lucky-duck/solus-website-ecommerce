@@ -5,7 +5,8 @@ import mixins from '../../../styles/mixins';
 import Section from './section';
 import Link from '../../../components/ui-kit/link';
 import Text from '../../../components/ui-kit/text';
-import { useProducts } from '../../../hooks/products';
+import { useProducts } from '../../../hooks/use-products';
+import { formatCurrency } from '../../../utils/utils';
 
 const OPTIONS = [
   {
@@ -147,7 +148,7 @@ function Item({ id, title, price, quantity, onChange, ...rest }) {
           onChange={onChange}
         />
         <ItemPrice pale big active={rest.active}>
-          £{price.toFixed(2)}
+          {formatCurrency(price)}
         </ItemPrice>
       </ItemRight>
     </StyledItem>

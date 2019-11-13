@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import styled from 'astroturf';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import Cart from '../../components/cart';
 import Container from '../../components/container';
 import Text from '../../components/ui-kit/text';
-import { useProducts } from '../../hooks/products';
+import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
 
 const Screen = styled.div`
   padding-top: 60px;

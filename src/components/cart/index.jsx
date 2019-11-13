@@ -6,7 +6,8 @@ import Text from '../ui-kit/text';
 import Link from '../ui-kit/link';
 import Flex from '../ui-kit/flex';
 import mixins from '../../styles/mixins';
-import { useProducts } from '../../hooks/products';
+import { useProducts } from '../../hooks/use-products';
+import { formatCurrency } from '../../utils/utils';
 
 const StyledCart = styled.div``;
 
@@ -42,6 +43,7 @@ function Cart({ altStyling }) {
             <Item
               key={item.id}
               quantity={item.quantity}
+              price={item.price}
               title={item.title}
               color={item.color}
               onRemove={() => removeProduct(item.id)}
@@ -58,9 +60,9 @@ function Cart({ altStyling }) {
         </Flex>
         <SubtotalLine />
         <Flex aic jcsb>
-          <Price big>£{totalPrice}</Price>
+          <Price big>{formatCurrency(totalPrice)}</Price>
           <Text extraSmall pale>
-            Includes VAT of approx. £40.00.*
+            Includes VAT of approx. {formatCurrency(40)}*
           </Text>
         </Flex>
       </div>

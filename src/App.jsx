@@ -4,7 +4,7 @@ import { Router } from '@reach/router';
 
 import ProductScreen from './screens/product';
 import mixins from './styles/mixins';
-import { ProductsProvider } from './hooks/products';
+import { ProductsProvider } from './hooks/use-products';
 import CartScreen from './screens/cart';
 
 const Wrapper = styled.div`

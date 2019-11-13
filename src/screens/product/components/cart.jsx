@@ -4,7 +4,7 @@ import styled from 'astroturf';
 import Section from './section';
 import Text from '../../../components/ui-kit/text';
 import Cart from '../../../components/cart';
-import { useProducts } from '../../../hooks/products';
+import { useProducts } from '../../../hooks/use-products';
 import Link from '../../../components/ui-kit/link';
 import Button from '../../../components/button';
 

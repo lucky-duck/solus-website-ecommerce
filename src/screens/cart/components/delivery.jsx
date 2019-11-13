@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'astroturf';
-import { Formik, Field } from 'formik';
-import * as Yup from 'yup';
+import { Field } from 'formik';
 
 import Text from '../../../components/ui-kit/text';
 import InputText from '../../../components/controls/input-text';

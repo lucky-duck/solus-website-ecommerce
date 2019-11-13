@@ -11,7 +11,7 @@ import Colours from './components/colours';
 import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
 import { IS_MOBILE } from '../../constants';
-import { useProducts } from '../../hooks/products';
+import { useProducts } from '../../hooks/use-products';
 import CheckoutBar from '../../components/checkout-bar';
 
 

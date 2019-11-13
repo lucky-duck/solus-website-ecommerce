@@ -5,7 +5,7 @@ import Section from './section';
 import Flex from '../../../components/ui-kit/flex';
 import mixins from '../../../styles/mixins';
 import Colour from '../../../components/colour-circle';
-import { useProducts } from '../../../hooks/products';
+import { useProducts } from '../../../hooks/use-products';
 import { COLORS } from '../../../constants';
 
 const StyledColour = styled(Colour)`
