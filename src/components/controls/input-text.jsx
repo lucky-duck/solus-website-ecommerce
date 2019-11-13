@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'astroturf';
 import TextareaAutosize from 'react-textarea-autosize';
 
-import mixins, { inputMixins } from '../../styles/mixins';
+import mixins from '../../styles/mixins';
+import inputMixins from '../../styles/input-mixins';
 
 const StyledInputText = styled.div`
   position: relative;
@@ -18,7 +19,9 @@ const StyledInputText = styled.div`
 
 const Input = styled.input`
   @import '../../styles/colors.scss';
-  composes: ${inputMixins.inputReset} ${inputMixins.inputCommon} ${mixins.fontFamilySansAlt};
+  composes: ${inputMixins.inputReset};
+  composes: ${inputMixins.inputCommon};
+  composes: ${mixins.fontFamilySansAlt};
 
   &.invalid {
     border-color: $colorDanger;
@@ -26,7 +29,9 @@ const Input = styled.input`
 `;
 
 const Textarea = styled(TextareaAutosize)`
-  composes: ${inputMixins.inputReset} ${inputMixins.inputCommon} ${mixins.fontFamilySansAlt};
+  composes: ${inputMixins.inputReset};
+  composes: ${inputMixins.inputCommon};
+  composes: ${mixins.fontFamilySansAlt};
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   height: 100%;

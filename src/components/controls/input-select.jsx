@@ -9,7 +9,8 @@ import {
   DropdownItemInner,
   DropdownWrapper,
 } from '../ui-kit/dropdown-styled-components';
-import mixins, { inputMixins } from '../../styles/mixins';
+import mixins from '../../styles/mixins';
+import inputMixins from '../../styles/input-mixins';
 
 const StyledSelect = styled.div`
   position: relative;
@@ -26,7 +27,10 @@ const StyledSelect = styled.div`
 `;
 
 const Current = styled.label`
-  composes: ${mixins.buttonReset} ${mixins.hoverDefault} ${inputMixins.inputCommon} ${mixins.fontFamilySansAlt};
+  composes: ${mixins.hoverDefault};
+  composes: ${mixins.fontFamilySansAlt};
+  composes: ${inputMixins.buttonReset};
+  composes: ${inputMixins.inputCommon};
   display: flex;
   align-items: center;
   position: relative;
@@ -72,10 +76,15 @@ const Current = styled.label`
   &.nonactive {
     opacity: 0.5;
   }
+
+  &.small {
+    padding-left: 10px;
+  }
 `;
 
 const Input = styled.input`
-  composes: ${mixins.fontFamilySansAlt} ${inputMixins.inputCommon};
+  composes: ${mixins.fontFamilySansAlt};
+  composes: ${inputMixins.inputCommon};
   background-color: transparent;
   border: none;
   position: absolute;

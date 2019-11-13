@@ -85,8 +85,8 @@ function Item({ id, title, quantity, color, onChange }) {
 
 const HeaderText = styled.div`
   @import '../../../styles/colors.scss';
-
   composes: ${mixins.fontFamilySansAlt};
+
   color: $colorPaleGrey;
   font-size: 13px;
 `;
