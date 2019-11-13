@@ -1,5 +1,5 @@
 {
-  "name": "solus-website-ecommerce",
+  "label": "solus-website-ecommerce",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
