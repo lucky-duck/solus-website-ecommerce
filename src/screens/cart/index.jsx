@@ -210,7 +210,7 @@ function Inner({ formikProps, selectedProducts }) {
             sendDeliveryDetails();
 
             alert(
-              `Thank you${getPayerName}. We will come back to you shortly!`
+              `Thank you${getPayerName()}. We will come back to you shortly!`
             );
           });
         },
