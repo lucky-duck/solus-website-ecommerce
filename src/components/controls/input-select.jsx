@@ -41,7 +41,6 @@ const Current = styled.label`
   border-radius: 4px;
   background-color: #fff;
   padding: 0 40px 0 20px;
-  font-size: inherit;
   font-weight: 400;
 
   &:focus {
