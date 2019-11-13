@@ -37,6 +37,7 @@ const Current = styled.label`
   background-color: #fff;
   padding: 0 40px 0 12px;
   font-size: inherit;
+  font-weight: 400;
 
   &:focus {
     outline: none;

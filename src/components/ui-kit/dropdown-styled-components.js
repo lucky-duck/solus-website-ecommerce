@@ -40,6 +40,7 @@ export const Dropdown = styled.ul`
   //transform: translateY(-100%);
   //will-change: transform;
   display: none;
+  padding-left: 0;
 
   &.opened {
     //transform: translateY(0%);
