@@ -36,7 +36,7 @@ const Current = styled.label`
   height: 100%;
   border-radius: 4px;
   background-color: #fff;
-  padding: 0 40px 0 12px;
+  padding: 0 40px 0 20px;
   font-size: inherit;
   font-weight: 400;
 

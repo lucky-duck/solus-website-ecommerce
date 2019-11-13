@@ -66,7 +66,7 @@ export const inputMixins = css`
     border: 1px solid #949494;
     background-color: #fff;
     border-radius: 3px;
-    padding: 0 14px;
+    padding: 0 20px;
     min-height: 50px;
     font-size: 18px;
   }

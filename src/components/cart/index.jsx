@@ -61,9 +61,9 @@ function Cart({ altStyling }) {
         <SubtotalLine />
         <Flex aic jcsb>
           <Price big>{formatCurrency(totalPrice)}</Price>
-          <Text extraSmall pale>
-            Includes VAT of approx. {formatCurrency(40)}*
-          </Text>
+          {/*<Text extraSmall pale>*/}
+          {/*  Includes VAT of approx. {formatCurrency(40)}**/}
+          {/*</Text>*/}
         </Flex>
       </div>
     </StyledCart>
