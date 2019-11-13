@@ -96,6 +96,7 @@ const Input = styled.input`
 
 const Placeholder = styled.span`
   color: #7a7a7a;
+  font-size: inherit;
 `;
 
 const StyledChevronDown = styled(IconChevronDown)`

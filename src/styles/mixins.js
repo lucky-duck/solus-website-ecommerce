@@ -16,15 +16,15 @@ const mixins = css`
 
   .hoverDefault {
     transition: opacity 0.35s ease-out;
+  }
 
-    &:hover {
-      opacity: 0.8;
-      transition: none;
-    }
+  .hoverDefault:hover {
+    opacity: 0.8;
+    transition: none;
+  }
 
-    &:active {
-      opacity: 0.6;
-    }
+  .hoverDefault:active {
+    opacity: 0.6;
   }
 
   .buttonReset {
