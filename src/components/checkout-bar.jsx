@@ -6,6 +6,7 @@ import ProductPreview from './product-preview';
 import Flex from './ui-kit/flex';
 import Button from './button';
 import { formatCurrency } from '../utils/utils';
+import { useProducts } from '../hooks/use-products';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
@@ -35,11 +36,10 @@ const StyledButton = styled(Button)`
 const StyledItem = styled.div`
   display: flex;
   align-items: center;
+  padding-right: 15px;
 `;
 
-const ItemContent = styled.div`
-  margin-right: 10px;
-`;
+const ItemContent = styled.div``;
 
 const ItemTitle = styled.div`
   color: #fff;
@@ -57,21 +57,31 @@ const ItemPrice = styled.div`
   color: #929292;
 `;
 
-function Item() {
+const More = styled.div`
+  color: #929292;
+  font-size: 14px;
+  margin-right: 25px;
+`;
+
+function Item({ quantity, price, title }) {
   return (
     <StyledItem>
       <ProductPreview />
       <ItemContent>
         <ItemTitle>
-          <ItemQuantity>2x</ItemQuantity> SOLUS+ M1 200W Heater
+          <ItemQuantity>{quantity}x</ItemQuantity> {title}
         </ItemTitle>
-        <ItemPrice>{formatCurrency(500)}</ItemPrice>
+        <ItemPrice>{formatCurrency(price * quantity)}</ItemPrice>
       </ItemContent>
     </StyledItem>
   );
 }
 
+const MAX_ITEMS = 3;
+
 function CheckoutBar() {
+  const { selectedProducts } = useProducts();
+
   return (
     <Sticky>
       {({ style }) => {
@@ -79,8 +89,19 @@ function CheckoutBar() {
           <StyledCheckoutBar style={{ ...style, top: 0 }}>
             <Flex aic>
               <Items>
-                <Item />
-                <Item />
+                {selectedProducts.slice(0, MAX_ITEMS).map((item, index) => {
+                  return (
+                    <Item
+                      key={index}
+                      title={item.title}
+                      quantity={item.quantity}
+                      price={item.price}
+                    />
+                  );
+                })}
+                {selectedProducts.length > MAX_ITEMS && (
+                  <More>+{selectedProducts.length - MAX_ITEMS} more</More>
+                )}
               </Items>
               <StyledButton href={'/cart'}>Checkout</StyledButton>
             </Flex>

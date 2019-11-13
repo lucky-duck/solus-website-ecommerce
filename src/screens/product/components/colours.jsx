@@ -7,6 +7,7 @@ import mixins from '../../../styles/mixins';
 import Colour from '../../../components/colour-circle';
 import { useProducts } from '../../../hooks/use-products';
 import { COLORS } from '../../../constants';
+import Text from '../../../components/ui-kit/text';
 
 const StyledColour = styled(Colour)`
   margin-right: 13px;
@@ -37,7 +38,7 @@ const StyledItem = styled(Flex)`
   }
 `;
 
-const ItemTitle = styled.div`
+const ItemTitle = styled(Text)`
   font-weight: 500;
   font-size: 18px;
   line-height: 1;
