@@ -13,8 +13,8 @@ import mixins, { inputMixins } from '../../styles/mixins';
 
 const StyledSelect = styled.div`
   position: relative;
-  height: 40px;
   user-select: none;
+  height: 50px;
 
   &.small {
     height: 32px;
@@ -26,12 +26,13 @@ const StyledSelect = styled.div`
 `;
 
 const Current = styled.label`
-  composes: ${mixins.buttonReset} ${mixins.hoverDefault} ${inputMixins.inputCommon};
+  composes: ${mixins.buttonReset} ${mixins.hoverDefault} ${inputMixins.inputCommon} ${mixins.fontFamilySansAlt};
   display: flex;
   align-items: center;
   position: relative;
   text-align: left;
   width: 100%;
+  min-height: 0;
   height: 100%;
   border-radius: 4px;
   background-color: #fff;
@@ -74,7 +75,7 @@ const Current = styled.label`
 `;
 
 const Input = styled.input`
-  composes: ${mixins.fontFamilySans} ${inputMixins.inputCommon};
+  composes: ${mixins.fontFamilySansAlt} ${inputMixins.inputCommon};
   background-color: transparent;
   border: none;
   position: absolute;
@@ -122,6 +123,7 @@ const InnerComponent = (
     altArrowButton,
     placeholder,
     name,
+    className,
     ...rest
   },
   ref
@@ -178,7 +180,13 @@ const InnerComponent = (
   }
 
   return (
-    <StyledSelect small={small} large={large} ref={ref} {...rest}>
+    <StyledSelect
+      small={small}
+      large={large}
+      ref={ref}
+      className={className}
+      {...rest}
+    >
       <Current
         {...getLabelProps()}
         {...getToggleButtonProps()}
@@ -210,9 +218,9 @@ const InnerComponent = (
             return (
               <DropdownItem {...getItemProps({ key: item.value, index, item })}>
                 <DropdownItemInner
-                  height={42}
                   highlighted={highlightedIndex === index}
                   selected={selectedItem === item}
+                  small={small}
                 >
                   {item.label}
                 </DropdownItemInner>
@@ -237,6 +245,7 @@ class InputSelect extends React.PureComponent {
       field,
       form,
       name,
+      className,
       ...rest
     } = this.props;
 
@@ -256,6 +265,7 @@ class InputSelect extends React.PureComponent {
               {...rest}
               {...dropdownProps.getRootProps()}
               name={field ? field.name : name}
+              className={className}
             />
           );
         }}

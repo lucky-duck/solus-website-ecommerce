@@ -128,6 +128,11 @@ const ItemPrice = styled(Text)`
   }
 `;
 
+const StyledInputSelect = styled(InputSelect)`
+  width: 50px;
+  flex-shrink: 0;
+`;
+
 function Item({ id, title, description, price, quantity, onChange, ...rest }) {
   function getValue() {
     if (quantity) {
@@ -143,7 +148,7 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
         <ItemDescription dangerouslySetInnerHTML={{ __html: description }} />
       </ItemLeft>
       <ItemRight>
-        <InputSelect
+        <StyledInputSelect
           name={`product_${id}`}
           type={'select'}
           selectedItem={getValue()}
@@ -152,6 +157,7 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
           onChange={onChange}
           placeholder={'0'}
           altArrowButton
+          small
         />
         <ItemPrice pale big active={rest.active}>
           {formatCurrency(price)}

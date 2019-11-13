@@ -53,6 +53,7 @@ export const DropdownItemInner = styled.span`
   align-items: center;
   transition: opacity 0.15s ease-out;
   padding: 5px 15px;
+  height: 42px;
 
   &.highlighted {
     background-color: #efefef;
@@ -61,6 +62,10 @@ export const DropdownItemInner = styled.span`
 
   &.selected {
     color: #4882c9;
+  }
+
+  &.small {
+    height: 32px;
   }
 `;
 

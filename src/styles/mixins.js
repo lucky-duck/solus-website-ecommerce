@@ -66,9 +66,9 @@ export const inputMixins = css`
     border: 1px solid #949494;
     background-color: #fff;
     border-radius: 3px;
-    font-size: 14px;
     padding: 0 14px;
-    min-height: 40px;
+    min-height: 50px;
+    font-size: 18px;
   }
 
   .inputCommon::placeholder {
