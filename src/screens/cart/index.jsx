@@ -156,7 +156,6 @@ function Inner({ formikProps, selectedProducts }) {
         ...omit(values, [COUNTRY_FIELD_NAME]),
         country: countryData.label,
       };
-      console.log('valuesToSend', valuesToSend);
       await axios({
         url: ZAPIER_WEBHOOK_URL,
         method: 'post',
