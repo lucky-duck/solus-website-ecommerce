@@ -35,7 +35,7 @@ export const Dropdown = styled.ul`
   //transition-duration: 0.15s;
   //transition-timing-function: ease-out;
   //transform-origin: center top;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: #fff;
   //transform: translateY(-100%);
   //will-change: transform;

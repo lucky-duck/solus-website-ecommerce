@@ -5,6 +5,8 @@ import { Field } from 'formik';
 import Text from '../../../components/ui-kit/text';
 import InputText from '../../../components/controls/input-text';
 import { Header, SmallContainer, Title } from '../index';
+import countries from '../../../countries.json';
+import InputSelect from '../../../components/controls/input-select';
 
 const DeliveryInputs = styled.div``;
 
@@ -12,6 +14,14 @@ const DeliveryInputSection = styled.fieldset`
   margin-bottom: 35px;
   border: none;
   outline: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const StyledInputSelect = styled(InputSelect)`
+  margin-bottom: 14px;
 
   &:last-child {
     margin-bottom: 0;
@@ -57,10 +67,12 @@ function Delivery() {
             component={InputText}
           />
           <Field
-            name={'country'}
+            name={'country__solus'}
             mb
             placeholder={'Country'}
-            component={InputText}
+            component={StyledInputSelect}
+            options={countries}
+            withInput
           />
           <Field
             name={'post_code'}

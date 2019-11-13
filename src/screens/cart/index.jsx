@@ -82,7 +82,7 @@ const initialValues = {
   phone_number: '',
   address1: '',
   address2: '',
-  country: '',
+  country__solus: '',
   post_code: '',
 };
 
@@ -97,9 +97,7 @@ const validationSchema = Yup.object().shape({
     .min(2)
     .required(),
   address2: Yup.string(),
-  country: Yup.string()
-    .min(2)
-    .required(),
+  country__solus: Yup.string().required(),
 });
 
 function CartScreen() {

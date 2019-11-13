@@ -23,10 +23,6 @@ const StyledSelect = styled.div`
   &.large {
     height: 48px;
   }
-
-  &.nonactive {
-    opacity: 0.3;
-  }
 `;
 
 const Current = styled.label`
@@ -37,8 +33,7 @@ const Current = styled.label`
   text-align: left;
   width: 100%;
   height: 100%;
-  border: 1px solid #c6c7ca;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: #fff;
   padding: 0 40px 0 12px;
   font-size: inherit;
@@ -68,8 +63,12 @@ const Current = styled.label`
     }
   }
 
-  .invalid {
+  &.invalid {
     border-color: #ff5a4f;
+  }
+
+  &.nonactive {
+    opacity: 0.5;
   }
 `;
 
@@ -121,6 +120,7 @@ const InnerComponent = (
     large,
     altArrowButton,
     placeholder,
+    name,
     ...rest
   },
   ref
@@ -135,6 +135,7 @@ const InnerComponent = (
     getInputProps,
     getLabelProps,
     inputValue,
+    nonactive,
   } = dropdownProps;
 
   const inputNode = useRef(null);
@@ -163,6 +164,18 @@ const InnerComponent = (
     return withInput ? filter(options) : options;
   }, [options, withInput, inputValue, isOpen]);
 
+  function renderCurrent() {
+    const placeholderJsx = (selectedItem && selectedItem.label) || (
+      <Placeholder>{placeholder || 'Select'}</Placeholder>
+    );
+
+    if (withInput) {
+      return isOpen ? null : placeholderJsx;
+    }
+
+    return placeholderJsx;
+  }
+
   return (
     <StyledSelect small={small} large={large} ref={ref} {...rest}>
       <Current
@@ -172,10 +185,9 @@ const InnerComponent = (
         aria-label={isOpen ? 'Close dropdown' : 'Open dropdown'}
         altArrowButton={altArrowButton}
         small={small}
+        nonactive={nonactive}
       >
-        {(selectedItem && selectedItem.label) || (
-          <Placeholder>{placeholder || 'Select'}</Placeholder>
-        )}
+        {renderCurrent()}
         <StyledChevronDown altArrowButton={altArrowButton} />
       </Current>
       {withInput && (
@@ -184,6 +196,8 @@ const InnerComponent = (
           {...getInputProps()}
           ref={inputNode}
           show={isOpen}
+          name={name}
+          autocomplete="new-password"
         />
       )}
       <DropdownWrapper
@@ -219,6 +233,8 @@ class InputSelect extends React.PureComponent {
       onChange,
       selectedItem,
       initialSelectedItem,
+      field,
+      name,
       ...rest
     } = this.props;
 
@@ -235,6 +251,7 @@ class InputSelect extends React.PureComponent {
               options={options}
               {...rest}
               {...dropdownProps.getRootProps()}
+              name={field ? field.name : name}
             />
           );
         }}
