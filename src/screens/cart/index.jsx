@@ -9,6 +9,7 @@ import Text from '../../components/ui-kit/text';
 import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
+import { getPath } from '../../utils/paths';
 
 const Screen = styled.div`
   padding-top: 60px;
@@ -132,7 +133,8 @@ function CartScreen() {
         <Container>
           <Title>Your cart currently is empty.</Title>
           <EmptyText>
-            You can select products on <Link href={'/buy'}>this page</Link>
+            You can select products on{' '}
+            <Link href={getPath.buy()}>this page</Link>
           </EmptyText>
         </Container>
       </Screen>

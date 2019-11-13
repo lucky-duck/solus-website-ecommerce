@@ -6,6 +6,7 @@ import ProductScreen from './screens/product';
 import mixins from './styles/mixins';
 import { ProductsProvider } from './hooks/use-products';
 import CartScreen from './screens/cart';
+import { getPath } from './utils/paths';
 
 const Wrapper = styled.div`
   composes: ${mixins.fontFamilySans};
@@ -17,8 +18,8 @@ function App() {
     <ProductsProvider>
       <Wrapper>
         <Router>
-          <ProductScreen path={'/buy'} />
-          <CartScreen path={'/cart'} />
+          <ProductScreen path={getPath.buy()} />
+          <CartScreen path={getPath.cart()} />
         </Router>
       </Wrapper>
     </ProductsProvider>

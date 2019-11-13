@@ -7,6 +7,7 @@ import Flex from './ui-kit/flex';
 import Button from './button';
 import { formatCurrency } from '../utils/utils';
 import { useProducts } from '../hooks/use-products';
+import { getPath } from '../utils/paths';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
@@ -103,7 +104,7 @@ function CheckoutBar() {
                   <More>+{selectedProducts.length - MAX_ITEMS} more</More>
                 )}
               </Items>
-              <StyledButton href={'/cart'}>Checkout</StyledButton>
+              <StyledButton href={getPath.cart()}>Checkout</StyledButton>
             </Flex>
           </StyledCheckoutBar>
         );

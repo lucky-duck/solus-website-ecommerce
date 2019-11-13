@@ -7,6 +7,7 @@ import Cart from '../../../components/cart';
 import { useProducts } from '../../../hooks/use-products';
 import Link from '../../../components/ui-kit/link';
 import Button from '../../../components/button';
+import { getPath } from '../../../utils/paths';
 
 const Header = styled.div`
   margin-bottom: 41px;
@@ -45,7 +46,7 @@ function ProductCart() {
         </Header>
       )}
       <Cart />
-      <StyledButton href={'/cart'}>Continue to payment</StyledButton>
+      <StyledButton href={getPath.cart()}>Continue to payment</StyledButton>
       <BottomText pale extraSmall>
         Powered by{' '}
         <Link href={'https://paypal.com'} target={'blank'} extraSmall>
