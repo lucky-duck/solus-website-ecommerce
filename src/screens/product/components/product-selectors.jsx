@@ -11,48 +11,48 @@ import { formatCurrency } from '../../../utils/utils';
 
 const OPTIONS = [
   {
-    value: 0,
-    label: 0,
+    value: '0',
+    label: '0',
   },
   {
-    value: 1,
-    label: 1,
+    value: '1',
+    label: '1',
   },
   {
-    value: 2,
-    label: 2,
+    value: '2',
+    label: '2',
   },
   {
-    value: 3,
-    label: 3,
+    value: '3',
+    label: '3',
   },
   {
-    value: 4,
-    label: 4,
+    value: '4',
+    label: '4',
   },
   {
-    value: 5,
-    label: 5,
+    value: '5',
+    label: '5',
   },
   {
-    value: 6,
-    label: 6,
+    value: '6',
+    label: '6',
   },
   {
-    value: 7,
-    label: 7,
+    value: '7',
+    label: '7',
   },
   {
-    value: 8,
-    label: 8,
+    value: '8',
+    label: '8',
   },
   {
-    value: 9,
-    label: 9,
+    value: '9',
+    label: '9',
   },
   {
-    value: 10,
-    label: 10,
+    value: '10',
+    label: '10',
   },
 ];
 
@@ -131,10 +131,9 @@ const ItemPrice = styled(Text)`
 function Item({ id, title, description, price, quantity, onChange, ...rest }) {
   function getValue() {
     if (quantity) {
-      const filtered = OPTIONS.filter((v) => v.value === quantity)[0];
-      return filtered && filtered.value;
+      return OPTIONS.filter((v) => v.value === quantity)[0];
     }
-    return OPTIONS[0].value;
+    return OPTIONS[0];
   }
 
   return (
@@ -147,10 +146,12 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
         <InputSelect
           name={`product_${id}`}
           type={'select'}
-          value={getValue()}
+          selectedItem={getValue()}
           options={OPTIONS}
-          active={rest.active}
+          nonactive={!rest.active}
           onChange={onChange}
+          placeholder={'0'}
+          altArrowButton
         />
         <ItemPrice pale big active={rest.active}>
           {formatCurrency(price)}
@@ -166,10 +167,6 @@ function ProductSelectors() {
     selectedProducts,
     setProductQuantity,
   } = useProducts();
-
-  function handleChange(e, id) {
-    setProductQuantity(id, Number(e.currentTarget.value));
-  }
 
   return (
     <Section>
@@ -193,7 +190,7 @@ function ProductSelectors() {
               quantity={selectedItem && selectedItem.quantity}
               price={item.price}
               active={!!selectedItem}
-              onChange={(e) => handleChange(e, item.id)}
+              onChange={(value) => setProductQuantity(item.id, value)}
             />
           );
         })}

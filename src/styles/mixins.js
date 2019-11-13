@@ -26,6 +26,19 @@ const mixins = css`
       opacity: 0.6;
     }
   }
+
+  .buttonReset {
+    border: none;
+    background-color: transparent;
+    border-radius: 0;
+    -webkit-appearance: none;
+    text-decoration: none;
+    user-select: none;
+  }
+
+  .buttonReset:focus {
+    outline: none;
+  }
 `;
 
 export const inputMixins = css`

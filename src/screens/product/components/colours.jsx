@@ -65,7 +65,8 @@ function Item({ id, title, quantity, color, onChange }) {
   return (
     <StyledItem jcsb aic>
       <ItemTitle>
-        <Quantity>{quantity}x</Quantity> {title}
+        <Quantity>{quantity}x</Quantity>{' '}
+        <span dangerouslySetInnerHTML={{ __html: title }} />
       </ItemTitle>
       <Flex aic>
         <StyledColour

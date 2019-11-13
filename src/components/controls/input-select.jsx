@@ -1,42 +1,250 @@
-import React from 'react';
+import React, { useEffect, useRef, useMemo } from 'react';
 import styled from 'astroturf';
 
-import mixins from '../../styles/mixins';
+import { ReactComponent as IconChevronDown } from '../../images/svg/icon-chevron-down.svg';
+import DropdownBasic from './dropdown-basic';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownItemInner,
+  DropdownWrapper,
+} from '../ui-kit/dropdown-styled-components';
+import mixins, { inputMixins } from '../../styles/mixins';
 
-const StyledInputSelect = styled.select`
-  composes: ${mixins.fontFamilySansAlt};
+const StyledSelect = styled.div`
+  position: relative;
+  height: 40px;
+  user-select: none;
 
-  width: 51px;
-  height: 32px;
-  border: 1px solid #e0e0e0;
-  font-size: 16px;
-  color: #cfcfcf;
-  background: #fff
-    url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+)
-    no-repeat 95% 50%;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  padding: 5px 8px;
-  border-radius: 5px;
+  &.small {
+    height: 32px;
+  }
 
-  &.active {
-    color: #1b1b1b;
+  &.large {
+    height: 48px;
+  }
+
+  &.nonactive {
+    opacity: 0.3;
   }
 `;
 
-function InputSelect({ options, ...rest }) {
+const Current = styled.label`
+  composes: ${mixins.buttonReset} ${mixins.hoverDefault} ${inputMixins.inputCommon};
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #c6c7ca;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 0 40px 0 12px;
+  font-size: inherit;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 32px;
+    top: -1px;
+    bottom: -1px;
+    right: -1px;
+    border-radius: 0 3px 3px 0;
+    transform: none;
+    background-color: #ff8e4f;
+  }
+
+  &.altArrowButton {
+    padding-right: 24px;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .invalid {
+    border-color: #ff5a4f;
+  }
+`;
+
+const Input = styled.input`
+  composes: ${mixins.fontFamilySans} ${inputMixins.inputCommon};
+  background-color: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  opacity: 0;
+  visibility: hidden;
+  padding: 0 40px 0 12px;
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+const Placeholder = styled.span`
+  color: #7a7a7a;
+`;
+
+const StyledChevronDown = styled(IconChevronDown)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  fill: #fff;
+  right: 11px;
+
+  &.altArrowButton {
+    right: 9px;
+    fill: #373e4c;
+  }
+`;
+
+const InnerComponent = (
+  {
+    dropdownProps,
+    options,
+    withInput,
+    invalid,
+    small,
+    large,
+    altArrowButton,
+    placeholder,
+    ...rest
+  },
+  ref
+) => {
+  const {
+    getItemProps,
+    isOpen,
+    highlightedIndex,
+    selectedItem,
+    getToggleButtonProps,
+    getMenuProps,
+    getInputProps,
+    getLabelProps,
+    inputValue,
+  } = dropdownProps;
+
+  const inputNode = useRef(null);
+  const prevIsOpen = useRef(undefined);
+
+  useEffect(() => {
+    if (isOpen && withInput) {
+      inputNode.current.focus();
+    }
+  }, [isOpen, withInput]);
+
+  const optionsFiltered = useMemo(() => {
+    function filter(options) {
+      if (prevIsOpen.current !== isOpen) {
+        prevIsOpen.current = isOpen;
+        return options;
+      }
+      const inputValueLowerCase = inputValue.toLowerCase();
+      return options.filter(
+        (item) =>
+          !inputValueLowerCase ||
+          item.label.toLowerCase().includes(inputValueLowerCase)
+      );
+    }
+
+    return withInput ? filter(options) : options;
+  }, [options, withInput, inputValue, isOpen]);
+
   return (
-    <StyledInputSelect type={'select'} {...rest}>
-      {options.map((option, index) => {
-        return (
-          <option key={index} value={option.value}>
-            {option.label}
-          </option>
-        );
-      })}
-    </StyledInputSelect>
+    <StyledSelect small={small} large={large} ref={ref} {...rest}>
+      <Current
+        {...getLabelProps()}
+        {...getToggleButtonProps()}
+        invalid={invalid}
+        aria-label={isOpen ? 'Close dropdown' : 'Open dropdown'}
+        altArrowButton={altArrowButton}
+        small={small}
+      >
+        {(selectedItem && selectedItem.label) || (
+          <Placeholder>{placeholder || 'Select'}</Placeholder>
+        )}
+        <StyledChevronDown altArrowButton={altArrowButton} />
+      </Current>
+      {withInput && (
+        <Input
+          type={'text'}
+          {...getInputProps()}
+          ref={inputNode}
+          show={isOpen}
+        />
+      )}
+      <DropdownWrapper
+        opened={isOpen && optionsFiltered.length > 0}
+        {...getMenuProps()}
+      >
+        <Dropdown opened={isOpen}>
+          {optionsFiltered.map((item, index) => {
+            return (
+              <DropdownItem {...getItemProps({ key: item.value, index, item })}>
+                <DropdownItemInner
+                  height={42}
+                  highlighted={highlightedIndex === index}
+                  selected={selectedItem === item}
+                >
+                  {item.label}
+                </DropdownItemInner>
+              </DropdownItem>
+            );
+          })}
+        </Dropdown>
+      </DropdownWrapper>
+    </StyledSelect>
   );
+};
+
+const Inner = React.forwardRef(InnerComponent);
+
+class InputSelect extends React.PureComponent {
+  render() {
+    const {
+      options,
+      onChange,
+      selectedItem,
+      initialSelectedItem,
+      ...rest
+    } = this.props;
+
+    return (
+      <DropdownBasic
+        onChange={onChange}
+        initialSelectedItem={initialSelectedItem}
+        selectedItem={selectedItem}
+      >
+        {({ dropdownProps }) => {
+          return (
+            <Inner
+              dropdownProps={dropdownProps}
+              options={options}
+              {...rest}
+              {...dropdownProps.getRootProps()}
+            />
+          );
+        }}
+      </DropdownBasic>
+    );
+  }
 }
+
+InputSelect.defaultProps = {
+  fontSize: 16,
+};
 
 export default InputSelect;

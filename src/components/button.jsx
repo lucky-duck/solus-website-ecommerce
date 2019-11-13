@@ -23,7 +23,7 @@ const styles = css`
 `;
 
 const StyledButton = styled.button`
-  composes: ${styles.button};
+  composes: ${mixins.buttonReset} ${styles.button};
 `;
 
 const StyledButtonLink = styled.a`

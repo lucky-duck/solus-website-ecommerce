@@ -6,6 +6,7 @@
     "@reach/router": "^1.2.1",
     "@rescripts/cli": "^0.0.13",
     "astroturf": "^0.9.21",
+    "downshift": "^3.4.1",
     "formik": "^2.0.3",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.0",
