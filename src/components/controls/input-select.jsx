@@ -234,12 +234,15 @@ class InputSelect extends React.PureComponent {
       selectedItem,
       initialSelectedItem,
       field,
+      form,
       name,
       ...rest
     } = this.props;
 
     return (
       <DropdownBasic
+        field={field}
+        form={form}
         onChange={onChange}
         initialSelectedItem={initialSelectedItem}
         selectedItem={selectedItem}

@@ -7,8 +7,15 @@ function DropdownBasic({
   initialSelectedItem,
   onChange,
   onInputValueChange,
+  form,
+  field,
 }) {
   function handleChange(option) {
+    if (form && field) {
+      form.setFieldValue(field.name, option.value);
+      return;
+    }
+
     onChange && onChange(option.value);
   }
 
