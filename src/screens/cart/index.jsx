@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'astroturf';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -86,8 +86,17 @@ const validationSchema = Yup.object().shape({
 
 function CartScreen() {
   const { selectedProducts } = useProducts();
+  const paypalButtonContainerNode = useRef(null);
 
   useEffect(() => {
+    if (!selectedProducts.length) {
+      return;
+    }
+
+    if (paypalButtonContainerNode.current) {
+      paypalButtonContainerNode.current.innerHtml = '';
+    }
+
     window.paypal
       .Buttons({
         createOrder: function(data, actions) {
@@ -114,7 +123,7 @@ function CartScreen() {
           });
         },
       })
-      .render('#paypal-button-container');
+      .render(paypalButtonContainerNode.current);
   }, [selectedProducts]);
 
   if (!selectedProducts || !selectedProducts.length) {
@@ -174,7 +183,7 @@ function CartScreen() {
                   disabled={!isValid}
                   onClick={handlePaypalAreaClick}
                 >
-                  <div id={'paypal-button-container'} />
+                  <div ref={paypalButtonContainerNode} />
                 </PaypalButtonContainer>
               </SmallContainer>
             </Container>
