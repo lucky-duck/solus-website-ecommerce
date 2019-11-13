@@ -6,9 +6,7 @@ import Text from '../../../components/ui-kit/text';
 import InputText from '../../../components/controls/input-text';
 import { Header, SmallContainer, Title } from '../index';
 
-const DeliveryInputs = styled.div`
-  margin-bottom: 60px;
-`;
+const DeliveryInputs = styled.div``;
 
 const DeliveryInputSection = styled.fieldset`
   margin-bottom: 35px;

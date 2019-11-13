@@ -14,10 +14,23 @@ import { getPath } from '../../utils/paths';
 const Screen = styled.div`
   padding-top: 60px;
   padding-bottom: 60px;
+
+  @media (max-width: 767px) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
 `;
 
-const OrderDetails = styled.section`
+const Section = styled.section`
   margin-bottom: 80px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 60px;
+  }
 `;
 
 export const Header = styled.header`
@@ -28,6 +41,10 @@ export const Title = styled.h2`
   font-size: 30px;
   font-weight: 500;
   margin-bottom: 3px;
+
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
 `;
 
 const EmptyText = styled(Text)`
@@ -157,7 +174,7 @@ function CartScreen() {
         return (
           <Screen>
             <Container narrow>
-              <OrderDetails>
+              <Section>
                 <Header>
                   <Title>Your Order</Title>
                   <Text pale>
@@ -166,28 +183,32 @@ function CartScreen() {
                   </Text>
                 </Header>
                 <Cart altStyling />
-              </OrderDetails>
-              <Delivery />
-              <SmallContainer>
-                <Header>
-                  <Title>Payment Confirmation</Title>
-                  {isValid ? (
-                    <Text pale>
-                      Please, proceed to make a payment via PayPal
-                    </Text>
-                  ) : (
-                    <Text danger>
-                      Please, fill out the delivery section to proceed
-                    </Text>
-                  )}
-                </Header>
-                <PaypalButtonContainer
-                  disabled={!isValid}
-                  onClick={handlePaypalAreaClick}
-                >
-                  <div ref={paypalButtonContainerNode} />
-                </PaypalButtonContainer>
-              </SmallContainer>
+              </Section>
+              <Section>
+                <Delivery />
+              </Section>
+              <Section>
+                <SmallContainer>
+                  <Header>
+                    <Title>Payment Confirmation</Title>
+                    {isValid ? (
+                      <Text pale>
+                        Please, proceed to make a payment via PayPal
+                      </Text>
+                    ) : (
+                      <Text danger>
+                        Please, fill out the delivery section to proceed
+                      </Text>
+                    )}
+                  </Header>
+                  <PaypalButtonContainer
+                    disabled={!isValid}
+                    onClick={handlePaypalAreaClick}
+                  >
+                    <div ref={paypalButtonContainerNode} />
+                  </PaypalButtonContainer>
+                </SmallContainer>
+              </Section>
             </Container>
           </Screen>
         );
