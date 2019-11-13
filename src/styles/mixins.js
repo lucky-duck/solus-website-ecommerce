@@ -37,15 +37,15 @@ export const inputMixins = css`
     border-radius: 0;
     -webkit-appearance: none;
     background-color: transparent;
+  }
 
-    &:focus {
-      outline: none;
-      border-color: $colorLink;
-    }
+  .inputReset:focus {
+    outline: none;
+    border-color: $colorLink;
+  }
 
-    &::-ms-clear {
-      display: none;
-    }
+  .inputReset::-ms-clear {
+    display: none;
   }
 
   .inputCommon {
@@ -56,10 +56,10 @@ export const inputMixins = css`
     font-size: 14px;
     padding: 0 14px;
     min-height: 40px;
+  }
 
-    &::placeholder {
-      color: #949494;
-    }
+  .inputCommon::placeholder {
+    color: #949494;
   }
 `;
 

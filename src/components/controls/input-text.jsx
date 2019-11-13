@@ -18,8 +18,7 @@ const StyledInputText = styled.div`
 
 const Input = styled.input`
   @import '../../styles/colors.scss';
-  composes: ${inputMixins.inputReset};
-  composes: ${inputMixins.inputCommon};
+  composes: ${inputMixins.inputReset} ${inputMixins.inputCommon};
 
   &.invalid {
     border-color: $colorDanger;
