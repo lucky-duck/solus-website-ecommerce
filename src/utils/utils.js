@@ -11,8 +11,16 @@ export function formatCurrency(value) {
 export function convertSelectedProductsToPlainText(selectedProducts) {
   const textArray = selectedProducts.map(
     (v, index) =>
-      `${index + 1}. ${v.title}, Price: ${formatCurrency(v.price * v.quantity)} `
+      `${index + 1}. ${v.title}, Price: ${formatCurrency(
+        v.price * v.quantity
+      )} `
   );
 
   return textArray.join('<br/>');
+}
+
+export function removeNodeChildren(node) {
+  while (node.firstChild) {
+    node.removeChild(node.firstChild);
+  }
 }

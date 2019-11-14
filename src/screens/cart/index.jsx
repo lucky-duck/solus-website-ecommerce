@@ -14,7 +14,10 @@ import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
 import { COUNTRY_FIELD_NAME } from '../../constants';
 import countries from '../../countries.json';
-import { convertSelectedProductsToPlainText } from '../../utils/utils';
+import {
+  convertSelectedProductsToPlainText,
+  removeNodeChildren,
+} from '../../utils/utils';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/3614782/o48nwdq/';
@@ -145,33 +148,37 @@ function CartScreen() {
   );
 }
 
+async function sendDeliveryDetails(selectedProducts, values) {
+  try {
+    const countryData = countries.filter(
+      (v) => v.value === values[COUNTRY_FIELD_NAME]
+    )[0];
+    const valuesToSend = {
+      ...omit(values, [COUNTRY_FIELD_NAME]),
+      country: countryData.label,
+      boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
+    };
+    await axios({
+      url: ZAPIER_WEBHOOK_URL,
+      method: 'post',
+      data: valuesToSend,
+      withCredentials: false,
+      headers: { 'Content-Type': 'text/plain' },
+    });
+  } catch (error) {
+    alert(
+      'Sorry! Cannot save delivery details. Please, contact as for more information.'
+    );
+    console.error(error);
+  }
+}
+
 function Inner({ formikProps, selectedProducts }) {
   const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
 
-  const sendDeliveryDetails = useCallback(async () => {
-    try {
-      const countryData = countries.filter(
-        (v) => v.value === values[COUNTRY_FIELD_NAME]
-      )[0];
-      const valuesToSend = {
-        ...omit(values, [COUNTRY_FIELD_NAME]),
-        country: countryData.label,
-        boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
-      };
-      await axios({
-        url: ZAPIER_WEBHOOK_URL,
-        method: 'post',
-        data: valuesToSend,
-        withCredentials: false,
-        headers: { 'Content-Type': 'text/plain' },
-      });
-    } catch (error) {
-      alert(
-        'Sorry! Cannot save delivery details. Please, contact as for more information.'
-      );
-      console.error(error);
-    }
+  const sendDeliveryDetailsCallback = useCallback(() => {
+    sendDeliveryDetails(selectedProducts, values);
   }, [selectedProducts, values]);
 
   useEffect(() => {
@@ -179,7 +186,7 @@ function Inner({ formikProps, selectedProducts }) {
       return;
     }
 
-    paypalButtonContainerNode.current.innerHtml = '';
+    removeNodeChildren(paypalButtonContainerNode.current);
 
     window.paypal
       .Buttons({
@@ -208,7 +215,7 @@ function Inner({ formikProps, selectedProducts }) {
               return name ? `, ${name}` : '';
             }
 
-            sendDeliveryDetails();
+            sendDeliveryDetailsCallback();
 
             alert(
               `Thank you${getPayerName()}. We will come back to you shortly!`
@@ -217,7 +224,8 @@ function Inner({ formikProps, selectedProducts }) {
         },
       })
       .render(paypalButtonContainerNode.current);
-  }, [selectedProducts, sendDeliveryDetails]);
+    // eslint-disable-next-line
+  }, [selectedProducts]);
 
   return (
     <Screen>
