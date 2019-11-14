@@ -7,3 +7,12 @@ export function formatCurrency(value) {
 
   return `${DEFAULT_CURRENCY_SYMBOL}${value.toFixed(2)}`;
 }
+
+export function convertSelectedProductsToPlainText(selectedProducts) {
+  const textArray = selectedProducts.map(
+    (v, index) =>
+      `${index + 1}. ${v.title}, Price: ${formatCurrency(v.price * v.quantity)} `
+  );
+
+  return textArray.join('<br/>');
+}

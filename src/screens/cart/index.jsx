@@ -14,6 +14,7 @@ import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
 import { COUNTRY_FIELD_NAME } from '../../constants';
 import countries from '../../countries.json';
+import { convertSelectedProductsToPlainText } from '../../utils/utils';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/3614782/o48nwdq/';
@@ -156,6 +157,7 @@ function Inner({ formikProps, selectedProducts }) {
       const valuesToSend = {
         ...omit(values, [COUNTRY_FIELD_NAME]),
         country: countryData.label,
+        boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
       };
       await axios({
         url: ZAPIER_WEBHOOK_URL,

@@ -29,6 +29,7 @@ const Input = styled.input`
 `;
 
 const Textarea = styled(TextareaAutosize)`
+  @import '../../styles/colors.scss';
   composes: ${inputMixins.inputReset};
   composes: ${inputMixins.inputCommon};
   composes: ${mixins.fontFamilySansAlt};
@@ -37,6 +38,10 @@ const Textarea = styled(TextareaAutosize)`
   height: 100%;
   resize: none;
   line-height: 1.85;
+
+  &.invalid {
+    border-color: $colorDanger;
+  }
 `;
 
 const Label = styled.label`
@@ -67,7 +72,7 @@ function InputText({
   const invalid = form.touched[field.name] && !!form.errors[field.name];
 
   return (
-    <StyledInputText className={className} invalid={invalid} {...rest}>
+    <StyledInputText className={className} {...rest}>
       {label && <Label htmlFor={id}>{label}</Label>}
       <InputComponent
         id={id}
