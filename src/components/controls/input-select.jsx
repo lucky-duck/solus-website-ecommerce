@@ -16,7 +16,6 @@ const StyledSelect = styled.div`
   position: relative;
   user-select: none;
   height: 50px;
-  z-index: 1000;
 
   &.small {
     height: 32px;

@@ -65,6 +65,7 @@ export const SmallContainer = styled.div`
 const PaypalButtonContainer = styled.div`
   position: relative;
   transition: filter 0.55s ease-out;
+  z-index: -1;
 
   &.disabled {
     -webkit-filter: grayscale(100%);
