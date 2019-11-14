@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import styled from 'astroturf';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -129,7 +129,7 @@ function CartScreen() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={() => undefined}
-      isInitialValid={false}
+      validateOnMount
     >
       {(formikProps) => {
         return (
@@ -147,7 +147,7 @@ function Inner({ formikProps, selectedProducts }) {
   const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
 
-  async function sendDeliveryDetails() {
+  const sendDeliveryDetails = useCallback(async () => {
     try {
       const countryData = countries.filter(
         (v) => v.value === values[COUNTRY_FIELD_NAME]
@@ -169,7 +169,7 @@ function Inner({ formikProps, selectedProducts }) {
       );
       console.error(error);
     }
-  }
+  }, [values]);
 
   useEffect(() => {
     if (!selectedProducts.length) {
@@ -216,7 +216,7 @@ function Inner({ formikProps, selectedProducts }) {
         },
       })
       .render(paypalButtonContainerNode.current);
-  }, [selectedProducts]);
+  }, [selectedProducts, sendDeliveryDetails]);
 
   return (
     <Screen>

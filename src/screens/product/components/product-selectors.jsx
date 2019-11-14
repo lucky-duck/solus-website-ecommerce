@@ -153,7 +153,6 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
           type={'select'}
           selectedItem={getValue()}
           options={OPTIONS}
-          nonactive={!rest.active}
           onChange={onChange}
           placeholder={'0'}
           altArrowButton
