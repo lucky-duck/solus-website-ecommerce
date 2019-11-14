@@ -172,16 +172,14 @@ function Inner({ formikProps, selectedProducts }) {
       );
       console.error(error);
     }
-  }, [values]);
+  }, [selectedProducts, values]);
 
   useEffect(() => {
-    if (!selectedProducts.length) {
+    if (!selectedProducts.length || !paypalButtonContainerNode.current) {
       return;
     }
 
-    if (paypalButtonContainerNode.current) {
-      paypalButtonContainerNode.current.innerHtml = '';
-    }
+    paypalButtonContainerNode.current.innerHtml = '';
 
     window.paypal
       .Buttons({
