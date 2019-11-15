@@ -16,6 +16,7 @@ const StyledColour = styled.button`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
+  background-color: transparent;
 
   &.active {
     border-color: #ff7020;
@@ -45,7 +46,7 @@ const ColourInner = styled.div`
   background-color: #1b1b1b;
 
   &.white {
-    background: linear-gradient(
+    background: #fff linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.25) 0%,
       rgba(214, 223, 239, 0.25) 43.53%,
