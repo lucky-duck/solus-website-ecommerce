@@ -14,7 +14,6 @@ import { IS_MOBILE } from '../../constants';
 import { useProducts } from '../../hooks/use-products';
 import CheckoutBar from '../../components/checkout-bar';
 
-
 const Screen = styled.div`
   padding-top: 50px;
 
@@ -47,8 +46,16 @@ const StickyItem = styled.div`
   top: 151px;
   padding-bottom: 45px;
 
+  @media (max-width: 991px) {
+    top: 130px;
+  }
+
   @media (max-width: 767px) {
     position: static;
+  }
+
+  @media (max-height: 700px) {
+    top: 125px;
   }
 `;
 
@@ -166,36 +173,36 @@ function ProductScreen() {
 
   return (
     <StickyContainer>
-    <div>
-      <CheckoutBar />
-      <Screen>
-        <Container>
-          <MobileHeader>
-            <MobileTitle>Buy today</MobileTitle>
-            <MobileSubtitle>Get your SOLUS+</MobileSubtitle>
-          </MobileHeader>
-          <StyledFlex posr jcsb>
-            <ImageArea>
-              <StickyItem>
-                <ImageContainer>
-                  <Image src={productImage} alt={'Product'} />
-                </ImageContainer>
-                {!IS_MOBILE && <Features />}
-              </StickyItem>
-            </ImageArea>
-            <Content>
-              <ProductSelectors />
-              <Description />
-              <FurtherSteps hide={selectedProducts.length > 0}>
-                <Colours />
-                <Cart />
-              </FurtherSteps>
-            </Content>
-          </StyledFlex>
-          {IS_MOBILE && <Features />}
-        </Container>
-      </Screen>
-    </div>
+      <div>
+        <CheckoutBar />
+        <Screen>
+          <Container>
+            <MobileHeader>
+              <MobileTitle>Buy today</MobileTitle>
+              <MobileSubtitle>Get your SOLUS+</MobileSubtitle>
+            </MobileHeader>
+            <StyledFlex posr jcsb>
+              <ImageArea>
+                <StickyItem>
+                  <ImageContainer>
+                    <Image src={productImage} alt={'Product'} />
+                  </ImageContainer>
+                  {!IS_MOBILE && <Features />}
+                </StickyItem>
+              </ImageArea>
+              <Content>
+                <ProductSelectors />
+                <Description />
+                <FurtherSteps hide={selectedProducts.length > 0}>
+                  <Colours />
+                  <Cart />
+                </FurtherSteps>
+              </Content>
+            </StyledFlex>
+            {IS_MOBILE && <Features />}
+          </Container>
+        </Screen>
+      </div>
     </StickyContainer>
   );
 }
