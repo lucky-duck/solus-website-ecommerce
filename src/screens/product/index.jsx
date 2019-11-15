@@ -10,7 +10,6 @@ import Description from './components/description';
 import Colours from './components/colours';
 import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
-import { IS_MOBILE } from '../../constants';
 import { useProducts } from '../../hooks/use-products';
 import CheckoutBar from '../../components/checkout-bar';
 
@@ -187,7 +186,7 @@ function ProductScreen() {
                   <ImageContainer>
                     <Image src={productImage} alt={'Product'} />
                   </ImageContainer>
-                  {!IS_MOBILE && <Features />}
+                  <Features />
                 </StickyItem>
               </ImageArea>
               <Content>
@@ -199,7 +198,7 @@ function ProductScreen() {
                 </FurtherSteps>
               </Content>
             </StyledFlex>
-            {IS_MOBILE && <Features />}
+            <Features isMobile />
           </Container>
         </Screen>
       </div>

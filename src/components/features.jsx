@@ -11,8 +11,20 @@ const StyledFeatures = styled.div`
   display: flex;
   flex-wrap: wrap;
 
+  &.isMobile {
+    display: none;
+  }
+
   @media (max-width: 991px) {
     display: block;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+
+    &.isMobile {
+      display: block;
+    }
   }
 `;
 
@@ -84,9 +96,9 @@ function Item({ title, text, icon: IconComponent }) {
   );
 }
 
-function Features() {
+function Features({ isMobile }) {
   return (
-    <StyledFeatures>
+    <StyledFeatures isMobile={isMobile}>
       <Item
         title={'Plug and play'}
         text={'Zero installation costs.'}
