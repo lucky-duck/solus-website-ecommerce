@@ -15,22 +15,38 @@ export const DEFAULT_CURRENCY_SYMBOL = '€';
 export const PRODUCTS = [
   {
     id: 0,
-    title: 'SOLUS+ M1 200W Heater',
-    description: '4.5 kg 750 x 321 x 10 mm<br/>(W x H x D)',
+    title: 'M1',
+    description: 'Heating area: 15m²',
+    descriptionDetailed: `
+      Heating area: 15m2
+      Rated Input: 450W
+      Weight: 4.5kg
+      Rated Voltage: 220/110V 50/60Hz
+      Dimensions: 750 x 321 x 10 mm (W x H x D)
+    `,
     price: 340,
   },
   {
     id: 1,
-    title: 'SOLUS+ M2 400W Heater',
-    description: '10 kg 1050 x 445 x 10 mm<br/>(W x H x D)',
+    title: 'M2',
+    description: 'Heating area: 20m²',
+    descriptionDetailed: `Heating area: 20m2
+      Rated Input: 800W
+      Weight: 10kg
+      Rated Voltage: 220/110V 50/60Hz
+      Dimensions: 1050 x 445 x 10 mm (W x H x D)
+      Temperature sensor: included
+      Feet: not compatible
+    `,
     price: 440,
   },
   {
     id: 2,
-    title: 'Starter Kit<br/> (2x M2 and 1x M1)',
-    description: '35% OFF!',
+    title: 'Starter Kit',
+    description: 'Heating area: 55m². 35% OFF<br/>M2 x2, M1 x1',
+    descriptionDetailed: '',
     price: 793,
   },
 ];
 
-export const COUNTRY_FIELD_NAME = 'country__solus'
+export const COUNTRY_FIELD_NAME = 'country__solus';

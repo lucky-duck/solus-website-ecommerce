@@ -63,11 +63,13 @@ const StyledColour = styled(Colour)`
 // `;
 
 function Item({ title, description, quantity, price, color, onRemove }) {
+  const isWhite = color === COLORS.WHITE;
+
   return (
     <StyledItem>
       <Row>
         <ItemLeft>
-          <ProductPreview />
+          <ProductPreview white={isWhite} />
           <Content>
             <Title bold>
               <Text as={'span'} pale>
@@ -85,7 +87,7 @@ function Item({ title, description, quantity, price, color, onRemove }) {
         <div>
           <Price big>{formatCurrency(price * quantity)}</Price>
           <ColourContainer>
-            <StyledColour small white={color === COLORS.WHITE} />
+            <StyledColour small white={isWhite} />
             <Text extraSmall pale>
               White
             </Text>

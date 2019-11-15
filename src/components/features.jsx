@@ -90,17 +90,21 @@ function Features() {
       />
       <Item
         title={'Maintenance free'}
-        text={'Technology requires no maintenance'}
+        text={
+          'Our heaters are maintenance free and their function is constantly being upgraded through software. A heater that improves over time.'
+        }
         icon={IconTools}
       />
       <Item
         title={'Smart home'}
-        text={'Control Solus+ from your phone. '}
+        text={
+          'Control your heating from your phone. Reduce heating costs by up to 25% with smart home features.'
+        }
         icon={IconSmartHome}
       />
       <Item
-        title={'Cost efficient'}
-        text={'Up to 30% more efficient than conventional radiators.'}
+        title={'Cost efficient infrared'}
+        text={'Up to 30% more cost efficient than convection electric heaters.'}
         icon={IconSeed}
       />
     </StyledFeatures>

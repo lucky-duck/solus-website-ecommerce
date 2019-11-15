@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'astroturf';
-import image from '../images/heater-black-small.jpg';
+import imageHeaterBlack from '../images/heater-black-small.jpg';
+import imageHeaterWhite from '../images/heater-white-small.jpg';
 
 const StyledProductPreview = styled.div`
   position: relative;
@@ -42,11 +43,11 @@ const Image = styled.img`
   height: auto;
 `;
 
-function ProductPreview() {
+function ProductPreview({ white }) {
   return (
     <StyledProductPreview>
       <Inner>
-        <Image src={image} />
+        <Image src={white ? imageHeaterWhite : imageHeaterBlack} />
       </Inner>
     </StyledProductPreview>
   );
