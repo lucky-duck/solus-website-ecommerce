@@ -64,6 +64,10 @@ const ItemTitle = styled.div`
   }
 `;
 
+const StyledItemText = styled(Text)`
+  line-height: 1.5;
+`;
+
 function Item({ title, text, icon: IconComponent }) {
   return (
     <StyledItem>
@@ -72,9 +76,9 @@ function Item({ title, text, icon: IconComponent }) {
       </ItemIconContainer>
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>
-        <Text small pale>
+        <StyledItemText small pale>
           {text}
-        </Text>
+        </StyledItemText>
       </ItemContent>
     </StyledItem>
   );
@@ -89,6 +93,11 @@ function Features() {
         icon={IconPlug}
       />
       <Item
+        title={'Cost efficient infrared'}
+        text={'Up to 30% more cost efficient than convection electric heaters.'}
+        icon={IconSeed}
+      />
+      <Item
         title={'Maintenance free'}
         text={
           'Our heaters are maintenance free and their function is constantly being upgraded through software. A heater that improves over time.'
@@ -101,11 +110,6 @@ function Features() {
           'Control your heating from your phone. Reduce heating costs by up to 25% with smart home features.'
         }
         icon={IconSmartHome}
-      />
-      <Item
-        title={'Cost efficient infrared'}
-        text={'Up to 30% more cost efficient than convection electric heaters.'}
-        icon={IconSeed}
       />
     </StyledFeatures>
   );
