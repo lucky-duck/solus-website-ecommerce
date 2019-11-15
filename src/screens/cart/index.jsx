@@ -39,6 +39,11 @@ const Section = styled.section`
     margin-bottom: 0;
   }
 
+  &.showAbove {
+    position: relative;
+    z-index: 9999;
+  }
+
   @media (max-width: 767px) {
     margin-bottom: 60px;
   }
@@ -69,7 +74,6 @@ export const SmallContainer = styled.div`
 const PaypalButtonContainer = styled.div`
   position: relative;
   transition: filter 0.55s ease-out;
-  z-index: -1;
 
   &.disabled {
     -webkit-filter: grayscale(100%);
@@ -239,7 +243,7 @@ function Inner({ formikProps, selectedProducts }) {
           </Header>
           <Cart altStyling />
         </Section>
-        <Section>
+        <Section showAbove>
           <Delivery />
         </Section>
         <Section>
