@@ -45,6 +45,7 @@ function Cart({ altStyling }) {
               quantity={item.quantity}
               price={item.price}
               title={item.title}
+              description={item.description}
               color={item.color}
               onRemove={() => removeProduct(item.id)}
             />
