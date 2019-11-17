@@ -35,7 +35,6 @@ const StyledSelect = styled.div`
 `;
 
 const Current = styled.label`
-  composes: ${mixins.hoverDefault};
   composes: ${mixins.fontFamilySansAlt};
   composes: ${inputMixins.buttonReset};
   composes: ${inputMixins.inputCommon};
@@ -111,7 +110,7 @@ const Input = styled.input`
 `;
 
 const Placeholder = styled.span`
-  color: #7a7a7a;
+  color: #949494;
   font-size: inherit;
 `;
 

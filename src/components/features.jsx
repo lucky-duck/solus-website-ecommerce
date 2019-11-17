@@ -119,7 +119,7 @@ function Features({ isMobile }) {
       <Item
         title={'Smart home'}
         text={
-          'Control your heating from your phone. Reduce heating costs by up to 25% with smart home features.'
+          'Control your heating from your phone. Reduce heating costs by up to 31% with smart home features.'
         }
         icon={IconSmartHome}
       />
