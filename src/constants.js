@@ -51,3 +51,9 @@ export const PRODUCTS = [
 ];
 
 export const COUNTRY_FIELD_NAME = 'country__solus';
+
+export const PAYPAL_CLIENT_ID_PRODUCTION =
+  'AY5-2OUUmaOU0gjxU8TwGqJ-dpI_sBJYnPmnYMNuDweJ0gzYs0HZRlE3_1zVXhC4Nn1hWfBeXRAnrw8c';
+
+export const PAYPAL_CLIENT_ID_SANDBOX =
+  'Ab115IoTrFjgeoyb2z9JEL2Njm7ovP8uBUY-FBWYvQvZMUuIkMb6G-JyIR0DTDw4Xh8bQ8tsaQxVpa8A';
