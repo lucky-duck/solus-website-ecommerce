@@ -1,11 +1,13 @@
 import { DEFAULT_CURRENCY_SYMBOL } from '../constants';
 
-export function formatCurrency(value) {
+export function formatCurrency(value, { noCurrency } = {}) {
+  const currencyPart = noCurrency ? '' : DEFAULT_CURRENCY_SYMBOL;
+
   if (isNaN(value)) {
-    return `${DEFAULT_CURRENCY_SYMBOL}0.00`;
+    return `${currencyPart}0.00`;
   }
 
-  return `${DEFAULT_CURRENCY_SYMBOL}${value.toFixed(2)}`;
+  return `${currencyPart}${value.toFixed(2)}`;
 }
 
 export function convertSelectedProductsToPlainText(selectedProducts) {

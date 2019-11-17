@@ -10,6 +10,7 @@ export const COLORS = {
 
 export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products.v1.21';
 
+export const DEFAULT_CURRENCY_CODE = 'EUR';
 export const DEFAULT_CURRENCY_SYMBOL = '€';
 
 export const PRODUCTS = [
@@ -18,7 +19,7 @@ export const PRODUCTS = [
     title: 'M1',
     description: 'Heating area: 15m²',
     descriptionDetailed: `
-      Heating area: 15m2<br/>
+      Heating area: 15m²<br/>
       Rated Input: 450W<br/>
       Weight: 4.5kg<br/>
       Rated Voltage: 220/110V 50/60Hz<br/>
@@ -31,7 +32,7 @@ export const PRODUCTS = [
     title: 'M2',
     description: 'Heating area: 20m²',
     descriptionDetailed: `
-      Heating area: 20m2<br/>
+      Heating area: 20m²<br/>
       Rated Input: 800W<br/>
       Weight: 10kg<br/>
       Rated Voltage: 220/110V 50/60Hz<br/>

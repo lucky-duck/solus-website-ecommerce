@@ -12,10 +12,11 @@ import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
-import { COUNTRY_FIELD_NAME } from '../../constants';
+import { COUNTRY_FIELD_NAME, DEFAULT_CURRENCY_CODE } from '../../constants';
 import countries from '../../countries.json';
 import {
   convertSelectedProductsToPlainText,
+  formatCurrency,
   removeNodeChildren,
 } from '../../utils/utils';
 
@@ -117,7 +118,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function CartScreen() {
-  const { selectedProducts, resetCart } = useProducts();
+  const { selectedProducts, totalPrice, resetCart } = useProducts();
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
@@ -145,6 +146,7 @@ function CartScreen() {
           <Inner
             formikProps={formikProps}
             selectedProducts={selectedProducts}
+            totalPrice={totalPrice}
             onResetCart={resetCart}
           />
         );
@@ -178,7 +180,7 @@ async function sendDeliveryDetails(selectedProducts, values) {
   }
 }
 
-function Inner({ formikProps, selectedProducts, onResetCart }) {
+function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
   const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
 
@@ -193,18 +195,38 @@ function Inner({ formikProps, selectedProducts, onResetCart }) {
 
     removeNodeChildren(paypalButtonContainerNode.current);
 
+    console.log('selectedProducts', selectedProducts);
+
     window.paypal
       .Buttons({
         createOrder: function(data, actions) {
           // This function sets up the details of the transaction, including the amount and line item details.
+          console.log('create order', selectedProducts);
           return actions.order.create({
             purchase_units: [
               {
-                amount: {
-                  value: selectedProducts.reduce((acc, curr) => {
-                    return acc + curr.quantity * curr.price;
-                  }, 0),
+                amount: { value: totalPrice },
+                payee: {
+                  email: values.email,
                 },
+                // items: selectedProducts.map((item) => {
+                //   const result = {
+                //     name: item.title,
+                //     sku: `sku${item.id}`,
+                //     amount: Number(
+                //       formatCurrency(item.price, { noCurrency: true })
+                //     ),
+                //     quantity: item.quantity,
+                //     currency: DEFAULT_CURRENCY_CODE,
+                //     description: `${
+                //       item.description
+                //         ? item.description.replace('<br/>', ' ')
+                //         : ''
+                //     }`,
+                //   };
+                //   console.log('result', result);
+                //   return result;
+                // }),
               },
             ],
           });
@@ -215,7 +237,10 @@ function Inner({ formikProps, selectedProducts, onResetCart }) {
             // This function shows a transaction success message to your buyer.
             function getPayerName() {
               const name =
-                details && details.payer && details.payer.name.given_name;
+                details &&
+                details.payer &&
+                details.payer.name &&
+                details.payer.name.given_name;
 
               return name ? `, ${name}` : '';
             }
