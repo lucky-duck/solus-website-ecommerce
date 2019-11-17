@@ -11,7 +11,7 @@ export function formatCurrency(value) {
 export function convertSelectedProductsToPlainText(selectedProducts) {
   const textArray = selectedProducts.map(
     (v, index) =>
-      `${index + 1}. ${v.title}, Price: ${formatCurrency(
+      `${index + 1}. ${v.quantity}x ${v.title}, Price: ${formatCurrency(
         v.price * v.quantity
       )} `
   );
