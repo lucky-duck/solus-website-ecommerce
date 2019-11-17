@@ -195,13 +195,10 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
 
     removeNodeChildren(paypalButtonContainerNode.current);
 
-    console.log('selectedProducts', selectedProducts);
-
     window.paypal
       .Buttons({
         createOrder: function(data, actions) {
           // This function sets up the details of the transaction, including the amount and line item details.
-          console.log('create order', selectedProducts);
           return actions.order.create({
             purchase_units: [
               {
@@ -224,7 +221,6 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
                 //         : ''
                 //     }`,
                 //   };
-                //   console.log('result', result);
                 //   return result;
                 // }),
               },
