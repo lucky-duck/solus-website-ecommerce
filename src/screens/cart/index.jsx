@@ -117,7 +117,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function CartScreen() {
-  const { selectedProducts } = useProducts();
+  const { selectedProducts, resetCart } = useProducts();
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
@@ -145,6 +145,7 @@ function CartScreen() {
           <Inner
             formikProps={formikProps}
             selectedProducts={selectedProducts}
+            onResetCart={resetCart}
           />
         );
       }}
@@ -177,7 +178,7 @@ async function sendDeliveryDetails(selectedProducts, values) {
   }
 }
 
-function Inner({ formikProps, selectedProducts }) {
+function Inner({ formikProps, selectedProducts, onResetCart }) {
   const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
 
@@ -220,6 +221,8 @@ function Inner({ formikProps, selectedProducts }) {
             }
 
             sendDeliveryDetailsCallback();
+
+            onResetCart && onResetCart();
 
             alert(
               `Thank you${getPayerName()}. We will come back to you shortly!`

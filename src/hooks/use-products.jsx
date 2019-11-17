@@ -64,6 +64,8 @@ function changeItemColor(id, color) {
   };
 }
 
+const initialSelectedProducts = [];
+
 export function ProductsProvider({ children }) {
   const [selectedProducts, setSelectedProducts] = useState(
     getSelectedFromLocalStorage()
@@ -114,11 +116,11 @@ export function ProductsProvider({ children }) {
       CART_LOCAL_STORAGE_KEY
     );
     if (!selectedProducts) {
-      return [];
+      return initialSelectedProducts;
     }
     const parsed = JSON.parse(selectedProducts);
     if (!Array.isArray(parsed)) {
-      return [];
+      return initialSelectedProducts;
     }
     return parsed;
   }
@@ -128,6 +130,10 @@ export function ProductsProvider({ children }) {
       CART_LOCAL_STORAGE_KEY,
       JSON.stringify(selectedProducts)
     );
+  }
+
+  function resetCart() {
+    setSelectedProducts(initialSelectedProducts);
   }
 
   return (
@@ -140,6 +146,7 @@ export function ProductsProvider({ children }) {
         setProductQuantity,
         changeProductColor,
         totalPrice,
+        resetCart,
       }}
     >
       {children}
