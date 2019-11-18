@@ -139,7 +139,7 @@ export function ProductsProvider({ children }) {
 
   function setProductQuantity(productId, quantity) {
     setSelectedProducts((state) => [
-      ...state,
+      ...state.filter((v) => v.productId !== productId),
       ...range(0, quantity).map(() => ({
         id: uuid.v4(),
         productId,
