@@ -52,6 +52,9 @@ function Description() {
             </DescriptionSection>
           );
         })}
+        <DescriptionSection>
+          <Text small accent>FREE SHIPPING WORLDWIDE</Text>
+        </DescriptionSection>
     </StyledSection>
   );
 }

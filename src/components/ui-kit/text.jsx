@@ -32,6 +32,10 @@ const Text = styled.div`
   &.danger {
     color: $colorDanger;
   }
+  
+  &.accent {
+    color: $colorPrimary;
+  }
 
   @media (max-width: 767px) {
     &.big {
