@@ -12,11 +12,10 @@ import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
-import { COUNTRY_FIELD_NAME, DEFAULT_CURRENCY_CODE } from '../../constants';
+import { COUNTRY_FIELD_NAME } from '../../constants';
 import countries from '../../countries.json';
 import {
   convertSelectedProductsToPlainText,
-  formatCurrency,
   removeNodeChildren,
 } from '../../utils/utils';
 

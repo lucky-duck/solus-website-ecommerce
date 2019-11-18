@@ -42,7 +42,7 @@ const ImageArea = styled.div`
 
 const StickyItem = styled.div`
   position: sticky;
-  top: 151px;
+  top: 221px;
   padding-bottom: 45px;
 
   @media (max-width: 991px) {

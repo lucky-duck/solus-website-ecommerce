@@ -4,7 +4,6 @@ import styled from 'astroturf';
 import InputSelect from '../../../components/controls/input-select';
 import mixins from '../../../styles/mixins';
 import Section from './section';
-import Link from '../../../components/ui-kit/link';
 import Text from '../../../components/ui-kit/text';
 import { useProducts } from '../../../hooks/use-products';
 import { formatCurrency } from '../../../utils/utils';

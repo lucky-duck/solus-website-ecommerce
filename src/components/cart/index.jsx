@@ -3,7 +3,6 @@ import styled from 'astroturf';
 
 import Item from './item';
 import Text from '../ui-kit/text';
-import Link from '../ui-kit/link';
 import Flex from '../ui-kit/flex';
 import mixins from '../../styles/mixins';
 import { useProducts } from '../../hooks/use-products';

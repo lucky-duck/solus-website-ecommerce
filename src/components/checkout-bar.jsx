@@ -89,26 +89,32 @@ function CheckoutBar() {
   }
 
   return (
-    <StyledCheckoutBar style={{ ...style, top: 0 }}>
-      <Flex aic>
-        <Items>
-          {selectedProducts.slice(0, MAX_ITEMS).map((item, index) => {
-            return (
-              <Item
-                key={index}
-                title={item.title}
-                quantity={item.quantity}
-                price={item.price}
-              />
-            );
-          })}
-          {selectedProducts.length > MAX_ITEMS && (
-            <More>+{selectedProducts.length - MAX_ITEMS} more</More>
-          )}
-        </Items>
-        <StyledButton href={getPath.cart()}>Checkout</StyledButton>
-      </Flex>
-    </StyledCheckoutBar>
+    <Sticky>
+      {({ style }) => {
+        return (
+          <StyledCheckoutBar style={{ ...style, top: 70 }}>
+            <Flex aic>
+              <Items>
+                {selectedProducts.slice(0, MAX_ITEMS).map((item, index) => {
+                  return (
+                    <Item
+                      key={index}
+                      title={item.title}
+                      quantity={item.quantity}
+                      price={item.price}
+                    />
+                  );
+                })}
+                {selectedProducts.length > MAX_ITEMS && (
+                  <More>+{selectedProducts.length - MAX_ITEMS} more</More>
+                )}
+              </Items>
+              <StyledButton href={getPath.cart()}>Checkout</StyledButton>
+            </Flex>
+          </StyledCheckoutBar>
+        );
+      }}
+    </Sticky>
   );
 }
 
