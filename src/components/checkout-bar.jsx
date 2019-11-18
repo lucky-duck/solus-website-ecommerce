@@ -88,7 +88,7 @@ function CheckoutBar() {
   }
 
   return (
-    <StyledCheckoutBar style={{ ...style, top: 0 }}>
+    <StyledCheckoutBar>
       <Flex aic>
         <Items>
           {selectedProducts.slice(0, MAX_ITEMS).map((item, index) => {
