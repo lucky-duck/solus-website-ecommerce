@@ -59,7 +59,7 @@ export const PAYPAL_CLIENT_ID_PRODUCTION =
 export const PAYPAL_CLIENT_ID_SANDBOX =
   'Ab115IoTrFjgeoyb2z9JEL2Njm7ovP8uBUY-FBWYvQvZMUuIkMb6G-JyIR0DTDw4Xh8bQ8tsaQxVpa8A';
 
-export const PROMO_CODES = {
+export const DISCOUNT_CODES = {
   '4b1de0f4': 5,
   '6d3e6073': 10,
   '2c7156c0': 15,
