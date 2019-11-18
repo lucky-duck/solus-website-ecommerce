@@ -57,7 +57,7 @@ function Cart({ altStyling }) {
           <Text as={'h2'} bold big>
             <SubtotalTitle>Subtotal</SubtotalTitle>
           </Text>
-          <Link extraSmall>Terms and conditions</Link>
+          {/*<Link extraSmall>Terms and conditions</Link>*/}
         </Flex>
         <SubtotalLine />
         <Flex aic jcsb>

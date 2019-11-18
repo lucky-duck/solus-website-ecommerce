@@ -177,9 +177,9 @@ function ProductSelectors() {
     <Section>
       <Header>
         <Section.Title>Select your SOLUS+</Section.Title>
-        <Link href={'/'} extraSmall>
-          How many heaters do I need?
-        </Link>
+        {/*<Link href={'/'} extraSmall>*/}
+        {/*  How many heaters do I need?*/}
+        {/*</Link>*/}
       </Header>
       <StyledProductSelectors>
         {items.map((item, index) => {
