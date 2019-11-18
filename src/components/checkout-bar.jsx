@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'astroturf';
-import { Sticky } from 'react-sticky';
 
 import ProductPreview from './product-preview';
 import Flex from './ui-kit/flex';
@@ -89,32 +88,26 @@ function CheckoutBar() {
   }
 
   return (
-    <Sticky>
-      {({ style }) => {
-        return (
-          <StyledCheckoutBar style={{ ...style, top: 70 }}>
-            <Flex aic>
-              <Items>
-                {selectedProducts.slice(0, MAX_ITEMS).map((item, index) => {
-                  return (
-                    <Item
-                      key={index}
-                      title={item.title}
-                      quantity={item.quantity}
-                      price={item.price}
-                    />
-                  );
-                })}
-                {selectedProducts.length > MAX_ITEMS && (
-                  <More>+{selectedProducts.length - MAX_ITEMS} more</More>
-                )}
-              </Items>
-              <StyledButton href={getPath.cart()}>Checkout</StyledButton>
-            </Flex>
-          </StyledCheckoutBar>
-        );
-      }}
-    </Sticky>
+    <StyledCheckoutBar style={{ ...style, top: 0 }}>
+      <Flex aic>
+        <Items>
+          {selectedProducts.slice(0, MAX_ITEMS).map((item, index) => {
+            return (
+              <Item
+                key={index}
+                title={item.title}
+                quantity={item.quantity}
+                price={item.price}
+              />
+            );
+          })}
+          {selectedProducts.length > MAX_ITEMS && (
+            <More>+{selectedProducts.length - MAX_ITEMS} more</More>
+          )}
+        </Items>
+        <StyledButton href={getPath.cart()}>Checkout</StyledButton>
+      </Flex>
+    </StyledCheckoutBar>
   );
 }
 
