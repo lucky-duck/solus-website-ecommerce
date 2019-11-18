@@ -8,7 +8,7 @@ export const COLORS = {
   WHITE: 'WHITE',
 };
 
-export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products.v1.21';
+export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products.v1.32';
 
 export const DEFAULT_CURRENCY_CODE = 'EUR';
 export const DEFAULT_CURRENCY_SYMBOL = '€';

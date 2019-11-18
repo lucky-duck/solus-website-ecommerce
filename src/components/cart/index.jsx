@@ -32,7 +32,11 @@ const SubtotalLine = styled.div`
 const Price = styled(Text)``;
 
 function Cart({ altStyling }) {
-  const { selectedProducts, totalPrice, removeProduct } = useProducts();
+  const {
+    cartSelectedProducts: selectedProducts,
+    totalPrice,
+    removeProduct,
+  } = useProducts();
 
   return (
     <StyledCart>
@@ -46,7 +50,7 @@ function Cart({ altStyling }) {
               title={item.title}
               description={item.description}
               color={item.color}
-              onRemove={() => removeProduct(item.id)}
+              onRemove={() => removeProduct(item.productId, item.color)}
             />
           );
         })}

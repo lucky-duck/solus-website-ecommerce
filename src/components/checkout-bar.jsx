@@ -8,6 +8,7 @@ import Button from './button';
 import { formatCurrency } from '../utils/utils';
 import { useProducts } from '../hooks/use-products';
 import { getPath } from '../utils/paths';
+import { COLORS } from '../constants';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
@@ -64,10 +65,10 @@ const More = styled.div`
   margin-right: 25px;
 `;
 
-function Item({ quantity, price, title }) {
+function Item({ quantity, price, title, color }) {
   return (
     <StyledItem>
-      <ProductPreview />
+      <ProductPreview white={color === COLORS.WHITE} />
       <ItemContent>
         <ItemTitle>
           <ItemQuantity>{quantity}x</ItemQuantity>{' '}
@@ -82,7 +83,7 @@ function Item({ quantity, price, title }) {
 const MAX_ITEMS = 3;
 
 function CheckoutBar() {
-  const { selectedProducts } = useProducts();
+  const { cartSelectedProducts: selectedProducts } = useProducts();
 
   if (!selectedProducts.length) {
     return null;
@@ -102,6 +103,7 @@ function CheckoutBar() {
                       title={item.title}
                       quantity={item.quantity}
                       price={item.price}
+                      color={item.color}
                     />
                   );
                 })}

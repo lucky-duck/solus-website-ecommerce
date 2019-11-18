@@ -65,7 +65,7 @@ function Item({ id, title, quantity, color, onChange }) {
   return (
     <StyledItem jcsb aic>
       <ItemTitle>
-        <Quantity>{quantity}x</Quantity>{' '}
+        {/*<Quantity>{quantity}x</Quantity>{' '}*/}
         <span dangerouslySetInnerHTML={{ __html: title }} />
       </ItemTitle>
       <Flex aic>
@@ -120,7 +120,7 @@ function Colours() {
         <Section.Title>Select Colour</Section.Title>
         <HeaderText>
           For the <HeaderTextNumber>{selectedProducts.length}</HeaderTextNumber>{' '}
-          selected radiators
+          selected items
         </HeaderText>
       </Header>
       <div>

@@ -18,6 +18,10 @@ const StyledColour = styled.button`
   flex-shrink: 0;
   background-color: transparent;
 
+  &:focus {
+    outline: none;
+  }
+
   &.active {
     border-color: #ff7020;
     cursor: default;
@@ -46,12 +50,13 @@ const ColourInner = styled.div`
   background-color: #1b1b1b;
 
   &.white {
-    background: #fff linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      rgba(214, 223, 239, 0.25) 43.53%,
-      rgba(123, 146, 179, 0.25) 100%
-    );
+    background: #fff
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(214, 223, 239, 0.25) 43.53%,
+        rgba(123, 146, 179, 0.25) 100%
+      );
   }
 
   &.small {
@@ -79,7 +84,7 @@ function Colour({ className, white, active, small, onClick }) {
       onClick={handleClick}
       type="button"
     >
-      <ColourInner white={white} small={small} tabIndex="-1" />
+      <ColourInner white={white} small={small} />
     </StyledColour>
   );
 }

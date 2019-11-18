@@ -1,5 +1,7 @@
 import React, { useContext, useState, useMemo, useEffect } from 'react';
 import sortBy from 'lodash/sortBy';
+import range from 'lodash/range';
+import uuid from 'uuid';
 
 import { CART_LOCAL_STORAGE_KEY, COLORS, PRODUCTS } from '../constants';
 
@@ -71,13 +73,14 @@ export function ProductsProvider({ children }) {
     getSelectedFromLocalStorage()
   );
   const [selectedProductsWithData, setSelectedProductsWithData] = useState([]);
+  const [cartSelectedProducts, setCartSelectedProducts] = useState([]);
 
   const totalPrice = useMemo(() => {
-    return selectedProductsWithData.reduce(
+    return cartSelectedProducts.reduce(
       (acc, curr) => acc + curr.price * curr.quantity,
       0
     );
-  }, [selectedProductsWithData]);
+  }, [cartSelectedProducts]);
 
   useEffect(() => {
     saveSelectedToLocalStorage(selectedProducts);
@@ -87,24 +90,63 @@ export function ProductsProvider({ children }) {
     setSelectedProductsWithData(
       sortBy(
         selectedProducts.map((v) => {
-          const productData = PRODUCTS.filter((data) => data.id === v.id)[0];
-          return { ...v, ...productData };
+          const productData = PRODUCTS.filter(
+            (data) => data.id === v.productId
+          )[0];
+          return { ...productData, ...v };
         }),
-        'id'
+        ['productId']
       )
     );
   }, [selectedProducts]);
 
-  function addProduct(id) {
-    setSelectedProducts(changeItemQuantity('+', id));
+  useEffect(() => {
+    setCartSelectedProducts(
+      selectedProductsWithData.reduce((acc, curr) => {
+        const foundIndex = acc.findIndex(
+          (v) => v.productId === curr.productId && v.color === curr.color
+        );
+        if (foundIndex > -1) {
+          acc[foundIndex] = {
+            ...acc[foundIndex],
+            quantity: acc[foundIndex].quantity + 1,
+          };
+        } else {
+          acc = [
+            ...acc,
+            {
+              ...curr,
+              quantity: 1,
+            },
+          ];
+        }
+        return acc;
+      }, [])
+    );
+  }, [selectedProductsWithData]);
+
+  // function addProduct(id) {
+  //   setSelectedProducts(changeItemQuantity('+', id));
+  // }
+
+  function removeProduct(productId, color) {
+    setSelectedProducts((state) =>
+      state.filter((v) => {
+        return !(v.productId === productId && v.color === color);
+      })
+    );
   }
 
-  function removeProduct(id) {
-    setSelectedProducts(changeItemQuantity('-', id));
-  }
-
-  function setProductQuantity(id, quantity) {
-    setSelectedProducts(changeItemQuantity('', id, quantity));
+  function setProductQuantity(productId, quantity) {
+    setSelectedProducts((state) => [
+      ...state,
+      ...range(0, quantity).map(() => ({
+        id: uuid.v4(),
+        productId,
+        color: COLORS.BLACK,
+      })),
+    ]);
+    // setSelectedProducts(changeItemQuantity('', id, quantity));
   }
 
   function changeProductColor(id, color) {
@@ -141,7 +183,8 @@ export function ProductsProvider({ children }) {
       value={{
         allProducts: PRODUCTS,
         selectedProducts: selectedProductsWithData,
-        addProduct,
+        cartSelectedProducts,
+        // addProduct,
         removeProduct,
         setProductQuantity,
         changeProductColor,
