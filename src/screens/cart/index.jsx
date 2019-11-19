@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import omit from 'lodash/omit';
+import { navigate } from '@reach/router';
 
 import Cart from '../../components/cart';
 import Container from '../../components/container';
@@ -19,19 +20,10 @@ import {
   removeNodeChildren,
 } from '../../utils/utils';
 import DiscountCode from './components/discount-code';
+import Screen from '../../components/screen';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/3614782/o48nwdq/';
-
-const Screen = styled.div`
-  padding-top: 60px;
-  padding-bottom: 60px;
-
-  @media (max-width: 767px) {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
-`;
 
 const Section = styled.section`
   margin-bottom: 80px;
@@ -190,10 +182,6 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
   const paypalButtonContainerNode = useRef(null);
   const paypalButtonsComponent = useRef(null);
 
-  // const sendDeliveryDetailsCallback = useCallback(() => {
-  //   sendDeliveryDetails(selectedProducts, values);
-  // }, [selectedProducts, values]);
-
   const handleApprove = useCallback(
     (data, actions) => {
       // This function captures the funds from the transaction.
@@ -213,9 +201,7 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
 
         onResetCart && onResetCart();
 
-        alert(
-          `Thank you for your purchase${getPayerName()}. We will come back to you shortly!`
-        );
+        navigate(getPath.paymentSuccess());
       });
     },
     [onResetCart, selectedProducts, values]
@@ -296,6 +282,12 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
         <Section>
           <SmallContainer>
             <Header>
+              <button
+                style={{ opacity: 0 }}
+                onClick={() => navigate(getPath.paymentSuccess())}
+              >
+                Test
+              </button>
               <Title>Payment Confirmation</Title>
               {isValid ? (
                 <Text pale>Please, proceed to make a payment via PayPal</Text>
