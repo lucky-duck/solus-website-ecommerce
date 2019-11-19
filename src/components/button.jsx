@@ -24,6 +24,10 @@ const styles = css`
 
 const StyledButton = styled.button`
   composes: ${mixins.buttonReset} ${styles.button};
+
+  &.borderRadius {
+    border-radius: 3px;
+  }
 `;
 
 const StyledButtonLink = styled.a`

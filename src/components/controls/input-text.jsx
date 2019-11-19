@@ -69,7 +69,7 @@ function InputText({
 }) {
   const InputComponent = type === 'textarea' ? Textarea : Input;
 
-  const invalid = form.touched[field.name] && !!form.errors[field.name];
+  const invalid = form && form.touched[field.name] && !!form.errors[field.name];
 
   return (
     <StyledInputText className={className} {...rest}>

@@ -18,6 +18,7 @@ import {
   convertSelectedProductsToPlainText,
   removeNodeChildren,
 } from '../../utils/utils';
+import DiscountCode from './components/discount-code';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/3614782/o48nwdq/';
@@ -173,7 +174,7 @@ async function sendDeliveryDetails(selectedProducts, values) {
     });
   } catch (error) {
     alert(
-      'Sorry! Cannot save delivery details. Please, contact as for more information.'
+      'Sorry! Cannot save delivery details. Please, contact us for more information.'
     );
     console.error(error);
   }
@@ -242,7 +243,7 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
             onResetCart && onResetCart();
 
             alert(
-              `Thank you${getPayerName()}. We will come back to you shortly!`
+              `Thank you for your purchase${getPayerName()}. We will come back to you shortly!`
             );
           });
         },
@@ -258,11 +259,17 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
           <Header>
             <Title>Your Order</Title>
             <Text pale>
-              This is what is in your cart. You can still edit your purchace.
+              This is what is in your cart. You can still edit your purchase.
             </Text>
           </Header>
           <Cart altStyling />
         </Section>
+        {/*<Section>*/}
+        {/*  <Header>*/}
+        {/*    <Title>Discount code</Title>*/}
+        {/*  </Header>*/}
+        {/*  <DiscountCode />*/}
+        {/*</Section>*/}
         <Section showAbove>
           <Delivery />
         </Section>
