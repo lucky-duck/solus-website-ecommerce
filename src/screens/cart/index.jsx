@@ -282,12 +282,6 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
         <Section>
           <SmallContainer>
             <Header>
-              <button
-                style={{ opacity: 0 }}
-                onClick={() => navigate(getPath.paymentSuccess())}
-              >
-                Test
-              </button>
               <Title>Payment Confirmation</Title>
               {isValid ? (
                 <Text pale>Please, proceed to make a payment via PayPal</Text>
