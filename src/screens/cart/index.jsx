@@ -114,6 +114,7 @@ function CartScreen() {
     cartSelectedProducts: selectedProducts,
     totalPrice,
     resetCart,
+    discountData,
   } = useProducts();
 
   if (!selectedProducts || !selectedProducts.length) {
@@ -143,6 +144,7 @@ function CartScreen() {
             formikProps={formikProps}
             selectedProducts={selectedProducts}
             totalPrice={totalPrice}
+            discountData={discountData}
             onResetCart={resetCart}
           />
         );
@@ -151,7 +153,7 @@ function CartScreen() {
   );
 }
 
-async function sendDeliveryDetails(selectedProducts, values) {
+async function sendDeliveryDetails(selectedProducts, values, discountData) {
   try {
     console.warn('Sending delivery information', JSON.stringify(values));
     const countryData = countries.filter(
@@ -161,6 +163,7 @@ async function sendDeliveryDetails(selectedProducts, values) {
       ...omit(values, [COUNTRY_FIELD_NAME]),
       country: countryData.label,
       boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
+      discountPercent: discountData ? discountData.discountPercent : 0,
     };
     await axios({
       url: ZAPIER_WEBHOOK_URL,
@@ -177,7 +180,13 @@ async function sendDeliveryDetails(selectedProducts, values) {
   }
 }
 
-function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
+function Inner({
+  formikProps,
+  selectedProducts,
+  totalPrice,
+  discountData,
+  onResetCart,
+}) {
   const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
   const paypalButtonsComponent = useRef(null);
@@ -197,14 +206,14 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
           return name ? `, ${name}` : '';
         }
 
-        sendDeliveryDetails(selectedProducts, values);
+        sendDeliveryDetails(selectedProducts, values, discountData);
 
         onResetCart && onResetCart();
 
         navigate(getPath.paymentSuccess());
       });
     },
-    [onResetCart, selectedProducts, values]
+    [onResetCart, selectedProducts, values, discountData]
   );
 
   useEffect(() => {
