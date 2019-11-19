@@ -118,7 +118,11 @@ const validationSchema = Yup.object().shape({
 });
 
 function CartScreen() {
-  const { cartSelectedProducts : selectedProducts, totalPrice, resetCart } = useProducts();
+  const {
+    cartSelectedProducts: selectedProducts,
+    totalPrice,
+    resetCart,
+  } = useProducts();
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
@@ -165,6 +169,7 @@ async function sendDeliveryDetails(selectedProducts, values) {
       country: countryData.label,
       boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
     };
+    console.warn('Sending delivery information', JSON.stringify(valuesToSend));
     await axios({
       url: ZAPIER_WEBHOOK_URL,
       method: 'post',
