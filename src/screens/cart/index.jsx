@@ -118,7 +118,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function CartScreen() {
-  const { selectedProducts, totalPrice, resetCart } = useProducts();
+  const { cartSelectedProducts : selectedProducts, totalPrice, resetCart } = useProducts();
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
