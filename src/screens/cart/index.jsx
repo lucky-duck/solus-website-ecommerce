@@ -161,6 +161,7 @@ function CartScreen() {
 
 async function sendDeliveryDetails(selectedProducts, values) {
   try {
+    console.warn('Sending delivery information', JSON.stringify(values));
     const countryData = countries.filter(
       (v) => v.value === values[COUNTRY_FIELD_NAME]
     )[0];
@@ -169,7 +170,6 @@ async function sendDeliveryDetails(selectedProducts, values) {
       country: countryData.label,
       boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
     };
-    console.warn('Sending delivery information', JSON.stringify(valuesToSend));
     await axios({
       url: ZAPIER_WEBHOOK_URL,
       method: 'post',
@@ -188,74 +188,89 @@ async function sendDeliveryDetails(selectedProducts, values) {
 function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
   const { isValid, values } = formikProps;
   const paypalButtonContainerNode = useRef(null);
+  const paypalButtonsComponent = useRef(null);
 
-  const sendDeliveryDetailsCallback = useCallback(() => {
-    sendDeliveryDetails(selectedProducts, values);
-  }, [selectedProducts, values]);
+  // const sendDeliveryDetailsCallback = useCallback(() => {
+  //   sendDeliveryDetails(selectedProducts, values);
+  // }, [selectedProducts, values]);
+
+  const handleApprove = useCallback(
+    (data, actions) => {
+      // This function captures the funds from the transaction.
+      return actions.order.capture().then(async (details) => {
+        // This function shows a transaction success message to your buyer.
+        function getPayerName() {
+          const name =
+            details &&
+            details.payer &&
+            details.payer.name &&
+            details.payer.name.given_name;
+
+          return name ? `, ${name}` : '';
+        }
+
+        sendDeliveryDetails(selectedProducts, values);
+
+        onResetCart && onResetCart();
+
+        alert(
+          `Thank you for your purchase${getPayerName()}. We will come back to you shortly!`
+        );
+      });
+    },
+    [onResetCart, selectedProducts, values]
+  );
 
   useEffect(() => {
-    if (!selectedProducts.length || !paypalButtonContainerNode.current) {
+    if (!paypalButtonContainerNode.current) {
       return;
     }
 
     removeNodeChildren(paypalButtonContainerNode.current);
 
-    window.paypal
-      .Buttons({
-        createOrder: function(data, actions) {
-          // This function sets up the details of the transaction, including the amount and line item details.
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: { value: totalPrice },
-                // items: selectedProducts.map((item) => {
-                //   const result = {
-                //     name: item.title,
-                //     sku: `sku${item.id}`,
-                //     amount: Number(
-                //       formatCurrency(item.price, { noCurrency: true })
-                //     ),
-                //     quantity: item.quantity,
-                //     currency: DEFAULT_CURRENCY_CODE,
-                //     description: `${
-                //       item.description
-                //         ? item.description.replace('<br/>', ' ')
-                //         : ''
-                //     }`,
-                //   };
-                //   return result;
-                // }),
-              },
-            ],
-          });
-        },
-        onApprove: function(data, actions) {
-          // This function captures the funds from the transaction.
-          return actions.order.capture().then(function(details) {
-            // This function shows a transaction success message to your buyer.
-            function getPayerName() {
-              const name =
-                details &&
-                details.payer &&
-                details.payer.name &&
-                details.payer.name.given_name;
+    paypalButtonsComponent.current = window.paypal.Buttons({
+      createOrder: function(data, actions) {
+        // This function sets up the details of the transaction, including the amount and line item details.
+        return actions.order.create({
+          purchase_units: [
+            {
+              amount: { value: totalPrice },
+              // items: selectedProducts.map((item) => {
+              //   const result = {
+              //     name: item.title,
+              //     sku: `sku${item.id}`,
+              //     amount: Number(
+              //       formatCurrency(item.price, { noCurrency: true })
+              //     ),
+              //     quantity: item.quantity,
+              //     currency: DEFAULT_CURRENCY_CODE,
+              //     description: `${
+              //       item.description
+              //         ? item.description.replace('<br/>', ' ')
+              //         : ''
+              //     }`,
+              //   };
+              //   return result;
+              // }),
+            },
+          ],
+        });
+      },
+      onApprove: () => null,
+    });
 
-              return name ? `, ${name}` : '';
-            }
+    paypalButtonsComponent.current.render(paypalButtonContainerNode.current);
+  }, [totalPrice]);
 
-            sendDeliveryDetailsCallback();
+  useEffect(() => {
+    if (!paypalButtonsComponent.current) {
+      return;
+    }
 
-            onResetCart && onResetCart();
-
-            alert(
-              `Thank you for your purchase${getPayerName()}. We will come back to you shortly!`
-            );
-          });
-        },
-      })
-      .render(paypalButtonContainerNode.current);
-    // eslint-disable-next-line
-  }, [selectedProducts, totalPrice]);
+    paypalButtonsComponent.current.updateProps({
+      onApprove: handleApprove,
+    });
+  }, [values, selectedProducts, handleApprove]);
 
   return (
     <Screen>
