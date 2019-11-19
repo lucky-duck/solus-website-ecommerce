@@ -15,7 +15,7 @@ export function convertSelectedProductsToPlainText(selectedProducts) {
     (v, index) =>
       `${index + 1}. ${v.quantity}x ${v.title}, Price: ${formatCurrency(
         v.price * v.quantity
-      )} `
+      )}, Colour: ${v.color && v.color.toLowerCase()} `
   );
 
   return textArray.join('<br/>');
