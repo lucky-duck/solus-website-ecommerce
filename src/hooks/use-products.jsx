@@ -22,6 +22,7 @@ function changeItemColor(id, color) {
 }
 
 const initialSelectedProducts = [];
+const initialDiscountData = null;
 
 export function ProductsProvider({ children }) {
   const [selectedProducts, setSelectedProducts] = useState(
@@ -29,13 +30,17 @@ export function ProductsProvider({ children }) {
   );
   const [selectedProductsWithData, setSelectedProductsWithData] = useState([]);
   const [cartSelectedProducts, setCartSelectedProducts] = useState([]);
+  const [discountData, setDiscountData] = useState(initialDiscountData);
 
   const totalPrice = useMemo(() => {
-    return cartSelectedProducts.reduce(
+    const total = cartSelectedProducts.reduce(
       (acc, curr) => acc + curr.price * curr.quantity,
       0
     );
-  }, [cartSelectedProducts]);
+    return discountData
+      ? total * ((100 - discountData.discountPercent) / 100)
+      : total;
+  }, [discountData, cartSelectedProducts]);
 
   useEffect(() => {
     saveSelectedToLocalStorage(selectedProducts);
@@ -145,6 +150,8 @@ export function ProductsProvider({ children }) {
         changeProductColor,
         totalPrice,
         resetCart,
+        setDiscountData,
+        discountData,
       }}
     >
       {children}

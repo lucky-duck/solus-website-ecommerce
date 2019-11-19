@@ -270,12 +270,12 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
           </Header>
           <Cart altStyling />
         </Section>
-        {/*<Section>*/}
-        {/*  <Header>*/}
-        {/*    <Title>Discount code</Title>*/}
-        {/*  </Header>*/}
-        {/*  <DiscountCode />*/}
-        {/*</Section>*/}
+        <Section>
+          <Header>
+            <Title>Discount code</Title>
+          </Header>
+          <DiscountCode />
+        </Section>
         <Section showAbove>
           <Delivery />
         </Section>

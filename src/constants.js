@@ -60,10 +60,22 @@ export const PAYPAL_CLIENT_ID_SANDBOX =
   'Ab115IoTrFjgeoyb2z9JEL2Njm7ovP8uBUY-FBWYvQvZMUuIkMb6G-JyIR0DTDw4Xh8bQ8tsaQxVpa8A';
 
 export const DISCOUNT_CODES = {
-  '4b1de0f4': 5,
-  '6d3e6073': 10,
-  '2c7156c0': 15,
-  '7e872d32': 20,
-  '5b1b9d5e': 25,
-  '9f914a24': 30,
+  '4b1de0f4': {
+    discountPercent: 5,
+  },
+  '6d3e6073': {
+    discountPercent: 10,
+  },
+  '2c7156c0': {
+    discountPercent: 15,
+  },
+  '7e872d32': {
+    discountPercent: 20,
+  },
+  '5b1b9d5e': {
+    discountPercent: 25,
+  },
+  '9f914a24': {
+    discountPercent: 30,
+  },
 };

@@ -65,6 +65,7 @@ function InputText({
   label,
   field,
   form,
+  onChange,
   ...rest
 }) {
   const InputComponent = type === 'textarea' ? Textarea : Input;
@@ -83,6 +84,7 @@ function InputText({
         ref={inputRef}
         autoComplete={autocomplete}
         onKeyDown={onKeyDown}
+        onChange={onChange}
         {...field}
       />
     </StyledInputText>
