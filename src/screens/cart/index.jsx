@@ -202,9 +202,6 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
             purchase_units: [
               {
                 amount: { value: totalPrice },
-                payee: {
-                  email: values.email,
-                },
                 // items: selectedProducts.map((item) => {
                 //   const result = {
                 //     name: item.title,
@@ -252,7 +249,7 @@ function Inner({ formikProps, selectedProducts, totalPrice, onResetCart }) {
       })
       .render(paypalButtonContainerNode.current);
     // eslint-disable-next-line
-  }, [selectedProducts]);
+  }, [selectedProducts, totalPrice]);
 
   return (
     <Screen>
