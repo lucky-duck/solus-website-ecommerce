@@ -53,19 +53,10 @@ const ItemTitle = styled(Text)`
   }
 `;
 
-const Quantity = styled.span`
-  @import '../../../styles/colors.scss';
-
-  display: inline-block;
-  color: $colorPaleGrey;
-  min-width: 23px;
-`;
-
-function Item({ id, title, quantity, color, onChange }) {
+function Item({ id, title, color, onChange }) {
   return (
     <StyledItem jcsb aic>
       <ItemTitle>
-        {/*<Quantity>{quantity}x</Quantity>{' '}*/}
         <span dangerouslySetInnerHTML={{ __html: title }} />
       </ItemTitle>
       <Flex aic>

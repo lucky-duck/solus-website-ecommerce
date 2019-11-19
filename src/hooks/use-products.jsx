@@ -7,51 +7,6 @@ import { CART_LOCAL_STORAGE_KEY, COLORS, PRODUCTS } from '../constants';
 
 const ProductsContext = React.createContext({});
 
-function changeItemQuantity(operation, id, quantity = 1) {
-  const isAdding = operation === '+';
-  const isSubtracting = operation === '-';
-  return function(products) {
-    const found = products.filter((v) => v.id === id)[0];
-    if (found) {
-      if ((isSubtracting && found.quantity === 1) || quantity === 0) {
-        return products.filter((v) => v.id !== id);
-      }
-      return products.map((v) => {
-        if (v.id !== id) {
-          return v;
-        }
-        let newQuantity;
-
-        if (isAdding) {
-          newQuantity = v.quantity + 1;
-        } else if (isSubtracting) {
-          newQuantity = v.quantity - 1;
-        } else {
-          newQuantity = quantity;
-        }
-
-        return {
-          ...v,
-          quantity: newQuantity,
-        };
-      });
-    }
-
-    if (!isSubtracting) {
-      return [
-        ...products,
-        {
-          id,
-          color: COLORS.BLACK,
-          quantity,
-        },
-      ];
-    }
-
-    return products;
-  };
-}
-
 function changeItemColor(id, color) {
   return function(products) {
     return products.map((v) => {
