@@ -12,8 +12,9 @@ import Flex from '../../components/ui-kit/flex';
 import Cart from './components/cart';
 import { useProducts } from '../../hooks/use-products';
 import CheckoutBar from '../../components/checkout-bar';
+import Screen from '../../components/screen';
 
-const Screen = styled.div`
+const StyledScreen = styled(Screen)`
   padding-top: 50px;
 
   @media (max-width: 767px) {
@@ -174,7 +175,7 @@ function ProductScreen() {
     <StickyContainer>
       <div>
         <CheckoutBar />
-        <Screen>
+        <StyledScreen>
           <Container>
             <MobileHeader>
               <MobileTitle>Buy today</MobileTitle>
@@ -200,7 +201,7 @@ function ProductScreen() {
             </StyledFlex>
             <Features isMobile />
           </Container>
-        </Screen>
+        </StyledScreen>
       </div>
     </StickyContainer>
   );

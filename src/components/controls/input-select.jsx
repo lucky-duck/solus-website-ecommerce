@@ -85,6 +85,7 @@ const Current = styled.label`
 
   &.small {
     padding-left: 10px;
+    font-size: 16px;
   }
 `;
 
