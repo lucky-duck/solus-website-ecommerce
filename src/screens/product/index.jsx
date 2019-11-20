@@ -76,7 +76,7 @@ const ImageContainer = styled.div`
   overflow: hidden;
 
   @media (max-height: 800px) {
-    height: 42vh;
+    //height: 42vh;
   }
 
   @media (max-width: 767px) {

@@ -41,12 +41,11 @@ function Description() {
         .map((v) => {
           return (
             <DescriptionSection key={v.id}>
-              <DescriptionSectionTitle bold small>
+              <DescriptionSectionTitle bold>
                 {v.title}
               </DescriptionSectionTitle>
               <StyledText
                 dangerouslySetInnerHTML={{ __html: v.descriptionDetailed }}
-                small
                 pale
               />
             </DescriptionSection>

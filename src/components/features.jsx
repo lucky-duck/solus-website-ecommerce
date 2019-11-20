@@ -88,9 +88,9 @@ function Item({ title, text, icon: IconComponent }) {
       </ItemIconContainer>
       <ItemContent>
         <ItemTitle>{title}</ItemTitle>
-        <StyledItemText small pale>
-          {text}
-        </StyledItemText>
+        {/*<StyledItemText small pale>*/}
+        {/*  {text}*/}
+        {/*</StyledItemText>*/}
       </ItemContent>
     </StyledItem>
   );
