@@ -110,7 +110,7 @@ const StyledItem = styled.div`
   padding: 8px 15px;
   border: 1px solid $colorPaleGrey;
   border-radius: 4px;
-  height: 86px;
+  min-height: 86px;
   margin-bottom: 15px;
 
   &:last-of-type {
@@ -135,6 +135,7 @@ const ItemTitle = styled.div`
   max-width: 200px;
   line-height: 1;
   margin-bottom: 3px;
+  font-size: 18px;
 `;
 
 const ItemDescription = styled.div`

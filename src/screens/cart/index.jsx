@@ -196,15 +196,15 @@ function Inner({
       // This function captures the funds from the transaction.
       return actions.order.capture().then(async (details) => {
         // This function shows a transaction success message to your buyer.
-        function getPayerName() {
-          const name =
-            details &&
-            details.payer &&
-            details.payer.name &&
-            details.payer.name.given_name;
-
-          return name ? `, ${name}` : '';
-        }
+        // function getPayerName() {
+        //   const name =
+        //     details &&
+        //     details.payer &&
+        //     details.payer.name &&
+        //     details.payer.name.given_name;
+        //
+        //   return name ? `, ${name}` : '';
+        // }
 
         sendDeliveryDetails(selectedProducts, values, discountData);
 
