@@ -45,7 +45,7 @@ export const PRODUCTS = [
   {
     id: 2,
     title: 'Starter Kit',
-    description: 'Heating area: 55m². 35% OFF<br/>M2 x2, M1 x1',
+    description: 'Heating area: 55m². <span style="color: #ff8e4f;">35% OFF!</span><br/>2x M2 & 1x M1',
     descriptionDetailed: null,
     price: 793,
   },

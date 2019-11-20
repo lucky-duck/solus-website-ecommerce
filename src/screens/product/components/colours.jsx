@@ -85,6 +85,9 @@ const HeaderText = styled.div`
 const HeaderTextNumber = styled.span`
   color: #1b1b1b;
   font-weight: 600;
+  font-family: FuturaPTMedium, 'Futura PT', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
 `;
 
 const StyledFakeColours = styled.div`
