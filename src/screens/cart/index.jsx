@@ -13,7 +13,7 @@ import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
-import { COUNTRY_FIELD_NAME } from '../../constants';
+import { COUNTRY_FIELD_NAME, DEFAULT_CURRENCY_CODE } from '../../constants';
 import countries from '../../countries.json';
 import {
   convertSelectedProductsToPlainText,
@@ -208,12 +208,18 @@ function Inner({
 
         sendDeliveryDetails(selectedProducts, values, discountData);
 
+        window.fbq &&
+          window.fbq('track', 'Purchase', {
+            currency: DEFAULT_CURRENCY_CODE,
+            value: totalPrice,
+          });
+
         onResetCart && onResetCart();
 
         navigate(getPath.paymentSuccess());
       });
     },
-    [onResetCart, selectedProducts, values, discountData]
+    [onResetCart, selectedProducts, values, discountData, totalPrice]
   );
 
   useEffect(() => {
