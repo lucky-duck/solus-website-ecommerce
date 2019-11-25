@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo, useEffect } from 'react';
+import React, { useContext, useState, useMemo, useEffect, useRef } from 'react';
 import sortBy from 'lodash/sortBy';
 import range from 'lodash/range';
 import uuid from 'uuid';
@@ -31,6 +31,8 @@ export function ProductsProvider({ children }) {
   const [selectedProductsWithData, setSelectedProductsWithData] = useState([]);
   const [cartSelectedProducts, setCartSelectedProducts] = useState([]);
   const [discountData, setDiscountData] = useState(initialDiscountData);
+  const { handleWhiteSelected } = useProducts();
+  const onWhiteSelectedCallbacks = useRef([]);
 
   const totalPrice = useMemo(() => {
     const total = cartSelectedProducts.reduce(
@@ -152,6 +154,15 @@ export function ProductsProvider({ children }) {
         resetCart,
         setDiscountData,
         discountData,
+        onWhiteSelected: () => {
+          onWhiteSelectedCallbacks.current.forEach((cb) => cb());
+        },
+        addOnWhiteSelectedCallback: (cb) => {
+          onWhiteSelectedCallbacks.current = [
+            ...onWhiteSelectedCallbacks.current,
+            cb,
+          ];
+        },
       }}
     >
       {children}

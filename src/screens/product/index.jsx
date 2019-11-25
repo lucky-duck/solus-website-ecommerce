@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'astroturf';
 import { StickyContainer } from 'react-sticky';
 
@@ -201,8 +201,23 @@ const CAROUSEL_ITEMS = [
   },
 ];
 
+const WHITE_HEATER_INDEX = 3;
+
 function ProductScreen() {
-  const { selectedProducts } = useProducts();
+  const { selectedProducts, addOnWhiteSelectedCallback } = useProducts();
+  const carouselInstance = useRef(null);
+
+  useEffect(() => {
+    addOnWhiteSelectedCallback(() => {
+      carouselInstance.current &&
+        carouselInstance.current.slideTo(WHITE_HEATER_INDEX);
+    });
+    // eslint-disable-next-line
+  }, []);
+
+  function handleCarouselInit(instance) {
+    carouselInstance.current = instance;
+  }
 
   return (
     <StickyContainer>
@@ -218,7 +233,10 @@ function ProductScreen() {
               <ImageArea>
                 <StickyItem>
                   <ImageContainer>
-                    <Carousel items={CAROUSEL_ITEMS} />
+                    <Carousel
+                      items={CAROUSEL_ITEMS}
+                      onInit={handleCarouselInit}
+                    />
                   </ImageContainer>
                   {/*<ImageContainer>*/}
                   {/*  <Image src={productImage} alt={'Product'} />*/}

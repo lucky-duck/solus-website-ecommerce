@@ -54,9 +54,13 @@ const ItemTitle = styled(Text)`
 `;
 
 function Item({ id, title, color, onChange }) {
+  const { onWhiteSelected } = useProducts();
   const isWhite = useMemo(() => color === COLORS.WHITE, [color]);
 
   function handleClick(newColor) {
+    if (newColor === COLORS.WHITE) {
+      onWhiteSelected && onWhiteSelected();
+    }
     onChange && onChange(id, newColor);
   }
 

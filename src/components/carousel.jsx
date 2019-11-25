@@ -28,9 +28,9 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-function Carousel({ items }) {
+function Carousel({ items, ...rest }) {
   return (
-    <ReactSwiper options={SWIPER_OPTIONS}>
+    <ReactSwiper options={SWIPER_OPTIONS} {...rest}>
       {items.map((item, index) => {
         return (
           <ReactSwiper.Item key={index}>

@@ -71,7 +71,14 @@ function Track({ children }) {
   );
 }
 
-function ReactSwiper({ className, children, options = {}, onChange, ...rest }) {
+function ReactSwiper({
+  className,
+  children,
+  options = {},
+  onChange,
+  onInit,
+  ...rest
+}) {
   const containerNode = useRef(null);
   const swiperInstance = useRef(null);
   const nextButtonRef = useRef(null);
@@ -93,6 +100,7 @@ function ReactSwiper({ className, children, options = {}, onChange, ...rest }) {
     });
     swiperInstance.current.on('init', () => {
       onChange && onChange(swiperInstance.current.realIndex);
+      onInit && onInit(swiperInstance.current);
     });
     swiperInstance.current.init();
     swiperInstance.current.on('slideChange', () => {
