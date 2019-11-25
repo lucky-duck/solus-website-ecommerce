@@ -162,7 +162,9 @@ async function sendDeliveryDetails(selectedProducts, values, discountData) {
     const valuesToSend = {
       ...omit(values, [COUNTRY_FIELD_NAME]),
       country: countryData.label,
-      boughtProducts: convertSelectedProductsToPlainText(selectedProducts),
+      boughtProducts: convertSelectedProductsToPlainText(selectedProducts, {
+        plainTextLineBreak: true,
+      }),
       discountPercent: discountData ? discountData.discountPercent : 0,
     };
     await axios({
@@ -306,13 +308,6 @@ function Inner({
                 </Text>
               )}
             </Header>
-            <button
-              onClick={() =>
-                sendDeliveryDetails(selectedProducts, values, discountData)
-              }
-            >
-              Send
-            </button>
             <PaypalButtonContainer disabled={!isValid}>
               <div ref={paypalButtonContainerNode} />
             </PaypalButtonContainer>

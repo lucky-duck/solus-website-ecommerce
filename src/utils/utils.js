@@ -10,7 +10,10 @@ export function formatCurrency(value, { noCurrency } = {}) {
   return `${currencyPart}${value.toFixed(2)}`;
 }
 
-export function convertSelectedProductsToPlainText(selectedProducts) {
+export function convertSelectedProductsToPlainText(
+  selectedProducts,
+  { plainTextLineBreak } = {}
+) {
   const textArray = selectedProducts.map(
     (v, index) =>
       `${index + 1}. ${v.quantity}x ${v.title}, Price: ${formatCurrency(
@@ -18,7 +21,7 @@ export function convertSelectedProductsToPlainText(selectedProducts) {
       )}, Colour: ${v.color && v.color.toLowerCase()} `
   );
 
-  return textArray.join('<br/>');
+  return textArray.join(plainTextLineBreak ? '\n' : '<br/>');
 }
 
 export function removeNodeChildren(node) {
