@@ -206,11 +206,14 @@ const WHITE_HEATER_INDEX = 3;
 function ProductScreen() {
   const { selectedProducts, addOnWhiteSelectedCallback } = useProducts();
   const carouselInstance = useRef(null);
+  const isWhiteSlideShown = useRef(false);
 
   useEffect(() => {
     addOnWhiteSelectedCallback(() => {
-      carouselInstance.current &&
+      !isWhiteSlideShown.current &&
+        carouselInstance.current &&
         carouselInstance.current.slideTo(WHITE_HEATER_INDEX);
+      isWhiteSlideShown.current = true;
     });
     // eslint-disable-next-line
   }, []);
