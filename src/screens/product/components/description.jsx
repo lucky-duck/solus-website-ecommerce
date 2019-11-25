@@ -31,13 +31,6 @@ const StyledText = styled(Text)`
   line-height: 1.5;
 `;
 
-const AccentText = styled.div`
-  composes: ${mixins.fontFamilySansAlt};
-  font-family: FuturaPTBook, 'Futura PT', 'San Francisco Display', -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-`;
-
 function Description() {
   const { allProducts } = useProducts();
 
@@ -57,11 +50,6 @@ function Description() {
             </DescriptionSection>
           );
         })}
-      <DescriptionSection>
-        <Text small accent>
-          <AccentText>FREE SHIPPING WORLDWIDE</AccentText>
-        </Text>
-      </DescriptionSection>
     </StyledSection>
   );
 }

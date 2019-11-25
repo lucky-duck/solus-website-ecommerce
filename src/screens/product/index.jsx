@@ -17,6 +17,8 @@ import carouselImage1 from '../../images/carousel/1.jpg';
 import carouselImage2 from '../../images/carousel/2.jpg';
 import carouselImage3 from '../../images/carousel/3.jpg';
 import carouselImage4 from '../../images/carousel/4.jpg';
+import mixins from '../../styles/mixins';
+import Text from '../../components/ui-kit/text';
 
 const StyledScreen = styled(Screen)`
   padding-top: 50px;
@@ -173,6 +175,17 @@ const MobileSubtitle = styled.h1`
   font-weight: 500;
 `;
 
+const AccentTextContainer = styled.div`
+  margin-bottom: 30px;
+`;
+
+const AccentText = styled.div`
+  composes: ${mixins.fontFamilySansAlt};
+  font-family: FuturaPTBook, 'Futura PT', 'San Francisco Display', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+`;
+
 const CAROUSEL_ITEMS = [
   {
     image: carouselImage1,
@@ -215,6 +228,11 @@ function ProductScreen() {
               </ImageArea>
               <Content>
                 <ProductSelectors />
+                <AccentTextContainer>
+                  <Text small accent>
+                    <AccentText>FREE SHIPPING WORLDWIDE</AccentText>
+                  </Text>
+                </AccentTextContainer>
                 <Description />
                 <FurtherSteps hide={selectedProducts.length > 0}>
                   <Colours />

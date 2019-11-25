@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'astroturf';
 
 import Section from './section';
@@ -54,6 +54,12 @@ const ItemTitle = styled(Text)`
 `;
 
 function Item({ id, title, color, onChange }) {
+  const isWhite = useMemo(() => color === COLORS.WHITE, [color]);
+
+  function handleClick(newColor) {
+    onChange && onChange(id, newColor);
+  }
+
   return (
     <StyledItem jcsb aic>
       <ItemTitle>
@@ -61,13 +67,13 @@ function Item({ id, title, color, onChange }) {
       </ItemTitle>
       <Flex aic>
         <StyledColour
-          active={color === COLORS.BLACK}
-          onClick={() => onChange(id, COLORS.BLACK)}
+          active={!isWhite}
+          onClick={() => handleClick(COLORS.BLACK)}
         />
         <StyledColour
           white
-          active={color === COLORS.WHITE}
-          onClick={() => onChange(id, COLORS.WHITE)}
+          active={isWhite}
+          onClick={() => handleClick(COLORS.WHITE)}
         />
       </Flex>
     </StyledItem>
