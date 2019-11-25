@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'astroturf';
 import { StickyContainer } from 'react-sticky';
 
-import productImage from '../../images/heater-black.png';
 import Container from '../../components/container';
 import Features from '../../components/features';
 import ProductSelectors from './components/product-selectors';
@@ -13,6 +12,11 @@ import Cart from './components/cart';
 import { useProducts } from '../../hooks/use-products';
 import CheckoutBar from '../../components/checkout-bar';
 import Screen from '../../components/screen';
+import Carousel from '../../components/carousel';
+import carouselImage1 from '../../images/carousel/1.jpg';
+import carouselImage2 from '../../images/carousel/2.jpg';
+import carouselImage3 from '../../images/carousel/3.jpg';
+import carouselImage4 from '../../images/carousel/4.jpg';
 
 const StyledScreen = styled(Screen)`
   padding-top: 50px;
@@ -74,10 +78,11 @@ const ImageContainer = styled.div`
   margin-bottom: 30px;
   border-radius: 5px;
   overflow: hidden;
+  will-change: transform;
 
-  @media (max-height: 800px) {
-    //height: 42vh;
-  }
+  //@media (max-height: 800px) {
+  //height: 42vh;
+  //}
 
   @media (max-width: 767px) {
     height: 100vw;
@@ -85,12 +90,12 @@ const ImageContainer = styled.div`
   }
 `;
 
-const Image = styled.img`
-  display: block;
-  max-width: 100%;
-  height: auto;
-  max-height: 80%;
-`;
+// const Image = styled.img`
+//   display: block;
+//   max-width: 100%;
+//   height: auto;
+//   max-height: 80%;
+// `;
 
 const Content = styled.div`
   flex: 1 0 auto;
@@ -113,9 +118,9 @@ const FurtherSteps = styled.div`
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -10px;
     bottom: 0;
-    left: 0;
+    left: -10px;
     background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0) 0%,
@@ -168,6 +173,21 @@ const MobileSubtitle = styled.h1`
   font-weight: 500;
 `;
 
+const CAROUSEL_ITEMS = [
+  {
+    image: carouselImage1,
+  },
+  {
+    image: carouselImage2,
+  },
+  {
+    image: carouselImage3,
+  },
+  {
+    image: carouselImage4,
+  },
+];
+
 function ProductScreen() {
   const { selectedProducts } = useProducts();
 
@@ -185,8 +205,11 @@ function ProductScreen() {
               <ImageArea>
                 <StickyItem>
                   <ImageContainer>
-                    <Image src={productImage} alt={'Product'} />
+                    <Carousel items={CAROUSEL_ITEMS} />
                   </ImageContainer>
+                  {/*<ImageContainer>*/}
+                  {/*  <Image src={productImage} alt={'Product'} />*/}
+                  {/*</ImageContainer>*/}
                   <Features />
                 </StickyItem>
               </ImageArea>

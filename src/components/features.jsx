@@ -76,9 +76,9 @@ const ItemTitle = styled.div`
   }
 `;
 
-const StyledItemText = styled(Text)`
-  line-height: 1.5;
-`;
+// const StyledItemText = styled(Text)`
+//   line-height: 1.5;
+// `;
 
 function Item({ title, text, icon: IconComponent }) {
   return (
