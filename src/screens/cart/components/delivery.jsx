@@ -31,13 +31,26 @@ function Delivery() {
       <DeliveryInputs>
         <DeliveryInputSection>
           <Field
+            name={'first_name'}
+            label={'First Name'}
+            placeholder={'Your first name here'}
+            component={InputText}
+            mb
+          />
+          <Field
+            name={'last_name'}
+            label={'Last Name'}
+            placeholder={'Your last name here'}
+            component={InputText}
+            mb
+          />
+          <Field
             name={'email'}
             label={'Email'}
             placeholder={'Your email address here'}
             component={InputText}
+            mb
           />
-        </DeliveryInputSection>
-        <DeliveryInputSection>
           <Field
             name={'phone_number'}
             label={'Phone Number'}

@@ -87,6 +87,8 @@ const PaypalButtonContainer = styled.div`
 `;
 
 const initialValues = {
+  first_name: '',
+  last_name: '',
   email: '',
   phone_number: '',
   address1: '',
@@ -96,6 +98,12 @@ const initialValues = {
 };
 
 const validationSchema = Yup.object().shape({
+  first_name: Yup.string()
+    .min(2)
+    .required(),
+  last_name: Yup.string()
+    .min(2)
+    .required(),
   email: Yup.string()
     .email()
     .required(),
@@ -153,7 +161,12 @@ function CartScreen() {
   );
 }
 
-async function sendDeliveryDetails(selectedProducts, values, discountData) {
+async function sendDeliveryDetails(
+  selectedProducts,
+  values,
+  discountData,
+  paypalDetails
+) {
   try {
     console.warn('Sending delivery information', JSON.stringify(values));
     const countryData = countries.filter(
@@ -161,6 +174,7 @@ async function sendDeliveryDetails(selectedProducts, values, discountData) {
     )[0];
     const valuesToSend = {
       ...omit(values, [COUNTRY_FIELD_NAME]),
+      transactionId: paypalDetails.id,
       country: countryData.label,
       boughtProducts: convertSelectedProductsToPlainText(selectedProducts, {
         plainTextLineBreak: true,
@@ -208,7 +222,7 @@ function Inner({
         //   return name ? `, ${name}` : '';
         // }
 
-        sendDeliveryDetails(selectedProducts, values, discountData);
+        sendDeliveryDetails(selectedProducts, values, discountData, details);
 
         window.fbq &&
           window.fbq('track', 'Purchase', {
@@ -234,7 +248,7 @@ function Inner({
     paypalButtonsComponent.current = window.paypal.Buttons({
       style: {
         layout: 'vertical',
-        label: 'pay'
+        label: 'pay',
       },
       createOrder: function(data, actions) {
         // This function sets up the details of the transaction, including the amount and line item details.

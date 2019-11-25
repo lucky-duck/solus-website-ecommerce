@@ -58,6 +58,7 @@ const StickyItem = styled.div`
 
   @media (max-width: 767px) {
     position: static;
+    padding-bottom: 0;
   }
 
   @media (max-height: 700px) {
@@ -177,6 +178,10 @@ const MobileSubtitle = styled.h1`
 
 const AccentTextContainer = styled.div`
   margin-bottom: 30px;
+
+  @media (max-width: 767px) {
+    margin-bottom: 50px;
+  }
 `;
 
 const AccentText = styled.div`
@@ -185,6 +190,17 @@ const AccentText = styled.div`
     BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 `;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+  }
+`;
+
+const FlexContainerRow = styled.div``;
 
 const CAROUSEL_ITEMS = [
   {
@@ -248,13 +264,19 @@ function ProductScreen() {
                 </StickyItem>
               </ImageArea>
               <Content>
-                <ProductSelectors />
-                <AccentTextContainer>
-                  <Text small accent>
-                    <AccentText>FREE SHIPPING WORLDWIDE</AccentText>
-                  </Text>
-                </AccentTextContainer>
-                <Description />
+                <FlexContainer>
+                  <FlexContainerRow>
+                    <ProductSelectors />
+                    <AccentTextContainer>
+                      <Text small accent>
+                        <AccentText>FREE SHIPPING WORLDWIDE</AccentText>
+                      </Text>
+                    </AccentTextContainer>
+                  </FlexContainerRow>
+                  <FlexContainerRow>
+                    <Description />
+                  </FlexContainerRow>
+                </FlexContainer>
                 <FurtherSteps hide={selectedProducts.length > 0}>
                   <Colours />
                   <Cart />
