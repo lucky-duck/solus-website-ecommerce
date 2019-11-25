@@ -7,9 +7,9 @@ const SWIPER_OPTIONS = {
   slidesPerView: 1,
   speed: 1000,
   loop: true,
-  // autoplay: {
-  //   speed: 5000,
-  // },
+  autoplay: {
+    speed: 5000,
+  },
   // breakpoints: {
   //   [BREAKPOINT_MD]: {
   //     spaceBetween: 40,
