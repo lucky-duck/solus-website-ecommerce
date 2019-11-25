@@ -71,7 +71,7 @@ function Item({ title, description, quantity, price, color, onRemove }) {
         <ItemLeft>
           <ProductPreview white={isWhite} />
           <Content>
-            <Title al bold>
+            <Title bold>
               <Text as={'span'} pale>
                 {quantity}x
               </Text>{' '}

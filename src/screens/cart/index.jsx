@@ -306,6 +306,13 @@ function Inner({
                 </Text>
               )}
             </Header>
+            <button
+              onClick={() =>
+                sendDeliveryDetails(selectedProducts, values, discountData)
+              }
+            >
+              Send
+            </button>
             <PaypalButtonContainer disabled={!isValid}>
               <div ref={paypalButtonContainerNode} />
             </PaypalButtonContainer>

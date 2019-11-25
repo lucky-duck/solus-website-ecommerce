@@ -5,7 +5,6 @@ import { ReactComponent as IconPlug } from '../images/svg/icon-plug.svg';
 import { ReactComponent as IconSmartHome } from '../images/svg/icon-smart-home.svg';
 import { ReactComponent as IconTools } from '../images/svg/icon-tools.svg';
 import { ReactComponent as IconSeed } from '../images/svg/icon-seed.svg';
-import Text from './ui-kit/text';
 
 const StyledFeatures = styled.div`
   display: flex;

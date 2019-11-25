@@ -35,6 +35,7 @@ function ReactSwiper({ className, children, options = {}, onChange, ...rest }) {
 
   useEffect(() => {
     initSwiper();
+    // eslint-disable-next-line
   }, []);
 
   function initSwiper() {
