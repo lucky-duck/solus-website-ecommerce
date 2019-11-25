@@ -10,6 +10,7 @@ const SWIPER_OPTIONS = {
   autoplay: {
     speed: 5000,
   },
+  grabCursor: true,
   // breakpoints: {
   //   [BREAKPOINT_MD]: {
   //     spaceBetween: 40,
