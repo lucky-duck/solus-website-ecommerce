@@ -89,7 +89,7 @@ function Item({ title, description, quantity, price, color, onRemove }) {
           <ColourContainer>
             <StyledColour small white={isWhite} />
             <Text extraSmall pale>
-              White
+              {isWhite ? 'White' : 'Black'}
             </Text>
           </ColourContainer>
         </div>
