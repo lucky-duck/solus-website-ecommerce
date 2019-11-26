@@ -23,7 +23,7 @@ import DiscountCode from './components/discount-code';
 import Screen from '../../components/screen';
 
 const ZAPIER_WEBHOOK_URL =
-  'https://hooks.zapier.com/hooks/catch/3614782/o48nwdq/';
+  'https://hooks.zapier.com/hooks/catch/6164333/o62kq63/';
 
 const Section = styled.section`
   margin-bottom: 80px;
