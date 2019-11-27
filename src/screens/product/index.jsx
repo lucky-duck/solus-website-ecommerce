@@ -153,29 +153,42 @@ const FurtherSteps = styled.div`
   }
 `;
 
-const MobileHeader = styled.div`
-  display: none;
+const Header = styled.div`
   text-align: center;
-  margin-bottom: 36px;
+  margin-bottom: 60px;
 
   @media (max-width: 767px) {
-    display: block;
+    margin-bottom: 36px;
   }
 `;
 
-const MobileTitle = styled.h2`
+const Title = styled.h2`
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 12px;
   font-weight: 500;
-  margin-bottom: 8px;
+  font-size: 14px;
+  margin-bottom: 4px;
+
+  @media (max-width: 767px) {
+    font-size: 12px;
+  }
 `;
 
-const MobileSubtitle = styled.h1`
+const Subtitle = styled.h1`
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 28px;
   font-weight: 500;
+  font-size: 48px;
+  margin-bottom: 5px;
+
+  @media (max-width: 767px) {
+    font-size: 28px;
+  }
+`;
+
+const HeaderText = styled.div`
+  font-size: 18px;
+  font-weight: 300;
 `;
 
 const AccentTextContainer = styled.div`
@@ -253,10 +266,13 @@ function ProductScreen() {
         <CheckoutBar />
         <StyledScreen>
           <Container>
-            <MobileHeader>
-              <MobileTitle>Buy today</MobileTitle>
-              <MobileSubtitle>Get your SOLUS+</MobileSubtitle>
-            </MobileHeader>
+            <Header>
+              <Title>Buy today</Title>
+              <Subtitle>Select your SOLUS+</Subtitle>
+              <HeaderText>
+                Choose the model and finish that best suits your home.
+              </HeaderText>
+            </Header>
             <StyledFlex posr jcsb>
               <ImageArea>
                 <StickyItem>
