@@ -27,6 +27,7 @@ const StyledItem = styled(Flex)`
 
   &:last-of-type {
     border-bottom: none;
+    padding-bottom: 0;
   }
 
   @media (max-width: 767px) {
@@ -116,12 +117,12 @@ function Colours() {
   const { selectedProducts, changeProductColor } = useProducts();
 
   return (
-    <Section>
+    <Section borders>
       <Header aic jcsb>
         <Section.Title>Select Colour</Section.Title>
         <HeaderText>
           For the <HeaderTextNumber>{selectedProducts.length}</HeaderTextNumber>{' '}
-          selected items
+          selected item{selectedProducts.length > 1 && 's'}
         </HeaderText>
       </Header>
       <div>

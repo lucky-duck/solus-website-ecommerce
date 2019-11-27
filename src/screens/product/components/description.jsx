@@ -4,10 +4,8 @@ import styled from 'astroturf';
 import Section from './section';
 import Text from '../../../components/ui-kit/text';
 import { useProducts } from '../../../hooks/use-products';
-import mixins from '../../../styles/mixins';
 
 const StyledSection = styled(Section)`
-  border-bottom: 1px solid #dadada;
   padding-bottom: 27px;
 `;
 

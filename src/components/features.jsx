@@ -9,6 +9,9 @@ import { ReactComponent as IconSeed } from '../images/svg/icon-seed.svg';
 const StyledFeatures = styled.div`
   display: flex;
   flex-wrap: wrap;
+  max-width: 410px;
+  margin-left: auto;
+  margin-right: auto;
 
   &.isMobile {
     display: none;
@@ -29,6 +32,7 @@ const StyledFeatures = styled.div`
 
 const StyledItem = styled.div`
   display: flex;
+  align-items: center;
   width: 50%;
   margin-bottom: 20px;
 
@@ -67,12 +71,7 @@ const ItemTitle = styled.div`
   font-size: 13px;
   text-transform: uppercase;
   font-weight: 500;
-  margin-bottom: 5px;
   letter-spacing: 0.12em;
-
-  @media (max-width: 767px) {
-    margin-bottom: 4px;
-  }
 `;
 
 // const StyledItemText = styled(Text)`
@@ -104,11 +103,6 @@ function Features({ isMobile }) {
         icon={IconPlug}
       />
       <Item
-        title={'Cost efficient infrared'}
-        text={'Up to 30% more cost efficient than convection electric heaters.'}
-        icon={IconSeed}
-      />
-      <Item
         title={'Maintenance free'}
         text={
           'Our heaters are maintenance free and their function is constantly being upgraded through software. A heater that improves over time.'
@@ -121,6 +115,11 @@ function Features({ isMobile }) {
           'Control your heating from your phone. Reduce heating costs by up to 31% with smart home features.'
         }
         icon={IconSmartHome}
+      />
+      <Item
+        title={'Cost efficient'}
+        text={'Up to 30% more cost efficient than convection electric heaters.'}
+        icon={IconSeed}
       />
     </StyledFeatures>
   );

@@ -21,6 +21,7 @@ import mixins from '../../styles/mixins';
 import Text from '../../components/ui-kit/text';
 import { facebookTrackEvent } from '../../utils/utils';
 import { PRODUCTS } from '../../constants';
+import FreeShippingMsg from '../../components/free-shipping-msg';
 
 const StyledScreen = styled(Screen)`
   padding-top: 50px;
@@ -80,7 +81,7 @@ const ImageContainer = styled.div`
     rgba(214, 223, 239, 0.25) 35.55%,
     rgba(123, 146, 179, 0.25) 111.64%
   );
-  margin-bottom: 30px;
+  margin-bottom: 17px;
   border-radius: 5px;
   overflow: hidden;
   will-change: transform;
@@ -91,7 +92,6 @@ const ImageContainer = styled.div`
 
   @media (max-width: 767px) {
     height: 100vw;
-    margin-bottom: 0;
   }
 `;
 
@@ -101,6 +101,32 @@ const ImageContainer = styled.div`
 //   height: auto;
 //   max-height: 80%;
 // `;
+
+const ImageCaption = styled.div`
+  position: relative;
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 18px;
+  margin-bottom: 15px;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1px;
+    background-color: #dadada;
+  }
+`;
+
+const ImageCaptionHighlight = styled.span`
+  color: #949494;
+`;
 
 const Content = styled.div`
   flex: 1 0 auto;
@@ -192,18 +218,11 @@ const HeaderText = styled.div`
 `;
 
 const AccentTextContainer = styled.div`
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 
   @media (max-width: 767px) {
     margin-bottom: 50px;
   }
-`;
-
-const AccentText = styled.div`
-  composes: ${mixins.fontFamilySansAlt};
-  font-family: FuturaPTBook, 'Futura PT', 'San Francisco Display', -apple-system,
-    BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 `;
 
 const FlexContainer = styled.div`
@@ -268,7 +287,7 @@ function ProductScreen() {
           <Container>
             <Header>
               <Title>Buy today</Title>
-              <Subtitle>Select your SOLUS+</Subtitle>
+              <Subtitle>Choose product.</Subtitle>
               <HeaderText>
                 Choose the model and finish that best suits your home.
               </HeaderText>
@@ -282,9 +301,12 @@ function ProductScreen() {
                       onInit={handleCarouselInit}
                     />
                   </ImageContainer>
-                  {/*<ImageContainer>*/}
-                  {/*  <Image src={productImage} alt={'Product'} />*/}
-                  {/*</ImageContainer>*/}
+                  <ImageCaption>
+                    SOLUS+{' '}
+                    <ImageCaptionHighlight>
+                      White or Black
+                    </ImageCaptionHighlight>
+                  </ImageCaption>
                   <Features />
                 </StickyItem>
               </ImageArea>
@@ -292,14 +314,12 @@ function ProductScreen() {
                 <FlexContainer>
                   <FlexContainerRow>
                     <ProductSelectors />
-                    <AccentTextContainer>
-                      <Text small accent>
-                        <AccentText>FREE SHIPPING WORLDWIDE</AccentText>
-                      </Text>
-                    </AccentTextContainer>
                   </FlexContainerRow>
                   <FlexContainerRow>
                     <Description />
+                    <AccentTextContainer>
+                      <FreeShippingMsg />
+                    </AccentTextContainer>
                   </FlexContainerRow>
                 </FlexContainer>
                 <FurtherSteps hide={selectedProducts.length > 0}>

@@ -35,7 +35,7 @@ function ProductCart() {
   const { selectedProducts } = useProducts();
 
   return (
-    <Section>
+    <Section noBorder>
       {selectedProducts.length > 0 && (
         <Header>
           <StyledTitle>Your Cart</StyledTitle>

@@ -9,7 +9,7 @@ export const DropdownWrapper = styled.div`
   width: 100%;
   z-index: 10;
   //visibility: hidden;
-  max-height: 380px;
+  max-height: 230px;
   overflow-y: auto;
   border: 1px solid #c6c7ca;
   user-select: none;
@@ -19,6 +19,7 @@ export const DropdownWrapper = styled.div`
   //transform-origin: center top;
   //opacity: 0;
   //will-change: transform;
+  border-radius: 4px;
   display: none;
 
   &.opened {
@@ -35,7 +36,6 @@ export const Dropdown = styled.ul`
   //transition-duration: 0.15s;
   //transition-timing-function: ease-out;
   //transform-origin: center top;
-  border-radius: 4px;
   background-color: #fff;
   //transform: translateY(-100%);
   //will-change: transform;

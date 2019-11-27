@@ -31,7 +31,6 @@ export function ProductsProvider({ children }) {
   const [selectedProductsWithData, setSelectedProductsWithData] = useState([]);
   const [cartSelectedProducts, setCartSelectedProducts] = useState([]);
   const [discountData, setDiscountData] = useState(initialDiscountData);
-  const { handleWhiteSelected } = useProducts();
   const onWhiteSelectedCallbacks = useRef([]);
 
   const totalPrice = useMemo(() => {

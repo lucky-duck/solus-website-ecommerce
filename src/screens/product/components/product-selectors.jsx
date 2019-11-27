@@ -107,8 +107,8 @@ const StyledItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 15px;
-  border: 1px solid $colorPaleGrey;
+  padding: 16px 15px;
+  border: 2px solid #d6dfef;
   border-radius: 4px;
   min-height: 86px;
   margin-bottom: 15px;
@@ -135,7 +135,7 @@ const ItemTitle = styled.div`
   max-width: 200px;
   line-height: 1;
   margin-bottom: 3px;
-  font-size: 18px;
+  font-size: 24px;
 `;
 
 const ItemDescription = styled.div`
@@ -143,7 +143,7 @@ const ItemDescription = styled.div`
 
   composes: ${mixins.fontFamilySansAlt};
   color: $colorPaleGrey;
-  font-size: 14px;
+  font-size: 17px;
 `;
 
 const ItemRight = styled.div`
@@ -152,15 +152,10 @@ const ItemRight = styled.div`
 `;
 
 const ItemPrice = styled(Text)`
-  @import '../../../styles/colors.scss';
-
   text-align: right;
   padding-left: 25px;
   min-width: 100px;
-
-  &.active {
-    color: $colorBlack;
-  }
+  font-size: 26px;
 
   @media (max-width: 374px) {
     padding-left: 12px;
@@ -197,8 +192,9 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
           placeholder={'0'}
           altArrowButton
           small
+          altStyling
         />
-        <ItemPrice pale big active={rest.active}>
+        <ItemPrice bold>
           {formatCurrency(price)}
         </ItemPrice>
       </ItemRight>

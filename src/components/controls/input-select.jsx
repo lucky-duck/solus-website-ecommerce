@@ -87,6 +87,10 @@ const Current = styled.label`
     padding-left: 10px;
     font-size: 16px;
   }
+
+  &.altStyling {
+    border-color: #e0e0e0;
+  }
 `;
 
 const Input = styled.input`
@@ -141,6 +145,7 @@ const InnerComponent = (
     placeholder,
     name,
     className,
+    altStyling,
     ...rest
   },
   ref
@@ -212,6 +217,7 @@ const InnerComponent = (
         altArrowButton={altArrowButton}
         small={small}
         nonactive={nonactive}
+        altStyling={altStyling}
       >
         {renderCurrent()}
         <StyledChevronDown altArrowButton={altArrowButton} />
