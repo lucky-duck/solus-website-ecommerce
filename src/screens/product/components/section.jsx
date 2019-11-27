@@ -12,6 +12,7 @@ const StyledSection = styled.section`
 
   &.noBorder {
     border-bottom: none;
+    padding-bottom: 0;
   }
 `;
 
@@ -21,7 +22,7 @@ function Section(props) {
 
 const SectionTitle = styled.h2`
   font-weight: 500;
-  font-size: 22px;
+  font-size: 30px;
 `;
 
 Section.Title = SectionTitle;

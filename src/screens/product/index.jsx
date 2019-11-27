@@ -287,7 +287,7 @@ function ProductScreen() {
           <Container>
             <Header>
               <Title>Buy today</Title>
-              <Subtitle>Choose product.</Subtitle>
+              <Subtitle>Select your SOLUS+</Subtitle>
               <HeaderText>
                 Choose the model and finish that best suits your home.
               </HeaderText>

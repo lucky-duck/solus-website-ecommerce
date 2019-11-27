@@ -98,7 +98,7 @@ const OPTIONS = [
 const StyledProductSelectors = styled.div``;
 
 const Header = styled.header`
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 const StyledItem = styled.div`
@@ -224,9 +224,9 @@ function ProductSelectors() {
   }, [cartSelectedProducts]);
 
   return (
-    <Section>
+    <Section noBorder>
       <Header>
-        <Section.Title>Select your SOLUS+</Section.Title>
+        <Section.Title>Choose product.</Section.Title>
         {/*<Link href={'/'} extraSmall>*/}
         {/*  How many heaters do I need?*/}
         {/*</Link>*/}
