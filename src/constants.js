@@ -18,6 +18,7 @@ export const PRODUCTS = [
     id: 0,
     title: 'M1',
     description: 'Heating area: 15m²',
+    descriptionDetailedTitle: 'M1 450W Heater',
     descriptionDetailed: `
       Heating area: 15m²<br/>
       Rated Input: 450W<br/>
@@ -31,6 +32,7 @@ export const PRODUCTS = [
     id: 1,
     title: 'M2',
     description: 'Heating area: 20m²',
+    descriptionDetailedTitle: 'M2 800W Heater',
     descriptionDetailed: `
       Heating area: 20m²<br/>
       Rated Input: 800W<br/>
@@ -45,7 +47,9 @@ export const PRODUCTS = [
   {
     id: 2,
     title: 'Starter Kit',
-    description: 'Heating area: 55m².<br/><span style="color: #ff8e4f;">28% OFF!</span><br/>2x M2 & 1x M1',
+    description:
+      'Heating area: 55m².<br/><span style="color: #ff8e4f;">28% OFF!</span><br/>2x M2 & 1x M1',
+    descriptionDetailedTitle: null,
     descriptionDetailed: null,
     price: 880,
   },
