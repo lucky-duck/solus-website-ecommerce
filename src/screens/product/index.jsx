@@ -19,6 +19,8 @@ import carouselImage3 from '../../images/carousel/3.jpg';
 import carouselImage4 from '../../images/carousel/4.jpg';
 import mixins from '../../styles/mixins';
 import Text from '../../components/ui-kit/text';
+import { facebookTrackEvent } from '../../utils/utils';
+import { PRODUCTS } from '../../constants';
 
 const StyledScreen = styled(Screen)`
   padding-top: 50px;
@@ -232,6 +234,13 @@ function ProductScreen() {
       isWhiteSlideShown.current = true;
     });
     // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    facebookTrackEvent('ViewContent', {
+      content_type: 'product_group',
+      content_ids: `[${PRODUCTS.map((v) => v.id).join(',')}]`,
+    });
   }, []);
 
   function handleCarouselInit(instance) {

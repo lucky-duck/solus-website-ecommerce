@@ -29,3 +29,12 @@ export function removeNodeChildren(node) {
     node.removeChild(node.firstChild);
   }
 }
+
+export function facebookTrackEvent(name, options) {
+  if (!window.fbq) {
+    console.error('Cannot cal Facebook event');
+    return;
+  }
+
+  window.fbq('track', name, options);
+}

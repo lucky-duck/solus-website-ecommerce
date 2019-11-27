@@ -17,6 +17,7 @@ import { COUNTRY_FIELD_NAME, DEFAULT_CURRENCY_CODE } from '../../constants';
 import countries from '../../countries.json';
 import {
   convertSelectedProductsToPlainText,
+  facebookTrackEvent,
   removeNodeChildren,
 } from '../../utils/utils';
 import DiscountCode from './components/discount-code';
@@ -224,11 +225,12 @@ function Inner({
 
         sendDeliveryDetails(selectedProducts, values, discountData, details);
 
-        window.fbq &&
-          window.fbq('track', 'Purchase', {
-            currency: DEFAULT_CURRENCY_CODE,
-            value: totalPrice,
-          });
+        facebookTrackEvent('Purchase', {
+          content_type: 'product_group',
+          content_ids: `[${selectedProducts.map((v) => v.id).join(',')}]`,
+          currency: DEFAULT_CURRENCY_CODE,
+          value: totalPrice,
+        });
 
         onResetCart && onResetCart();
 
@@ -292,6 +294,13 @@ function Inner({
       onApprove: handleApprove,
     });
   }, [values, selectedProducts, handleApprove]);
+
+  useEffect(() => {
+    facebookTrackEvent('AddToCart', {
+      content_type: 'product_group',
+      content_ids: `[${selectedProducts.map((v) => v.id).join(',')}]`,
+    });
+  }, [selectedProducts]);
 
   return (
     <Screen>
