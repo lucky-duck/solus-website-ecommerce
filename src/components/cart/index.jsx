@@ -14,7 +14,7 @@ const Items = styled.div`
   margin-bottom: 80px;
 
   &.altStyling {
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
 `;
 
@@ -29,7 +29,13 @@ const SubtotalLine = styled.div`
   margin-bottom: 10px;
 `;
 
-const Price = styled(Text)``;
+const Price = styled(Text)`
+  font-size: 26px;
+
+  @media (max-width: 991px) {
+    font-size: 22px;
+  }
+`;
 
 function Cart({ altStyling }) {
   const {
@@ -64,7 +70,7 @@ function Cart({ altStyling }) {
         </Flex>
         <SubtotalLine />
         <Flex aic jcsb>
-          <Price big>{formatCurrency(totalPrice)}</Price>
+          <Price>{formatCurrency(totalPrice)}</Price>
           {/*<Text extraSmall pale>*/}
           {/*  Includes VAT of approx. {formatCurrency(40)}**/}
           {/*</Text>*/}

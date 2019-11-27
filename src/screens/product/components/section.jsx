@@ -23,6 +23,10 @@ function Section(props) {
 const SectionTitle = styled.h2`
   font-weight: 500;
   font-size: 30px;
+
+  @media (max-width: 767px) {
+    font-size: 26px;
+  }
 `;
 
 Section.Title = SectionTitle;

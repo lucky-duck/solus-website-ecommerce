@@ -23,6 +23,10 @@ const Header = styled.div`
 
 const DescriptionSectionTitle = styled(Text)`
   font-size: 20px;
+
+  @media (max-width: 991px) {
+    font-size: 18px;
+  }
 `;
 
 const TextContainer = styled(motion.div)``;

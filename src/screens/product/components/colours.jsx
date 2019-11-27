@@ -117,7 +117,7 @@ function Colours() {
   const { selectedProducts, changeProductColor } = useProducts();
 
   return (
-    <Section borders>
+    <Section>
       <Header aic jcsb>
         <Section.Title>Select Colour</Section.Title>
         <HeaderText>

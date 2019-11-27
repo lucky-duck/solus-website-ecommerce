@@ -136,6 +136,10 @@ const ItemTitle = styled.div`
   line-height: 1;
   margin-bottom: 3px;
   font-size: 24px;
+
+  @media (max-width: 991px) {
+    font-size: 20px;
+  }
 `;
 
 const ItemDescription = styled.div`
@@ -194,9 +198,7 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
           small
           altStyling
         />
-        <ItemPrice bold>
-          {formatCurrency(price)}
-        </ItemPrice>
+        <ItemPrice bold>{formatCurrency(price)}</ItemPrice>
       </ItemRight>
     </StyledItem>
   );

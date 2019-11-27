@@ -39,13 +39,7 @@ const Text = styled.div`
 
   @media (max-width: 767px) {
     &.big {
-      font-size: 24px;
-    }
-  }
-
-  @media (max-width: 374px) {
-    &.big {
-      font-size: 20px;
+      font-size: 26px;
     }
   }
 `;
