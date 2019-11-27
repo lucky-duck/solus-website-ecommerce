@@ -30,7 +30,15 @@ export function removeNodeChildren(node) {
   }
 }
 
+export function envIsProduction() {
+  return process.env.NODE_ENV === 'production';
+}
+
 export function facebookTrackEvent(name, options) {
+  if (!envIsProduction()) {
+    return;
+  }
+
   if (!window.fbq) {
     console.error('Cannot cal Facebook event');
     return;

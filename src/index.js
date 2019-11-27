@@ -7,8 +7,9 @@ import LogRocket from 'logrocket';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { envIsProduction } from './utils/utils';
 
-if (process.env.NODE_ENV === 'production') {
+if (envIsProduction()) {
   LogRocket.init('1aby2t/solus');
 }
 
