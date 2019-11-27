@@ -238,7 +238,7 @@ function ProductScreen() {
 
   useEffect(() => {
     facebookTrackEvent('ViewContent', {
-      content_type: 'product_group',
+      content_type: 'products',
       content_ids: `[${PRODUCTS.map((v) => v.id).join(',')}]`,
     });
   }, []);

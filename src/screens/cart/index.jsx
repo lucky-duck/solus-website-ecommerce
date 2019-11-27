@@ -226,7 +226,7 @@ function Inner({
         sendDeliveryDetails(selectedProducts, values, discountData, details);
 
         facebookTrackEvent('Purchase', {
-          content_type: 'product_group',
+          content_type: 'products',
           content_ids: `[${selectedProducts.map((v) => v.id).join(',')}]`,
           currency: DEFAULT_CURRENCY_CODE,
           value: totalPrice,
@@ -297,7 +297,7 @@ function Inner({
 
   useEffect(() => {
     facebookTrackEvent('AddToCart', {
-      content_type: 'product_group',
+      content_type: 'products',
       content_ids: `[${selectedProducts.map((v) => v.id).join(',')}]`,
     });
   }, [selectedProducts]);
