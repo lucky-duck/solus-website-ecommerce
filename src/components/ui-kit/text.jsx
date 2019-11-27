@@ -18,7 +18,7 @@ const Text = styled.div`
   }
 
   &.big {
-    font-size: 22px;
+    font-size: 30px;
   }
 
   &.pale {
@@ -32,20 +32,20 @@ const Text = styled.div`
   &.danger {
     color: $colorDanger;
   }
-  
+
   &.accent {
     color: $colorPrimary;
   }
 
   @media (max-width: 767px) {
     &.big {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 
   @media (max-width: 374px) {
     &.big {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 `;

@@ -11,7 +11,7 @@ import { formatCurrency } from '../../utils/utils';
 const StyledCart = styled.div``;
 
 const Items = styled.div`
-  margin-bottom: 50px;
+  margin-bottom: 80px;
 
   &.altStyling {
     margin-bottom: 10px;

@@ -225,12 +225,18 @@ function Inner({
 
         sendDeliveryDetails(selectedProducts, values, discountData, details);
 
-        facebookTrackEvent('Purchase', {
-          content_type: 'products',
-          content_ids: `[${selectedProducts.map((v) => v.id).join(',')}]`,
+        const options = {
+          content_type: 'product',
+          content_ids: `[${selectedProducts
+            .map((v) => v.productId)
+            .join(',')}]`,
           currency: DEFAULT_CURRENCY_CODE,
           value: totalPrice,
-        });
+        };
+
+        console.log('options', options);
+
+        facebookTrackEvent('Purchase', options);
 
         onResetCart && onResetCart();
 
@@ -296,11 +302,19 @@ function Inner({
   }, [values, selectedProducts, handleApprove]);
 
   useEffect(() => {
-    facebookTrackEvent('AddToCart', {
-      content_type: 'products',
-      content_ids: `[${selectedProducts.map((v) => v.id).join(',')}]`,
-    });
-  }, [selectedProducts]);
+    if (!selectedProducts.length || !totalPrice) {
+      return;
+    }
+
+    const options = {
+      content_type: 'product',
+      content_ids: `[${selectedProducts.map((v) => v.productId).join(',')}]`,
+      currency: DEFAULT_CURRENCY_CODE,
+      value: totalPrice,
+    };
+
+    facebookTrackEvent('AddToCart', options);
+  }, [totalPrice, selectedProducts]);
 
   return (
     <Screen>

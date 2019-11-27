@@ -18,11 +18,11 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 8px;
 `;
 
 const DescriptionSectionTitle = styled(Text)`
   font-size: 20px;
-  margin-bottom: 5px;
 `;
 
 const TextContainer = styled(motion.div)``;

@@ -16,6 +16,7 @@ const StyledItem = styled.div`
 
   &:last-of-type {
     margin-bottom: 0;
+    padding-bottom: 0;
     border-bottom: none;
   }
 `;
@@ -24,7 +25,7 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 `;
 
 const ItemLeft = styled.div`
