@@ -157,7 +157,11 @@ const ItemPrice = styled(Text)`
   text-align: right;
   padding-left: 25px;
   min-width: 100px;
-  font-size: 26px;
+  font-size: 26px !important;
+
+  @media (max-width: 991px) {
+    font-size: 22px !important;
+  }
 
   @media (max-width: 374px) {
     padding-left: 12px;

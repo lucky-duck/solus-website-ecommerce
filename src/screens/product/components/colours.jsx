@@ -90,7 +90,7 @@ const HeaderText = styled.div`
   composes: ${mixins.fontFamilySansAlt};
 
   color: $colorPaleGrey;
-  font-size: 13px;
+  font-size: 16px;
 `;
 
 const HeaderTextNumber = styled.span`

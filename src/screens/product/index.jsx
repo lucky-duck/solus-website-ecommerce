@@ -102,9 +102,8 @@ const ImageContainer = styled.div`
 //   max-height: 80%;
 // `;
 
-const ImageCaption = styled.div`
+const ImageCaption = styled(Text)`
   position: relative;
-  font-size: 14px;
   text-align: center;
   padding-bottom: 18px;
   margin-bottom: 15px;
@@ -293,8 +292,8 @@ function ProductScreen() {
                       onInit={handleCarouselInit}
                     />
                   </ImageContainer>
-                  <ImageCaption>
-                    SOLUS+{' '}
+                  <ImageCaption small>
+                    <Text as={'span'} small bold>SOLUS+</Text>{' '}
                     <ImageCaptionHighlight>
                       White or Black
                     </ImageCaptionHighlight>

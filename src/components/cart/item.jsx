@@ -37,15 +37,19 @@ const ItemLeft = styled.div`
 const Content = styled.div``;
 
 const Title = styled(Text)`
-  margin-bottom: 4px;
+  font-size: 20px;
+`;
+
+const Description = styled(Text)`
+  font-size: 17px;
 `;
 
 const Price = styled(Text)`
   margin-bottom: 20px;
-  font-size: 26px;
+  font-size: 26px !important;
 
   @media (max-width: 991px) {
-    font-size: 22px;
+    font-size: 22px !important;
   }
 `;
 
@@ -68,6 +72,10 @@ const StyledColour = styled(Colour)`
 //   margin: 0 10px;
 // `;
 
+const StyledLink = styled(Link)`
+  font-size: 15px;
+`;
+
 function Item({ title, description, quantity, price, color, onRemove }) {
   const isWhite = color === COLORS.WHITE;
 
@@ -83,8 +91,7 @@ function Item({ title, description, quantity, price, color, onRemove }) {
               </Text>{' '}
               <span dangerouslySetInnerHTML={{ __html: title }} />
             </Title>
-            <Text
-              small
+            <Description
               pale
               dangerouslySetInnerHTML={{ __html: description }}
             />
@@ -103,9 +110,9 @@ function Item({ title, description, quantity, price, color, onRemove }) {
       <Flex aic>
         {/*<Link extraSmall>Edit</Link>*/}
         {/*<Separator />*/}
-        <Link extraSmall pale onClick={onRemove}>
+        <StyledLink pale onClick={onRemove}>
           Remove
-        </Link>
+        </StyledLink>
       </Flex>
     </StyledItem>
   );

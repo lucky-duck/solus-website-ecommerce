@@ -18,7 +18,8 @@ const StyledTitle = styled(Section.Title)`
 `;
 
 const StyledText = styled(Text)`
-  max-width: 345px;
+  max-width: 335px;
+  font-size: 15px;
 `;
 
 const StyledButton = styled(Button)`
@@ -39,7 +40,7 @@ function ProductCart() {
       {selectedProducts.length > 0 && (
         <Header>
           <StyledTitle>Your Cart</StyledTitle>
-          <StyledText small pale>
+          <StyledText pale>
             You still make changes to your selection or proceed directly to
             checkout!
           </StyledText>

@@ -30,10 +30,10 @@ const SubtotalLine = styled.div`
 `;
 
 const Price = styled(Text)`
-  font-size: 26px;
+  font-size: 26px !important;
 
   @media (max-width: 991px) {
-    font-size: 22px;
+    font-size: 22px !important;
   }
 `;
 
