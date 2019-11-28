@@ -82,4 +82,7 @@ export const DISCOUNT_CODES = {
   '9f914a24': {
     discountPercent: 30,
   },
+  Black30: {
+    discountPercent: 30,
+  },
 };
