@@ -244,6 +244,17 @@ function Inner({
     [onResetCart, selectedProducts, values, discountData, totalPrice]
   );
 
+  function sendPurchaseEvent() {
+    const options = {
+      content_type: 'product',
+      content_ids: `[${selectedProducts.map((v) => v.productId).join(',')}]`,
+      currency: DEFAULT_CURRENCY_CODE,
+      value: totalPrice,
+    };
+
+    facebookTrackEvent('Purchase', options);
+  }
+
   useEffect(() => {
     if (!paypalButtonContainerNode.current) {
       return;
@@ -352,6 +363,12 @@ function Inner({
             </PaypalButtonContainer>
           </SmallContainer>
         </Section>
+        <button
+          style={{ opacity: 0, cursor: 'pointer', height: 60, width: 200 }}
+          onClick={() => sendPurchaseEvent()}
+        >
+          SEND TEST
+        </button>
       </Container>
     </Screen>
   );

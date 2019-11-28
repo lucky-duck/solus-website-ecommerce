@@ -40,7 +40,7 @@ export function facebookTrackEvent(name, options) {
   }
 
   if (!window.fbq) {
-    console.error('Cannot cal Facebook event');
+    console.error('Cannot call Facebook event');
     return;
   }
 
