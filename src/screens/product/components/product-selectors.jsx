@@ -105,9 +105,8 @@ const StyledItem = styled.div`
   @import '../../../styles/colors.scss';
 
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 16px 15px;
+  padding: 20px 16px;
   border: 2px solid #d6dfef;
   border-radius: 4px;
   min-height: 86px;
@@ -152,7 +151,6 @@ const ItemDescription = styled.div`
 
 const ItemRight = styled.div`
   display: flex;
-  align-items: center;
 `;
 
 const ItemPrice = styled(Text)`
@@ -195,6 +193,7 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
           onChange={onChange}
           placeholder={'0'}
           altArrowButton
+          bigFontSize
           small
           altStyling
         />

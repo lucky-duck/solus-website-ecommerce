@@ -217,14 +217,6 @@ const HeaderText = styled.div`
   font-weight: 300;
 `;
 
-const AccentTextContainer = styled.div`
-  margin-bottom: 60px;
-
-  @media (max-width: 767px) {
-    margin-bottom: 50px;
-  }
-`;
-
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -317,9 +309,6 @@ function ProductScreen() {
                   </FlexContainerRow>
                   <FlexContainerRow>
                     <Description />
-                    <AccentTextContainer>
-                      <FreeShippingMsg />
-                    </AccentTextContainer>
                   </FlexContainerRow>
                 </FlexContainer>
                 <FurtherSteps hide={selectedProducts.length > 0}>

@@ -18,7 +18,7 @@ const StyledSelect = styled.div`
   height: 50px;
 
   &.small {
-    height: 32px;
+    height: 36px;
   }
 
   &.large {
@@ -91,6 +91,10 @@ const Current = styled.label`
   &.altStyling {
     border-color: #e0e0e0;
   }
+
+  &.bigFontSize {
+  font-size: 20px;
+  }
 `;
 
 const Input = styled.input`
@@ -141,6 +145,7 @@ const InnerComponent = (
     invalid,
     small,
     large,
+    bigFontSize,
     altArrowButton,
     placeholder,
     name,
@@ -216,6 +221,7 @@ const InnerComponent = (
         aria-label={isOpen ? 'Close dropdown' : 'Open dropdown'}
         altArrowButton={altArrowButton}
         small={small}
+        bigFontSize={bigFontSize}
         nonactive={nonactive}
         altStyling={altStyling}
       >
