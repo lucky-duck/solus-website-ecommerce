@@ -234,8 +234,6 @@ function Inner({
           value: totalPrice,
         };
 
-        console.log('options', options);
-
         facebookTrackEvent('Purchase', options);
 
         onResetCart && onResetCart();

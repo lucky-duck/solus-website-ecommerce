@@ -39,7 +39,7 @@ export function ProductsProvider({ children }) {
       0
     );
     return discountData
-      ? total * ((100 - discountData.discountPercent) / 100)
+      ? +(total * ((100 - discountData.discountPercent) / 100)).toFixed(2)
       : total;
   }, [discountData, cartSelectedProducts]);
 
