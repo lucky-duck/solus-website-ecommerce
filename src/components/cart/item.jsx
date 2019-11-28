@@ -42,6 +42,11 @@ const Title = styled(Text)`
 
 const Price = styled(Text)`
   margin-bottom: 20px;
+  font-size: 26px;
+
+  @media (max-width: 991px) {
+    font-size: 22px;
+  }
 `;
 
 const ColourContainer = styled.div`
@@ -86,7 +91,7 @@ function Item({ title, description, quantity, price, color, onRemove }) {
           </Content>
         </ItemLeft>
         <div>
-          <Price big>{formatCurrency(price * quantity)}</Price>
+          <Price bold>{formatCurrency(price * quantity)}</Price>
           <ColourContainer>
             <StyledColour small white={isWhite} />
             <Text extraSmall pale>
