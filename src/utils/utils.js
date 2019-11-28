@@ -44,5 +44,6 @@ export function facebookTrackEvent(name, options) {
     return;
   }
 
+  console.log('send fb event', name, options);
   window.fbq('track', name, options);
 }
