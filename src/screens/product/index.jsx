@@ -215,6 +215,10 @@ const HeaderText = styled.div`
   font-size: 18px;
   font-weight: 300;
   font-family: FuturaPT, Arial, sans-serif;
+
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
 `;
 
 const FlexContainer = styled.div`
