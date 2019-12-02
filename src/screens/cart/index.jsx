@@ -251,8 +251,6 @@ function Inner({
       return;
     }
 
-    console.log('totalPrice', totalPrice);
-
     await loadPaypalSdk();
 
     removeNodeChildren(paypalButtonContainerNode.current);
