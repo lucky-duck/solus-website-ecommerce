@@ -30,6 +30,6 @@ export const CURRENCIES = {
   },
 };
 
-export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_USD];
+export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_GBP];
 
 export const CURRENCY = determineCurrency();

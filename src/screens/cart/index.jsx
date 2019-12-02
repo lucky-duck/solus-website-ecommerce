@@ -13,7 +13,7 @@ import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
-import { COUNTRY_FIELD_NAME} from '../../constants';
+import { COUNTRY_FIELD_NAME } from '../../constants';
 import countries from '../../countries.json';
 import {
   convertSelectedProductsToPlainText,
@@ -23,6 +23,7 @@ import {
 import DiscountCode from './components/discount-code';
 import Screen from '../../components/screen';
 import { CURRENCY } from '../../utils/currencies';
+import { loadPaypalSdk } from '../../utils/paypal';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/6164333/o62kq63/';
@@ -245,10 +246,12 @@ function Inner({
     [onResetCart, selectedProducts, values, discountData, totalPrice]
   );
 
-  useEffect(() => {
+  async function createPaypalButtons() {
     if (!paypalButtonContainerNode.current) {
       return;
     }
+
+    await loadPaypalSdk();
 
     removeNodeChildren(paypalButtonContainerNode.current);
 
@@ -262,7 +265,7 @@ function Inner({
         return actions.order.create({
           purchase_units: [
             {
-              amount: { value: totalPrice },
+              amount: { value: totalPrice, currency: CURRENCY.code },
               // items: selectedProducts.map((item) => {
               //   const result = {
               //     name: item.title,
@@ -288,6 +291,10 @@ function Inner({
     });
 
     paypalButtonsComponent.current.render(paypalButtonContainerNode.current);
+  }
+
+  useEffect(() => {
+    createPaypalButtons();
   }, [totalPrice]);
 
   useEffect(() => {
