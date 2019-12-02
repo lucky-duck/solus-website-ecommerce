@@ -1,5 +1,4 @@
-import { LOCALES } from '../constants';
-import { CURRENCY, DEFAULT_CURRENCY } from './currencies';
+import { CURRENCY } from './currencies';
 
 export function formatCurrency(value, { noCurrency } = {}) {
   const currencyPart = noCurrency ? '' : CURRENCY.symbol;
@@ -47,4 +46,3 @@ export function facebookTrackEvent(name, options) {
 
   window.fbq('track', name, options);
 }
-

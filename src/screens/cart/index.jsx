@@ -246,10 +246,12 @@ function Inner({
     [onResetCart, selectedProducts, values, discountData, totalPrice]
   );
 
-  async function createPaypalButtons() {
+  const createPaypalButtons = useCallback(async () => {
     if (!paypalButtonContainerNode.current) {
       return;
     }
+
+    console.log('totalPrice', totalPrice);
 
     await loadPaypalSdk();
 
@@ -291,11 +293,11 @@ function Inner({
     });
 
     paypalButtonsComponent.current.render(paypalButtonContainerNode.current);
-  }
+  }, [totalPrice]);
 
   useEffect(() => {
     createPaypalButtons();
-  }, [totalPrice]);
+  }, [createPaypalButtons]);
 
   useEffect(() => {
     if (!paypalButtonsComponent.current) {

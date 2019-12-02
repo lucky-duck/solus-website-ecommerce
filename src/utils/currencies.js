@@ -44,6 +44,6 @@ export const CURRENCIES = {
   },
 };
 
-export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_CAD];
+export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_AUD];
 
 export const CURRENCY = determineCurrency();
