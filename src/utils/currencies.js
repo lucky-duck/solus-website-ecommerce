@@ -44,6 +44,6 @@ export const CURRENCIES = {
   },
 };
 
-export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_AUD];
+export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_EUR];
 
 export const CURRENCY = determineCurrency();
