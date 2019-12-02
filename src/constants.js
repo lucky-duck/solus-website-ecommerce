@@ -68,8 +68,8 @@ export const PRODUCTS = [
     descriptionDetailed: null,
     price: {
       [CURRENCY_CODE_EUR]: 880,
-      [CURRENCY_CODE_GBP]: 750,
-      [CURRENCY_CODE_USD]: 970,
+      [CURRENCY_CODE_GBP]: 751,
+      [CURRENCY_CODE_USD]: 971,
       [CURRENCY_CODE_CAD]: 1292,
       [CURRENCY_CODE_AUD]: 1429,
     },
