@@ -13,7 +13,7 @@ import { useProducts } from '../../hooks/use-products';
 import Link from '../../components/ui-kit/link';
 import Delivery from './components/delivery';
 import { getPath } from '../../utils/paths';
-import { COUNTRY_FIELD_NAME, DEFAULT_CURRENCY_CODE } from '../../constants';
+import { COUNTRY_FIELD_NAME} from '../../constants';
 import countries from '../../countries.json';
 import {
   convertSelectedProductsToPlainText,
@@ -22,6 +22,7 @@ import {
 } from '../../utils/utils';
 import DiscountCode from './components/discount-code';
 import Screen from '../../components/screen';
+import { CURRENCY } from '../../utils/currencies';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/6164333/o62kq63/';
@@ -230,7 +231,7 @@ function Inner({
           content_ids: `[${selectedProducts
             .map((v) => v.productId)
             .join(',')}]`,
-          currency: DEFAULT_CURRENCY_CODE,
+          currency: CURRENCY.code,
           value: totalPrice,
         };
 
@@ -307,7 +308,7 @@ function Inner({
     const options = {
       content_type: 'product',
       content_ids: `[${selectedProducts.map((v) => v.productId).join(',')}]`,
-      currency: DEFAULT_CURRENCY_CODE,
+      currency: CURRENCY.code,
       value: totalPrice,
     };
 

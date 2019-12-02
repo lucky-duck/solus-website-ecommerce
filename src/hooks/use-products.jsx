@@ -3,7 +3,12 @@ import sortBy from 'lodash/sortBy';
 import range from 'lodash/range';
 import uuid from 'uuid';
 
-import { CART_LOCAL_STORAGE_KEY, COLORS, PRODUCTS } from '../constants';
+import {
+  CART_LOCAL_STORAGE_KEY,
+  COLORS,
+  PRODUCTS,
+} from '../constants';
+import { CURRENCY } from '../utils/currencies';
 
 const ProductsContext = React.createContext({});
 
@@ -35,7 +40,7 @@ export function ProductsProvider({ children }) {
 
   const totalPrice = useMemo(() => {
     const total = cartSelectedProducts.reduce(
-      (acc, curr) => acc + curr.price * curr.quantity,
+      (acc, curr) => acc + curr.price[CURRENCY.code] * curr.quantity,
       0
     );
     return discountData

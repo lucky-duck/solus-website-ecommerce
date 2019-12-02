@@ -8,7 +8,8 @@ import Button from './button';
 import { formatCurrency } from '../utils/utils';
 import { useProducts } from '../hooks/use-products';
 import { getPath } from '../utils/paths';
-import { COLORS } from '../constants';
+import { COLORS} from '../constants';
+import { CURRENCY } from '../utils/currencies';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
@@ -102,7 +103,7 @@ function CheckoutBar() {
                       key={index}
                       title={item.title}
                       quantity={item.quantity}
-                      price={item.price}
+                      price={item.price[CURRENCY.code]}
                       color={item.color}
                     />
                   );

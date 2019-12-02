@@ -1,7 +1,8 @@
-import { DEFAULT_CURRENCY_SYMBOL } from '../constants';
+import { LOCALES } from '../constants';
+import { CURRENCY, DEFAULT_CURRENCY } from './currencies';
 
 export function formatCurrency(value, { noCurrency } = {}) {
-  const currencyPart = noCurrency ? '' : DEFAULT_CURRENCY_SYMBOL;
+  const currencyPart = noCurrency ? '' : CURRENCY.symbol;
 
   if (isNaN(value)) {
     return `${currencyPart}0.00`;
@@ -46,3 +47,4 @@ export function facebookTrackEvent(name, options) {
 
   window.fbq('track', name, options);
 }
+

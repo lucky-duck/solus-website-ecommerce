@@ -10,8 +10,9 @@ export const COLORS = {
 
 export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products.v1.33';
 
-export const DEFAULT_CURRENCY_CODE = 'EUR';
-export const DEFAULT_CURRENCY_SYMBOL = '€';
+export const CURRENCY_CODE_EUR = 'EUR';
+export const CURRENCY_CODE_USD = 'USD';
+export const CURRENCY_CODE_GBP = 'GBP';
 
 export const PRODUCTS = [
   {
@@ -26,7 +27,11 @@ export const PRODUCTS = [
       Rated Voltage: 220/110V 50/60Hz<br/>
       Dimensions: 750 x 321 x 10 mm (W x H x D)
     `,
-    price: 340,
+    price: {
+      [CURRENCY_CODE_EUR]: 340,
+      [CURRENCY_CODE_GBP]: 290,
+      [CURRENCY_CODE_USD]: 375,
+    },
   },
   {
     id: 1,
@@ -42,7 +47,11 @@ export const PRODUCTS = [
       Temperature sensor: included<br/>
       Feet: not compatible
     `,
-    price: 440,
+    price: {
+      [CURRENCY_CODE_EUR]: 440,
+      [CURRENCY_CODE_GBP]: 375,
+      [CURRENCY_CODE_USD]: 485,
+    },
   },
   {
     id: 2,
@@ -51,7 +60,11 @@ export const PRODUCTS = [
       'Heating area: 55m².<br/><span style="color: #ff8e4f;">28% OFF!</span><br/>2x M2 & 1x M1',
     descriptionDetailedTitle: null,
     descriptionDetailed: null,
-    price: 880,
+    price: {
+      [CURRENCY_CODE_EUR]: 880,
+      [CURRENCY_CODE_GBP]: 750,
+      [CURRENCY_CODE_USD]: 970,
+    },
   },
 ];
 

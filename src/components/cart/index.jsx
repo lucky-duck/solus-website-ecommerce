@@ -7,6 +7,7 @@ import Flex from '../ui-kit/flex';
 import mixins from '../../styles/mixins';
 import { useProducts } from '../../hooks/use-products';
 import { formatCurrency } from '../../utils/utils';
+import { CURRENCY } from '../../utils/currencies';
 
 const StyledCart = styled.div``;
 
@@ -52,7 +53,7 @@ function Cart({ altStyling }) {
             <Item
               key={item.id}
               quantity={item.quantity}
-              price={item.price}
+              price={item.price[CURRENCY.code]}
               title={item.title}
               description={item.description}
               color={item.color}

@@ -17,11 +17,9 @@ import carouselImage1 from '../../images/carousel/1.jpg';
 import carouselImage2 from '../../images/carousel/2.jpg';
 import carouselImage3 from '../../images/carousel/3.jpg';
 import carouselImage4 from '../../images/carousel/4.jpg';
-import mixins from '../../styles/mixins';
 import Text from '../../components/ui-kit/text';
 import { facebookTrackEvent } from '../../utils/utils';
 import { PRODUCTS } from '../../constants';
-import FreeShippingMsg from '../../components/free-shipping-msg';
 
 const StyledScreen = styled(Screen)`
   padding-top: 50px;

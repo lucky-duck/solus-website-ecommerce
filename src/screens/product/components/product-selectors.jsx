@@ -7,6 +7,7 @@ import Section from './section';
 import Text from '../../../components/ui-kit/text';
 import { useProducts } from '../../../hooks/use-products';
 import { formatCurrency } from '../../../utils/utils';
+import { CURRENCY } from '../../../utils/currencies';
 
 const OPTIONS = [
   {
@@ -248,7 +249,7 @@ function ProductSelectors() {
               title={item.title}
               description={item.description}
               quantity={selectedItem && selectedItem.quantity}
-              price={item.price}
+              price={item.price[CURRENCY.code]}
               active={!!selectedItem}
               onChange={(value) => setProductQuantity(item.id, value)}
             />
