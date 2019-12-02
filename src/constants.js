@@ -13,6 +13,8 @@ export const CART_LOCAL_STORAGE_KEY = 'cart-selected-products.v1.33';
 export const CURRENCY_CODE_EUR = 'EUR';
 export const CURRENCY_CODE_USD = 'USD';
 export const CURRENCY_CODE_GBP = 'GBP';
+export const CURRENCY_CODE_CAD = 'CAD';
+export const CURRENCY_CODE_AUD = 'AUD';
 
 export const PRODUCTS = [
   {
@@ -31,6 +33,8 @@ export const PRODUCTS = [
       [CURRENCY_CODE_EUR]: 340,
       [CURRENCY_CODE_GBP]: 290,
       [CURRENCY_CODE_USD]: 375,
+      [CURRENCY_CODE_CAD]: 499,
+      [CURRENCY_CODE_AUD]: 552,
     },
   },
   {
@@ -51,6 +55,8 @@ export const PRODUCTS = [
       [CURRENCY_CODE_EUR]: 440,
       [CURRENCY_CODE_GBP]: 375,
       [CURRENCY_CODE_USD]: 485,
+      [CURRENCY_CODE_CAD]: 646,
+      [CURRENCY_CODE_AUD]: 714,
     },
   },
   {
@@ -64,6 +70,8 @@ export const PRODUCTS = [
       [CURRENCY_CODE_EUR]: 880,
       [CURRENCY_CODE_GBP]: 750,
       [CURRENCY_CODE_USD]: 970,
+      [CURRENCY_CODE_CAD]: 1292,
+      [CURRENCY_CODE_AUD]: 1429,
     },
   },
 ];
