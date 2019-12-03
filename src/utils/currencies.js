@@ -18,7 +18,7 @@ export function determineCurrency() {
   if (!localeSettings) {
     return DEFAULT_CURRENCY;
   }
-  return localeSettings.currency;
+  return CURRENCIES[localeSettings.currency];
 }
 
 export const CURRENCIES = {
