@@ -22,8 +22,8 @@ import {
 } from '../../utils/utils';
 import DiscountCode from './components/discount-code';
 import Screen from '../../components/screen';
-import { CURRENCY } from '../../utils/currencies';
 import { loadPaypalSdk } from '../../utils/paypal';
+import { useCurrency } from '../../hooks/use-currency';
 
 const ZAPIER_WEBHOOK_URL =
   'https://hooks.zapier.com/hooks/catch/6164333/o62kq63/';
@@ -127,6 +127,7 @@ function CartScreen() {
     resetCart,
     discountData,
   } = useProducts();
+  const { currencyData } = useCurrency();
 
   if (!selectedProducts || !selectedProducts.length) {
     return (
@@ -157,6 +158,7 @@ function CartScreen() {
             totalPrice={totalPrice}
             discountData={discountData}
             onResetCart={resetCart}
+            currencyData={currencyData}
           />
         );
       }}
@@ -204,6 +206,7 @@ function Inner({
   selectedProducts,
   totalPrice,
   discountData,
+  currencyData,
   onResetCart,
 }) {
   const { isValid, values } = formikProps;
@@ -232,7 +235,7 @@ function Inner({
           content_ids: `[${selectedProducts
             .map((v) => v.productId)
             .join(',')}]`,
-          currency: CURRENCY.code,
+          currency: currencyData.code,
           value: totalPrice,
         };
 
@@ -243,15 +246,22 @@ function Inner({
         navigate(getPath.paymentSuccess());
       });
     },
-    [onResetCart, selectedProducts, values, discountData, totalPrice]
+    [
+      currencyData,
+      onResetCart,
+      selectedProducts,
+      values,
+      discountData,
+      totalPrice,
+    ]
   );
 
   const createPaypalButtons = useCallback(async () => {
-    if (!paypalButtonContainerNode.current) {
+    if (!paypalButtonContainerNode.current || !currencyData) {
       return;
     }
 
-    await loadPaypalSdk();
+    await loadPaypalSdk({ currencyData });
 
     removeNodeChildren(paypalButtonContainerNode.current);
 
@@ -265,7 +275,7 @@ function Inner({
         return actions.order.create({
           purchase_units: [
             {
-              amount: { value: totalPrice, currency: CURRENCY.code },
+              amount: { value: totalPrice, currency: currencyData.code },
               // items: selectedProducts.map((item) => {
               //   const result = {
               //     name: item.title,
@@ -291,7 +301,7 @@ function Inner({
     });
 
     paypalButtonsComponent.current.render(paypalButtonContainerNode.current);
-  }, [totalPrice]);
+  }, [currencyData, totalPrice]);
 
   useEffect(() => {
     createPaypalButtons();
@@ -308,19 +318,19 @@ function Inner({
   }, [values, selectedProducts, handleApprove]);
 
   useEffect(() => {
-    if (!selectedProducts.length || !totalPrice) {
+    if (!selectedProducts.length || !totalPrice || !currencyData) {
       return;
     }
 
     const options = {
       content_type: 'product',
       content_ids: `[${selectedProducts.map((v) => v.productId).join(',')}]`,
-      currency: CURRENCY.code,
+      currency: currencyData.code,
       value: totalPrice,
     };
 
     facebookTrackEvent('AddToCart', options);
-  }, [totalPrice, selectedProducts]);
+  }, [currencyData, totalPrice, selectedProducts]);
 
   return (
     <Screen>

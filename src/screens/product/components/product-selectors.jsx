@@ -6,8 +6,8 @@ import mixins from '../../../styles/mixins';
 import Section from './section';
 import Text from '../../../components/ui-kit/text';
 import { useProducts } from '../../../hooks/use-products';
-import { formatCurrency } from '../../../utils/utils';
-import { CURRENCY } from '../../../utils/currencies';
+import FormatCurrency from '../../../components/format-currency';
+import { useCurrency } from '../../../hooks/use-currency';
 
 const OPTIONS = [
   {
@@ -202,7 +202,9 @@ function Item({ id, title, description, price, quantity, onChange, ...rest }) {
           small
           altStyling
         />
-        <ItemPrice bold>{formatCurrency(price)}</ItemPrice>
+        <ItemPrice bold>
+          <FormatCurrency>{price}</FormatCurrency>
+        </ItemPrice>
       </ItemRight>
     </StyledItem>
   );
@@ -214,6 +216,8 @@ function ProductSelectors() {
     cartSelectedProducts,
     setProductQuantity,
   } = useProducts();
+  const { currencyData } = useCurrency();
+
   const itemsEnhanced = useMemo(() => {
     return cartSelectedProducts.reduce((acc, curr) => {
       const foundIndex = acc.findIndex((v) => v.productId === curr.productId);
@@ -249,7 +253,7 @@ function ProductSelectors() {
               title={item.title}
               description={item.description}
               quantity={selectedItem && selectedItem.quantity}
-              price={item.price[CURRENCY.code]}
+              price={currencyData ? item.price[currencyData.code] : 0}
               active={!!selectedItem}
               onChange={(value) => setProductQuantity(item.id, value)}
             />

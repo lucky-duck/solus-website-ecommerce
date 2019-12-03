@@ -8,6 +8,7 @@ import { ProductsProvider } from './hooks/use-products';
 import CartScreen from './screens/cart';
 import { getPath } from './utils/paths';
 import PaymentSuccessScreen from './screens/payment-success';
+import { CurrencyProvider } from './hooks/use-currency';
 
 const Wrapper = styled.div`
   composes: ${mixins.fontFamilySans};
@@ -16,15 +17,17 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <ProductsProvider>
-      <Wrapper>
-        <Router>
-          <ProductScreen path={getPath.buy()} />
-          <CartScreen path={getPath.cart()} />
-          <PaymentSuccessScreen path={getPath.paymentSuccess()} />
-        </Router>
-      </Wrapper>
-    </ProductsProvider>
+    <CurrencyProvider>
+      <ProductsProvider>
+        <Wrapper>
+          <Router>
+            <ProductScreen path={getPath.buy()} />
+            <CartScreen path={getPath.cart()} />
+            <PaymentSuccessScreen path={getPath.paymentSuccess()} />
+          </Router>
+        </Wrapper>
+      </ProductsProvider>
+    </CurrencyProvider>
   );
 }
 

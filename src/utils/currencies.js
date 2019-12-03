@@ -6,19 +6,50 @@ import {
   CURRENCY_CODE_GBP,
   CURRENCY_CODE_USD,
 } from '../constants';
+import { getGeoData } from './utils';
 
-export function determineCurrency() {
-  if (typeof window === 'undefined' || !window.navigator) {
-    return DEFAULT_CURRENCY;
+export async function getCurrencyFromIp() {
+  try {
+    const geoData = await getGeoData();
+    const currencyCode = geoData.currency.code;
+    return CURRENCIES[currencyCode];
+  } catch (err) {
+    console.warn('Currency was not detected via third-party service');
   }
+}
+
+function getCurrencyCodeFromBrowser() {
+  if (typeof window === 'undefined' || !window.navigator) {
+    return null;
+  }
+
   const locale = window.navigator.language
     ? window.navigator.language.toLowerCase()
     : '';
+
   const localeSettings = LOCALES[locale];
+
   if (!localeSettings) {
-    return DEFAULT_CURRENCY;
+    return null;
   }
+
   return CURRENCIES[localeSettings.currency];
+}
+
+export async function determineCurrency() {
+  let currencyData;
+
+  currencyData = await getCurrencyFromIp();
+
+  console.log('currencyData', currencyData);
+
+  if (!currencyData) {
+    currencyData = getCurrencyCodeFromBrowser();
+  }
+
+  console.log('currencyData', currencyData);
+
+  return currencyData || DEFAULT_CURRENCY;
 }
 
 export const CURRENCIES = {
@@ -45,5 +76,3 @@ export const CURRENCIES = {
 };
 
 export const DEFAULT_CURRENCY = CURRENCIES[CURRENCY_CODE_EUR];
-
-export const CURRENCY = determineCurrency();

@@ -1,7 +1,9 @@
-import { CURRENCY } from './currencies';
+import axios from 'axios';
 
-export function formatCurrency(value, { noCurrency } = {}) {
-  const currencyPart = noCurrency ? '' : CURRENCY.symbol;
+import { GEO_DATA_API_URL } from '../constants';
+
+export function formatCurrency(value, currencyData, { noCurrency } = {}) {
+  const currencyPart = noCurrency || !currencyData ? '' : currencyData.symbol;
 
   if (isNaN(value)) {
     return `${currencyPart}0.00`;
@@ -12,12 +14,13 @@ export function formatCurrency(value, { noCurrency } = {}) {
 
 export function convertSelectedProductsToPlainText(
   selectedProducts,
-  { plainTextLineBreak } = {}
+  { plainTextLineBreak, currencyData } = {}
 ) {
   const textArray = selectedProducts.map(
     (v, index) =>
       `${index + 1}. ${v.quantity}x ${v.title}, Price: ${formatCurrency(
-        v.price * v.quantity
+        v.price * v.quantity,
+        currencyData
       )}, Colour: ${v.color && v.color.toLowerCase()} `
   );
 
@@ -45,4 +48,18 @@ export function facebookTrackEvent(name, options) {
   }
 
   window.fbq('track', name, options);
+}
+
+export async function getGeoData() {
+  try {
+    const response = await axios.get(GEO_DATA_API_URL, {
+      withCredentials: false,
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+    });
+    return response.data;
+  } catch (err) {
+    console.warn('Cannot fetch geo data');
+  }
 }

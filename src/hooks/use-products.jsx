@@ -3,12 +3,8 @@ import sortBy from 'lodash/sortBy';
 import range from 'lodash/range';
 import uuid from 'uuid';
 
-import {
-  CART_LOCAL_STORAGE_KEY,
-  COLORS,
-  PRODUCTS,
-} from '../constants';
-import { CURRENCY } from '../utils/currencies';
+import { CART_LOCAL_STORAGE_KEY, COLORS, PRODUCTS } from '../constants';
+import { useCurrency } from './use-currency';
 
 const ProductsContext = React.createContext({});
 
@@ -30,6 +26,8 @@ const initialSelectedProducts = [];
 const initialDiscountData = null;
 
 export function ProductsProvider({ children }) {
+  const { currencyData } = useCurrency();
+
   const [selectedProducts, setSelectedProducts] = useState(
     getSelectedFromLocalStorage()
   );
@@ -39,14 +37,18 @@ export function ProductsProvider({ children }) {
   const onWhiteSelectedCallbacks = useRef([]);
 
   const totalPrice = useMemo(() => {
+    if (!currencyData) {
+        return 0;
+    }
+
     const total = cartSelectedProducts.reduce(
-      (acc, curr) => acc + curr.price[CURRENCY.code] * curr.quantity,
+      (acc, curr) => acc + curr.price[currencyData.code] * curr.quantity,
       0
     );
     return discountData
       ? +(total * ((100 - discountData.discountPercent) / 100)).toFixed(2)
       : total;
-  }, [discountData, cartSelectedProducts]);
+  }, [currencyData, discountData, cartSelectedProducts]);
 
   useEffect(() => {
     saveSelectedToLocalStorage(selectedProducts);

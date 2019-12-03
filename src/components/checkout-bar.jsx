@@ -5,11 +5,11 @@ import { Sticky } from 'react-sticky';
 import ProductPreview from './product-preview';
 import Flex from './ui-kit/flex';
 import Button from './button';
-import { formatCurrency } from '../utils/utils';
 import { useProducts } from '../hooks/use-products';
 import { getPath } from '../utils/paths';
-import { COLORS} from '../constants';
-import { CURRENCY } from '../utils/currencies';
+import { COLORS } from '../constants';
+import FormatCurrency from './format-currency';
+import { useCurrency } from '../hooks/use-currency';
 
 const StyledCheckoutBar = styled.div`
   @import '../styles/colors.scss';
@@ -75,7 +75,9 @@ function Item({ quantity, price, title, color }) {
           <ItemQuantity>{quantity}x</ItemQuantity>{' '}
           <span dangerouslySetInnerHTML={{ __html: title }} />
         </ItemTitle>
-        <ItemPrice>{formatCurrency(price * quantity)}</ItemPrice>
+        <ItemPrice>
+          <FormatCurrency>{price * quantity}</FormatCurrency>
+        </ItemPrice>
       </ItemContent>
     </StyledItem>
   );
@@ -85,6 +87,7 @@ const MAX_ITEMS = 3;
 
 function CheckoutBar() {
   const { cartSelectedProducts: selectedProducts } = useProducts();
+  const { currencyData } = useCurrency();
 
   if (!selectedProducts.length) {
     return null;
@@ -103,7 +106,7 @@ function CheckoutBar() {
                       key={index}
                       title={item.title}
                       quantity={item.quantity}
-                      price={item.price[CURRENCY.code]}
+                      price={currencyData ? item.price[currencyData.code] : 0}
                       color={item.color}
                     />
                   );

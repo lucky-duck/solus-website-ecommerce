@@ -107,3 +107,6 @@ export const DISCOUNT_CODES = {
     discountPercent: 30,
   },
 };
+
+export const GEO_DATA_API_URL =
+  'https://api.ipdata.co/?api-key=f155746521299bf31c5e2026cae75e166deabc355f05c2a67e0403ce';

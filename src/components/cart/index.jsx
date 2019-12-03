@@ -6,8 +6,8 @@ import Text from '../ui-kit/text';
 import Flex from '../ui-kit/flex';
 import mixins from '../../styles/mixins';
 import { useProducts } from '../../hooks/use-products';
-import { formatCurrency } from '../../utils/utils';
-import { CURRENCY } from '../../utils/currencies';
+import FormatCurrency from '../format-currency';
+import { useCurrency } from '../../hooks/use-currency';
 
 const StyledCart = styled.div``;
 
@@ -44,6 +44,7 @@ function Cart({ altStyling }) {
     totalPrice,
     removeProduct,
   } = useProducts();
+  const { currencyData } = useCurrency();
 
   return (
     <StyledCart>
@@ -53,7 +54,7 @@ function Cart({ altStyling }) {
             <Item
               key={item.id}
               quantity={item.quantity}
-              price={item.price[CURRENCY.code]}
+              price={currencyData ? item.price[currencyData.code] : 0}
               title={item.title}
               description={item.description}
               color={item.color}
@@ -71,7 +72,9 @@ function Cart({ altStyling }) {
         </Flex>
         <SubtotalLine />
         <Flex aic jcsb>
-          <Price>{formatCurrency(totalPrice)}</Price>
+          <Price>
+            <FormatCurrency>{totalPrice}</FormatCurrency>
+          </Price>
           {/*<Text extraSmall pale>*/}
           {/*  Includes VAT of approx. {formatCurrency(40)}**/}
           {/*</Text>*/}

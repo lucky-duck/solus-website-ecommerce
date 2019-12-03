@@ -8,6 +8,7 @@ import Link from '../ui-kit/link';
 import ProductPreview from '../product-preview';
 import { COLORS } from '../../constants';
 import { formatCurrency } from '../../utils/utils';
+import FormatCurrency from '../format-currency';
 
 const StyledItem = styled.div`
   padding-bottom: 20px;
@@ -98,7 +99,9 @@ function Item({ title, description, quantity, price, color, onRemove }) {
           </Content>
         </ItemLeft>
         <div>
-          <Price bold>{formatCurrency(price * quantity)}</Price>
+          <Price bold>
+            <FormatCurrency>{price * quantity}</FormatCurrency>
+          </Price>
           <ColourContainer>
             <StyledColour small white={isWhite} />
             <Text extraSmall pale>
