@@ -41,8 +41,6 @@ export async function determineCurrency() {
 
   currencyData = await getCurrencyFromIp();
 
-  console.log('currencyData', currencyData);
-
   if (!currencyData) {
     currencyData = getCurrencyCodeFromBrowser();
   }
