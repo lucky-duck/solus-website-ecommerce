@@ -7,7 +7,6 @@ import Colour from '../colour-circle';
 import Link from '../ui-kit/link';
 import ProductPreview from '../product-preview';
 import { COLORS } from '../../constants';
-import { formatCurrency } from '../../utils/utils';
 import FormatCurrency from '../format-currency';
 
 const StyledItem = styled.div`

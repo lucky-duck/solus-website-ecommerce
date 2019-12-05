@@ -170,7 +170,8 @@ async function sendDeliveryDetails(
   selectedProducts,
   values,
   discountData,
-  paypalDetails
+  paypalDetails,
+  currencyData
 ) {
   try {
     console.warn('Sending delivery information', JSON.stringify(values));
@@ -182,6 +183,7 @@ async function sendDeliveryDetails(
       transactionId: paypalDetails.id,
       country: countryData.label,
       boughtProducts: convertSelectedProductsToPlainText(selectedProducts, {
+        currencyData,
         plainTextLineBreak: true,
       }),
       discountPercent: discountData ? discountData.discountPercent : 0,
@@ -228,7 +230,13 @@ function Inner({
         //   return name ? `, ${name}` : '';
         // }
 
-        sendDeliveryDetails(selectedProducts, values, discountData, details);
+        sendDeliveryDetails(
+          selectedProducts,
+          values,
+          discountData,
+          details,
+          currencyData
+        );
 
         const options = {
           content_type: 'product',

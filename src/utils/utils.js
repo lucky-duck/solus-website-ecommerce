@@ -16,13 +16,12 @@ export function convertSelectedProductsToPlainText(
   selectedProducts,
   { plainTextLineBreak, currencyData } = {}
 ) {
-  const textArray = selectedProducts.map(
-    (v, index) =>
-      `${index + 1}. ${v.quantity}x ${v.title}, Price: ${formatCurrency(
-        v.price * v.quantity,
-        currencyData
-      )}, Colour: ${v.color && v.color.toLowerCase()} `
-  );
+  const textArray = selectedProducts.map((v, index) => {
+    return `${index + 1}. ${v.quantity}x ${v.title}, Price: ${formatCurrency(
+      v.price[currencyData.code] * v.quantity,
+      currencyData
+    )}, Colour: ${v.color && v.color.toLowerCase()} `;
+  });
 
   return textArray.join(plainTextLineBreak ? '\n' : '<br/>');
 }
