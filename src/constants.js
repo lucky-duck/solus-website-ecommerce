@@ -106,6 +106,15 @@ export const DISCOUNT_CODES = {
   KOLEDA30: {
     discountPercent: 30,
   },
+  SAVE10: {
+    discountPercent: 10,
+  },
+  WINTER25: {
+    discountPercent: 25,
+  },
+  WARM30: {
+    discountPercent: 30,
+  },
 };
 
 export const GEO_DATA_API_URL =
