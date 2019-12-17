@@ -100,6 +100,9 @@ export const DISCOUNT_CODES = {
   KOLEDA15: {
     discountPercent: 15,
   },
+  TEST13: {
+    discountPercent: 13,
+  },
 };
 
 export const GEO_DATA_API_URL =
