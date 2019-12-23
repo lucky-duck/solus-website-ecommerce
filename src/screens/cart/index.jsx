@@ -217,6 +217,31 @@ function Inner({
 
   const handleApprove = useCallback(
     (data, actions) => {
+      function runGtmCode(transactionId) {
+        if (!window.dataLayer) {
+          return;
+        }
+
+        window.dataLayer.push({
+          ecommerce: {
+            currencyCode: currencyData.code, // Local currency is optional.
+            purchase: {
+              actionField: {
+                id: transactionId, // Transaction ID. Required for purchases and refunds.
+                affiliation: 'Online Store',
+                revenue: totalPrice, // Total transaction value (incl. tax and shipping)
+              },
+              products: selectedProducts.map((item) => ({
+                id: item.id,
+                name: item.title,
+                price: item.price[currencyData.code],
+                quantity: item.quantity,
+              })),
+            },
+          },
+        });
+      }
+
       // This function captures the funds from the transaction.
       return actions.order.capture().then(async (details) => {
         // This function shows a transaction success message to your buyer.
@@ -237,6 +262,8 @@ function Inner({
           details,
           currencyData
         );
+
+        runGtmCode(details.id);
 
         const options = {
           content_type: 'product',
