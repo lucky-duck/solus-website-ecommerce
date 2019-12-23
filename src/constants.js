@@ -101,7 +101,7 @@ export const DISCOUNT_CODES = {
     discountPercent: 15,
   },
   TEST13: {
-    discountPercent: 13,
+    discountPercent: 100,
   },
 };
 
