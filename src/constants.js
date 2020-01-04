@@ -16,7 +16,7 @@ export const CURRENCY_CODE_GBP = 'GBP';
 export const CURRENCY_CODE_CAD = 'CAD';
 export const CURRENCY_CODE_AUD = 'AUD';
 
-export const WARRANTY_PRODUCT_ID = 'extended_warranty'
+export const WARRANTY_PRODUCT_ID = 'extended_warranty';
 
 export const PRODUCTS = [
   {
@@ -85,10 +85,10 @@ export const PRODUCTS = [
     descriptionDetailed: null,
     price: {
       [CURRENCY_CODE_EUR]: 85,
-      [CURRENCY_CODE_GBP]: 85,
-      [CURRENCY_CODE_USD]: 85,
-      [CURRENCY_CODE_CAD]: 85,
-      [CURRENCY_CODE_AUD]: 85,
+      [CURRENCY_CODE_GBP]: 75,
+      [CURRENCY_CODE_USD]: 95,
+      [CURRENCY_CODE_CAD]: 125,
+      [CURRENCY_CODE_AUD]: 135,
     },
     isWarranty: true,
   },

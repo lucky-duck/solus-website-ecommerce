@@ -5,6 +5,9 @@ import Modal from './modal';
 import imageWarranty from '../images/warranty.jpg';
 import Button from './button';
 import WarrantyImage from './warranty-image';
+import { useCurrency } from '../hooks/use-currency';
+import { useProducts } from '../hooks/use-products';
+import FormatCurrency from './format-currency';
 
 const StyledModal = styled(Modal)`
   position: relative;
@@ -143,6 +146,9 @@ const ButtonBottom = styled.div`
 `;
 
 function ModalWarranty({ shown, onClose, onAddToCart }) {
+  const { currencyData } = useCurrency();
+  const { warrantyProduct } = useProducts();
+
   return (
     <StyledModal shown={shown} onClose={onClose}>
       <Header>
@@ -155,13 +161,15 @@ function ModalWarranty({ shown, onClose, onAddToCart }) {
           <Image src={imageWarranty} />
         </ImageContainer>
         <Content>
-          <ContentTitle>SOLUS+ Extended Waranty</ContentTitle>
-          <ContentText>
-            Buy an additional 2 year full unit exchange warranty for your SOLUS+
-            unit and don’t worry about your heater for 4 years. If it stops
-            working, we will send you a new one to replace it.
-          </ContentText>
-          <Price>£85</Price>
+          <ContentTitle>{warrantyProduct.title}</ContentTitle>
+          <ContentText>{warrantyProduct.description}</ContentText>
+          {currencyData && (
+            <Price>
+              <FormatCurrency>
+                {warrantyProduct.price[currencyData.code]}
+              </FormatCurrency>
+            </Price>
+          )}
           <StyledButton onClick={onAddToCart}>Add to purchase</StyledButton>
         </Content>
       </Main>
