@@ -16,6 +16,8 @@ export const CURRENCY_CODE_GBP = 'GBP';
 export const CURRENCY_CODE_CAD = 'CAD';
 export const CURRENCY_CODE_AUD = 'AUD';
 
+export const WARRANTY_PRODUCT_ID = 'extended_warranty'
+
 export const PRODUCTS = [
   {
     id: 0,
@@ -73,6 +75,22 @@ export const PRODUCTS = [
       [CURRENCY_CODE_CAD]: 1292,
       [CURRENCY_CODE_AUD]: 1429,
     },
+  },
+  {
+    id: WARRANTY_PRODUCT_ID,
+    title: 'SOLUS+ Extended Waranty',
+    description:
+      'Buy an additional 2 year full unit exchange warranty for your SOLUS+ unit and don’t worry about your heater for 4 years. If it stops working, we will send you a new one to replace it.',
+    descriptionDetailedTitle: null,
+    descriptionDetailed: null,
+    price: {
+      [CURRENCY_CODE_EUR]: 85,
+      [CURRENCY_CODE_GBP]: 85,
+      [CURRENCY_CODE_USD]: 85,
+      [CURRENCY_CODE_CAD]: 85,
+      [CURRENCY_CODE_AUD]: 85,
+    },
+    isWarranty: true,
   },
 ];
 

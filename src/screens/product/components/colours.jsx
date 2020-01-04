@@ -127,18 +127,20 @@ function Colours() {
       </Header>
       <div>
         {selectedProducts.length > 0 ? (
-          selectedProducts.map((item) => {
-            return (
-              <Item
-                key={item.id}
-                id={item.id}
-                quantity={item.quantity}
-                title={item.title}
-                color={item.color}
-                onChange={changeProductColor}
-              />
-            );
-          })
+          selectedProducts
+            .filter((v) => !v.isWarranty)
+            .map((item) => {
+              return (
+                <Item
+                  key={item.id}
+                  id={item.id}
+                  quantity={item.quantity}
+                  title={item.title}
+                  color={item.color}
+                  onChange={changeProductColor}
+                />
+              );
+            })
         ) : (
           <FakeColours />
         )}

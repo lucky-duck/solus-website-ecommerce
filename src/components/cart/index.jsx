@@ -59,6 +59,7 @@ function Cart({ altStyling }) {
               description={item.description}
               color={item.color}
               onRemove={() => removeProduct(item.productId, item.color)}
+              isWarranty={item.isWarranty}
             />
           );
         })}

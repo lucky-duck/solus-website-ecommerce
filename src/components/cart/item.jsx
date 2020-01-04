@@ -76,14 +76,22 @@ const StyledLink = styled(Link)`
   font-size: 15px;
 `;
 
-function Item({ title, description, quantity, price, color, onRemove }) {
+function Item({
+  title,
+  description,
+  quantity,
+  price,
+  color,
+  onRemove,
+  isWarranty,
+}) {
   const isWhite = color === COLORS.WHITE;
 
   return (
     <StyledItem>
       <Row>
         <ItemLeft>
-          <ProductPreview white={isWhite} />
+          <ProductPreview white={isWhite} isWarranty={isWarranty} />
           <Content>
             <Title bold>
               <Text as={'span'} pale>
@@ -91,22 +99,26 @@ function Item({ title, description, quantity, price, color, onRemove }) {
               </Text>{' '}
               <span dangerouslySetInnerHTML={{ __html: title }} />
             </Title>
-            <Description
-              pale
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
+            {!isWarranty && (
+              <Description
+                pale
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
+            )}
           </Content>
         </ItemLeft>
         <div>
           <Price bold>
             <FormatCurrency>{price * quantity}</FormatCurrency>
           </Price>
-          <ColourContainer>
-            <StyledColour small white={isWhite} />
-            <Text extraSmall pale>
-              {isWhite ? 'White' : 'Black'}
-            </Text>
-          </ColourContainer>
+          {!isWarranty && (
+            <ColourContainer>
+              <StyledColour small white={isWhite} />
+              <Text extraSmall pale>
+                {isWhite ? 'White' : 'Black'}
+              </Text>
+            </ColourContainer>
+          )}
         </div>
       </Row>
       <Flex aic>

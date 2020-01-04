@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'astroturf';
 import imageHeaterBlack from '../images/heater-black-small.jpg';
 import imageHeaterWhite from '../images/heater-white-small.jpg';
+import WarrantyImage from './warranty-image';
 
 const StyledProductPreview = styled.div`
   position: relative;
@@ -11,6 +12,7 @@ const StyledProductPreview = styled.div`
   border-radius: 4px;
   margin-right: 14px;
   overflow: hidden;
+  flex-shrink: 0;
 
   &:before {
     content: '';
@@ -43,11 +45,15 @@ const Image = styled.img`
   height: auto;
 `;
 
-function ProductPreview({ white }) {
+function ProductPreview({ white, isWarranty }) {
   return (
     <StyledProductPreview>
       <Inner>
-        <Image src={white ? imageHeaterWhite : imageHeaterBlack} />
+        {isWarranty ? (
+          <WarrantyImage />
+        ) : (
+          <Image src={white ? imageHeaterWhite : imageHeaterBlack} />
+        )}
       </Inner>
     </StyledProductPreview>
   );

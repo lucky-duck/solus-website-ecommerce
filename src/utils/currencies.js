@@ -45,8 +45,6 @@ export async function determineCurrency() {
     currencyData = getCurrencyCodeFromBrowser();
   }
 
-  console.log('currencyData', currencyData);
-
   return currencyData || DEFAULT_CURRENCY;
 }
 

@@ -3,7 +3,12 @@ import sortBy from 'lodash/sortBy';
 import range from 'lodash/range';
 import uuid from 'uuid';
 
-import { CART_LOCAL_STORAGE_KEY, COLORS, PRODUCTS } from '../constants';
+import {
+  CART_LOCAL_STORAGE_KEY,
+  COLORS,
+  PRODUCTS,
+  WARRANTY_PRODUCT_ID,
+} from '../constants';
 import { useCurrency } from './use-currency';
 
 const ProductsContext = React.createContext({});
@@ -27,6 +32,9 @@ const initialDiscountData = null;
 
 export function ProductsProvider({ children }) {
   const { currencyData } = useCurrency();
+  const warrantyModalWasShown = useRef(false);
+  const [warrantyModalShown, setWarrantyModalShown] = useState(false);
+  const initialRender = useRef(true);
 
   const [selectedProducts, setSelectedProducts] = useState(
     getSelectedFromLocalStorage()
@@ -38,7 +46,7 @@ export function ProductsProvider({ children }) {
 
   const totalPrice = useMemo(() => {
     if (!currencyData) {
-        return 0;
+      return 0;
     }
 
     const total = cartSelectedProducts.reduce(
@@ -49,6 +57,10 @@ export function ProductsProvider({ children }) {
       ? +(total * ((100 - discountData.discountPercent) / 100)).toFixed(2)
       : total;
   }, [currencyData, discountData, cartSelectedProducts]);
+
+  const warrantyIsInCart = useMemo(() => {
+    return selectedProductsWithData.filter((v) => v.isWarranty)[0];
+  }, [selectedProductsWithData]);
 
   useEffect(() => {
     saveSelectedToLocalStorage(selectedProducts);
@@ -66,6 +78,22 @@ export function ProductsProvider({ children }) {
         ['productId']
       )
     );
+  }, [selectedProducts]);
+
+  useEffect(() => {
+    if (
+      warrantyIsInCart ||
+      warrantyModalWasShown.current ||
+      initialRender.current
+    ) {
+      return;
+    }
+
+    showWarrantyModal();
+
+    warrantyModalWasShown.current = true;
+
+    // eslint-disable-next-line
   }, [selectedProducts]);
 
   useEffect(() => {
@@ -92,6 +120,14 @@ export function ProductsProvider({ children }) {
       }, [])
     );
   }, [selectedProductsWithData]);
+
+  useEffect(() => {
+    initialRender.current = false;
+  }, []);
+
+  const warrantyProduct = useMemo(() => {
+    return PRODUCTS.filter((v) => v.isWarranty)[0];
+  }, []);
 
   // function addProduct(id) {
   //   setSelectedProducts(changeItemQuantity('+', id));
@@ -146,6 +182,19 @@ export function ProductsProvider({ children }) {
     setSelectedProducts(initialSelectedProducts);
   }
 
+  function handleAddWarranty() {
+    setProductQuantity(WARRANTY_PRODUCT_ID, 1);
+    setWarrantyModalShown(false);
+  }
+
+  function showWarrantyModal() {
+    setWarrantyModalShown(true);
+  }
+
+  function handleCloseWarrantyModal() {
+    setWarrantyModalShown(false);
+  }
+
   return (
     <ProductsContext.Provider
       value={{
@@ -169,6 +218,10 @@ export function ProductsProvider({ children }) {
             cb,
           ];
         },
+        warrantyProduct,
+        warrantyModalShown,
+        onCloseWarrantyModal: handleCloseWarrantyModal,
+        onAddWarranty: handleAddWarranty,
       }}
     >
       {children}

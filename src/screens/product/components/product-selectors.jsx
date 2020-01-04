@@ -242,23 +242,25 @@ function ProductSelectors() {
         {/*</Link>*/}
       </Header>
       <StyledProductSelectors>
-        {allProducts.map((item, index) => {
-          const selectedItem = itemsEnhanced.filter(
-            (v) => v.productId === item.id
-          )[0];
-          return (
-            <Item
-              key={index}
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              quantity={selectedItem && selectedItem.quantity}
-              price={currencyData ? item.price[currencyData.code] : 0}
-              active={!!selectedItem}
-              onChange={(value) => setProductQuantity(item.id, value)}
-            />
-          );
-        })}
+        {allProducts
+          .filter((v) => !v.isWarranty)
+          .map((item, index) => {
+            const selectedItem = itemsEnhanced.filter(
+              (v) => v.productId === item.id
+            )[0];
+            return (
+              <Item
+                key={index}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                quantity={selectedItem && selectedItem.quantity}
+                price={currencyData ? item.price[currencyData.code] : 0}
+                active={!!selectedItem}
+                onChange={(value) => setProductQuantity(item.id, value)}
+              />
+            );
+          })}
       </StyledProductSelectors>
     </Section>
   );

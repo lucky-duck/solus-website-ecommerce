@@ -9,6 +9,7 @@ import CartScreen from './screens/cart';
 import { getPath } from './utils/paths';
 import PaymentSuccessScreen from './screens/payment-success';
 import { CurrencyProvider } from './hooks/use-currency';
+import ModalWarranty from './components/modal-warranty';
 
 const Wrapper = styled.div`
   composes: ${mixins.fontFamilySans};

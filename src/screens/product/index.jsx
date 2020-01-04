@@ -20,6 +20,7 @@ import carouselImage4 from '../../images/carousel/4.jpg';
 import Text from '../../components/ui-kit/text';
 import { facebookTrackEvent } from '../../utils/utils';
 import { PRODUCTS } from '../../constants';
+import ModalWarranty from '../../components/modal-warranty';
 
 const StyledScreen = styled(Screen)`
   padding-top: 50px;
@@ -248,7 +249,13 @@ const CAROUSEL_ITEMS = [
 const WHITE_HEATER_INDEX = 3;
 
 function ProductScreen() {
-  const { selectedProducts, addOnWhiteSelectedCallback } = useProducts();
+  const {
+    selectedProducts,
+    addOnWhiteSelectedCallback,
+    warrantyModalShown,
+    onCloseWarrantyModal,
+    onAddWarranty,
+  } = useProducts();
   const carouselInstance = useRef(null);
   const isWhiteSlideShown = useRef(false);
 
@@ -324,6 +331,11 @@ function ProductScreen() {
             <Features isMobile />
           </Container>
         </StyledScreen>
+        <ModalWarranty
+          shown={warrantyModalShown}
+          onClose={onCloseWarrantyModal}
+          onAddToCart={onAddWarranty}
+        />
       </div>
     </StickyContainer>
   );
