@@ -17,6 +17,8 @@ import carouselImage1 from '../../images/carousel/1.jpg';
 import carouselImage2 from '../../images/carousel/2.jpg';
 import carouselImage3 from '../../images/carousel/3.jpg';
 import carouselImage4 from '../../images/carousel/4.jpg';
+import carouselImage3 from '../../images/carousel/5.jpg';
+import carouselImage4 from '../../images/carousel/6.jpg';
 import Text from '../../components/ui-kit/text';
 import { facebookTrackEvent } from '../../utils/utils';
 import { PRODUCTS } from '../../constants';
@@ -243,6 +245,12 @@ const CAROUSEL_ITEMS = [
   },
   {
     image: carouselImage4,
+  },
+  {
+    image: carouselImage5,
+  },
+  {
+    image: carouselImage6,
   },
 ];
 
