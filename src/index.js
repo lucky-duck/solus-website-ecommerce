@@ -2,16 +2,16 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LogRocket from 'logrocket';
+// import LogRocket from 'logrocket';
 
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { envIsProduction } from './utils/utils';
 
-if (envIsProduction()) {
-  LogRocket.init('1aby2t/solus');
-}
+// if (envIsProduction()) {
+//   LogRocket.init('1aby2t/solus');
+// }
 
 function render() {
   ReactDOM.render(<App />, document.getElementById('react-ecommerce'));
